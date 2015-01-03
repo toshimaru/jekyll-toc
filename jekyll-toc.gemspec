@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.license     = 'MIT'
   spec.test_files  = spec.files.grep(%r{^(test|spec|features)/})
 
-  spec.add_dependency "nokogiri"
-  spec.add_development_dependency "simplecov"
+  spec.add_runtime_dependency "nokogiri", "~> 1.6"
+  spec.add_development_dependency 'minitest', "~> 5.0"
   spec.add_development_dependency "jekyll", "~> 2.0"
-  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency "rake"
 end
