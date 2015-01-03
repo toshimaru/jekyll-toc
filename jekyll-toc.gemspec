@@ -1,16 +1,18 @@
-Gem::Specification.new do |s|
-  s.name        = 'jekyll-toc'
-  s.version     = '0.0.1'
-  s.date        = '2015-01-04'
-  s.summary     = "Jekyll Table of Contents plugin"
-  s.description = "Jekyll plugin which generates a table of contents at the top of the content"
-  s.authors     = ["Toshimaru"]
-  s.email       = 'me@toshimaru.net'
-  s.files       = `git ls-files -z`.split("\x0")
-  s.homepage    = 'https://github.com/toshimaru/jekyll-toc'
-  s.license     = 'MIT'
-  s.test_files  = s.files.grep(%r{^(test|spec|features)/})
+Gem::Specification.new do |spec|
+  spec.name        = 'jekyll-toc'
+  spec.version     = '0.0.1'
+  spec.date        = '2015-01-04'
+  spec.summary     = "Jekyll Table of Contents plugin"
+  spec.description = "Jekyll plugin which generates a table of contents at the top of the content"
+  spec.authors     = ["Toshimaru"]
+  spec.email       = 'me@toshimaru.net'
+  spec.files       = `git ls-files -z`.split("\x0")
+  spec.homepage    = 'https://github.com/toshimaru/jekyll-toc'
+  spec.license     = 'MIT'
+  spec.test_files  = spec.files.grep(%r{^(test|spec|features)/})
 
-  s.add_dependency "nokogiri"
-  s.add_development_dependency "simplecov"
+  spec.add_dependency "nokogiri"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "jekyll", "~> 2.0"
+  spec.add_development_dependency 'minitest'
 end
