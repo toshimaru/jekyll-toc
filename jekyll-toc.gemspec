@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'jekyll-toc'
-  spec.version     = '0.0.2'
+  spec.version     = '0.0.3'
   spec.summary     = "Jekyll Table of Contents plugin"
   spec.description = "Jekyll plugin which generates a table of contents at the top of the content"
   spec.authors     = ["Toshimaru"]
