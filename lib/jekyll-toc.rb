@@ -7,6 +7,9 @@ module Jekyll
     PUNCTUATION_REGEXP = RUBY_VERSION > "1.9" ? /[^\p{Word}\- ]/u : /[^\w\- ]/
 
     def toc(html)
+      page = @context.registers[:page]
+      return html unless page["toc"]
+
       toc = ""
       doc = Nokogiri::HTML::DocumentFragment.parse(html)
       headers = Hash.new(0)
