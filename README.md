@@ -4,31 +4,41 @@
 [![Dependency Status](https://gemnasium.com/toshimaru/jekyll-toc.svg)](https://gemnasium.com/toshimaru/jekyll-toc)
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 
-## TODO
-* Test
-* Travis CI
-* Coverage & Coverall
+# Usage
 
-# Imprementation idea
+Add jekyll-toc plugin in your site's `Gemfile`.
 
-## page filter
-```
-{{ page | toc }}
+```ruby
+gem 'jekyll-toc'
 ```
 
-* Customisable
-+ Keep `content` clean (no filter for content)
+And add the jekyll-toc to your site's `_config.yml`.
 
-## content filter
+```yml
+gems:
+  - jekyll-toc
+```
+
+Finally, add `toc` filter to your site's `{{ content }}`.
+
 ```
 {{ content | toc }}
 ```
 
-or
+## Generated Tablle of Contents
 
-```
-{{ content | toc: use_toc? }}
+```html
+<ul>
+  <li>foo</li>
+  <li>bar</li>
+</ul>
 ```
 
-* Uncustomisable
-* need to pass in option of whether to use toc
+## CSS Styling
+
+## TODO
+* more README
+* Close toc JavaScript
+* Test
+* Travis CI
+* Coverage & Coverall
