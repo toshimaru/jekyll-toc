@@ -4,8 +4,6 @@
 [![Dependency Status](https://gemnasium.com/toshimaru/jekyll-toc.svg)](https://gemnasium.com/toshimaru/jekyll-toc)
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 
-![screenshot](https://cloud.githubusercontent.com/assets/803398/5722561/7f59e8aa-9b80-11e4-9ee5-27a15192ee83.png)
-
 # Usage
 
 Add jekyll-toc plugin in your site's `Gemfile`.
@@ -37,7 +35,9 @@ toc: true
 ---
 ```
 
-## Generated table of Contents
+## Generated Table of Contents HTML
+
+jekyll-toc generates Unordered List. The output is as follows.
 
 ```html
 <ul class="section-nav">
@@ -49,16 +49,25 @@ toc: true
 </ul>
 ```
 
-## SASS Styling
+It looks like the image below.
+
+![screenshot](https://cloud.githubusercontent.com/assets/803398/5722561/7f59e8aa-9b80-11e4-9ee5-27a15192ee83.png)
+
+## CSS Styling
 
 ```css
-section-nav {
-
+.section-nav {
+  background-color: #FFF;
+  margin: 5px 0;
+  padding: 10px 30px;
+  border: 1px solid #E8E8E8;
+  border-radius: 3px;
 }
 ```
 
+![screenshot](https://cloud.githubusercontent.com/assets/803398/5723662/f0bc84c8-9b88-11e4-986c-90608ca88184.png)
+
 ## TODO
-* more README
 * Test
 * Travis CI
 * Coverage & Coverall
