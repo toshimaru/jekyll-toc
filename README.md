@@ -1,4 +1,4 @@
-# This plugin is still WIP.
+# jekyll-toc
 
 [![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](http://badge.fury.io/rb/jekyll-toc)
 [![Dependency Status](https://gemnasium.com/toshimaru/jekyll-toc.svg)](https://gemnasium.com/toshimaru/jekyll-toc)
@@ -37,7 +37,7 @@ toc: true
 
 ## Generated Table of Contents HTML
 
-jekyll-toc generates Unordered List. The output is as follows.
+jekyll-toc generates Unordered List. The final output is as follows.
 
 ```html
 <ul class="section-nav">
@@ -54,6 +54,8 @@ It looks like the image below.
 ![screenshot](https://cloud.githubusercontent.com/assets/803398/5722561/7f59e8aa-9b80-11e4-9ee5-27a15192ee83.png)
 
 ## CSS Styling
+
+The toc can be modified with CSS. The sample CSS is the following.
 
 ```css
 .section-nav {
