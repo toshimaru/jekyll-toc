@@ -68,9 +68,3 @@ The toc can be modified with CSS. The sample CSS is the following.
 ```
 
 ![screenshot](https://cloud.githubusercontent.com/assets/803398/5723662/f0bc84c8-9b88-11e4-986c-90608ca88184.png)
-
-## TODO
-* Test
-* Travis CI
-* Coverage & Coverall
-* Close toc with JavaScript
