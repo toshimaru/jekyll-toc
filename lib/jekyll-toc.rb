@@ -9,10 +9,34 @@ module Jekyll
 
       def initialize(html)
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
+        @entries = parse_content
+      end
+
+      def build_toc
+        toc = %Q{<ul class="section-nav">\n}
+
+        @entries.each do |entry|
+          toc << %Q{<li><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
+        end
+
+        toc << '</ul>'
+      end
+
+      def inject_anchors_into_html
+        @entries.each do |entry|
+          entry[:content_node].add_previous_sibling(%Q{<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>})
+        end
+
+        @doc.inner_html
+      end
+
+      def toc
+        build_toc + inject_anchors_into_html
       end
 
       # parse logic is from html-pipeline toc_filter
       # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
+      private
       def parse_content
         entries = []
         headers = Hash.new(0)
@@ -37,34 +61,24 @@ module Jekyll
 
         entries
       end
-
-      def inject_anchors(entries)
-        entries.each do |entry|
-          entry[:content_node].add_previous_sibling(%Q{<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>})
-        end
-
-        @doc.inner_html
-      end
-
-      def build_toc(entries)
-        toc = %Q{<ul class="section-nav">\n}
-
-        entries.each do |entry|
-          toc << %Q{<li><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
-        end
-
-        toc << '</ul>'
-      end
-
-      def toc
-        entries = parse_content
-
-        build_toc(entries) + inject_anchors(entries)
-      end
     end
   end
 
   module TableOfContentsFilter
+    def toc_only(html)
+      page = @context.registers[:page]
+      return html unless page['toc']
+
+      Jekyll::TableOfContents::Parser.new(html).build_toc
+    end
+
+    def inject_anchors(html)
+      page = @context.registers[:page]
+      return html unless page['toc']
+
+      Jekyll::TableOfContents::Parser.new(html).inject_anchors_into_html
+    end
+
     def toc(html)
       page = @context.registers[:page]
       return html unless page['toc']
