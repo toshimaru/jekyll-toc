@@ -9,3 +9,10 @@ SIMPLE_HTML = <<EOL
 <h5>Simple H5</h5>
 <h6>Simple H6</h6>
 EOL
+
+module TestHelpers
+  def read_html_and_create_parser
+    @parser = Jekyll::TableOfContents::Parser.new(SIMPLE_HTML)
+    assert_match /Simple H1/, @parser.doc.inner_html
+  end
+end

@@ -3,9 +3,10 @@ require_relative '../lib/jekyll-toc'
 
 
 class TestTOCOnlyFilter < Minitest::Test
+  include TestHelpers
+
   def setup
-    @parser = Jekyll::TableOfContents::Parser.new(SIMPLE_HTML)
-    assert_match /Simple H1/, @parser.doc.inner_html
+    read_html_and_create_parser
   end
 
   def test_injects_toc_container
