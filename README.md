@@ -32,11 +32,11 @@ toc: true
 There are three Liquid filters available now.
 
 1. `toc_only`  
-   Generates the TOC itself as described [below][#generated-table-of-contents-html]. 
+   Generates the TOC itself as described [below](#generated-table-of-contents-html). 
 
 2. `inject_anchors`  
    Injects HTML anchors into the content.
-   The are of the form:
+   They are of the form:
    
    ```html
    <a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
