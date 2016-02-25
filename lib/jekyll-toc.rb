@@ -2,61 +2,64 @@ require 'nokogiri'
 
 module Jekyll
   module TableOfContents
-    PUNCTUATION_REGEXP = RUBY_VERSION > "1.9" ? /[^\p{Word}\- ]/u : /[^\w\- ]/
+    PUNCTUATION_REGEXP = RUBY_VERSION > '1.9' ? /[^\p{Word}\- ]/u : /[^\w\- ]/
 
     class Parser
-      class << self
-        # parse logic is from html-pipeline toc_filter
-        # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
-        def parse_content(doc)
-          entries = []
-          headers = Hash.new(0)
+      attr_reader :doc
 
-          doc.css('h1, h2, h3, h4, h5, h6').each do |node|
-            text = node.text
-            id = text.downcase
-            id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
-            id.gsub!(' ', '-') # replace spaces with dash
+      def initialize(html)
+        @doc = Nokogiri::HTML::DocumentFragment.parse(html)
+      end
 
-            uniq = (headers[id] > 0) ? "-#{headers[id]}" : ''
-            headers[id] += 1
-            if header_content = node.children.first
-              entries << {
-                  id: id,
-                  uniq: uniq,
-                  text: text,
-                  content_node: header_content
-              }
-            end
+      # parse logic is from html-pipeline toc_filter
+      # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
+      def parse_content
+        entries = []
+        headers = Hash.new(0)
+
+        @doc.css('h1, h2, h3, h4, h5, h6').each do |node|
+          text = node.text
+          id = text.downcase
+          id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
+          id.gsub!(' ', '-') # replace spaces with dash
+
+          uniq = (headers[id] > 0) ? "-#{headers[id]}" : ''
+          headers[id] += 1
+          if header_content = node.children.first
+            entries << {
+                id: id,
+                uniq: uniq,
+                text: text,
+                content_node: header_content
+            }
           end
-
-          entries
         end
 
-        def inject_anchors(doc, entries)
-          entries.each do |entry|
-            entry[:content_node].add_previous_sibling(%Q{<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>})
-          end
+        entries
+      end
 
-          doc.inner_html
+      def inject_anchors(entries)
+        entries.each do |entry|
+          entry[:content_node].add_previous_sibling(%Q{<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>})
         end
 
-        def build_toc(entries)
-          toc = %Q{<ul class="section-nav">\n}
+        @doc.inner_html
+      end
 
-          entries.each do |entry|
-            toc << %Q{<li><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
-          end
+      def build_toc(entries)
+        toc = %Q{<ul class="section-nav">\n}
 
-          toc << '</ul>'
+        entries.each do |entry|
+          toc << %Q{<li><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
         end
 
-        def toc(html)
-          doc = Nokogiri::HTML::DocumentFragment.parse(html)
-          entries = parse_content(doc)
+        toc << '</ul>'
+      end
 
-          build_toc(entries) + inject_anchors(doc, entries)
-        end
+      def toc
+        entries = parse_content
+
+        build_toc(entries) + inject_anchors(entries)
       end
     end
   end
@@ -64,9 +67,9 @@ module Jekyll
   module TableOfContentsFilter
     def toc(html)
       page = @context.registers[:page]
-      return html unless page["toc"]
+      return html unless page['toc']
 
-      Jekyll::TableOfContents::Parser.toc(html)
+      Jekyll::TableOfContents::Parser.new(html).toc
     end
   end
 end
