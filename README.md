@@ -19,12 +19,6 @@ gems:
   - jekyll-toc
 ```
 
-Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
-
-```
-{{ content | toc }}
-```
-
 Set `toc: true` in your posts.
 
 ```yml
@@ -34,6 +28,32 @@ title: "Welcome to Jekyll!"
 toc: true
 ---
 ```
+
+There are three Liquid filters available now.
+
+1. `toc_only`  
+   Generates the TOC itself as described [below][#generated-table-of-contents-html]. 
+
+2. `inject_anchors`  
+   Injects HTML anchors into the content.
+   The are of the form:
+   
+   ```html
+   <a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
+     <span class="octicon octicon-link"></span>
+   </a>
+   ```
+
+3. `toc`  
+  This is the concatenation of the two above.
+  Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
+
+  ```
+  {{ content | toc }}
+  ```
+
+  This prepends the `content` with a TOC and injects anchors to the headings.
+
 
 ## Generated Table of Contents HTML
 
