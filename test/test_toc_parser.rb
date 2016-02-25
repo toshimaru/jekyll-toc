@@ -14,7 +14,7 @@ EOL
 
   def setup
     @data = SIMPLE_HTML
-    @parser = Jekyll::TableOfContentsFilter::Parser
+    @parser = Jekyll::TableOfContents::Parser
   end
 
   def test_example_html_is_loaded

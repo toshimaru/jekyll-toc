@@ -1,13 +1,13 @@
 require 'nokogiri'
 
 module Jekyll
-  # parse logic is from html-pipeline toc_filter
-  # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
-  module TableOfContentsFilter
+  module TableOfContents
     PUNCTUATION_REGEXP = RUBY_VERSION > "1.9" ? /[^\p{Word}\- ]/u : /[^\w\- ]/
 
     class Parser
       class << self
+        # parse logic is from html-pipeline toc_filter
+        # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
         def parse_content(doc)
           entries = []
           headers = Hash.new(0)
@@ -59,12 +59,14 @@ module Jekyll
         end
       end
     end
+  end
 
+  module TableOfContentsFilter
     def toc(html)
       page = @context.registers[:page]
       return html unless page["toc"]
 
-      Parser.toc(html)
+      Jekyll::TableOfContents::Parser.toc(html)
     end
   end
 end
