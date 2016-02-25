@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = JekyllToc::VERSION
   spec.summary       = "Jekyll Table of Contents plugin"
   spec.description   = "A liquid filter plugin for Jekyll which generates a table of contents."
-  spec.authors       = ["Toshimaru"]
+  spec.authors       = ["Toshimaru", 'torbjoernk']
   spec.email         = 'me@toshimaru.net'
   spec.files         = `git ls-files -z`.split("\x0")
   spec.homepage      = 'https://github.com/toshimaru/jekyll-toc'
