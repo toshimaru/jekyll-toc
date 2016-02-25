@@ -16,7 +16,7 @@ module Jekyll
         toc = %Q{<ul class="section-nav">\n}
 
         @entries.each do |entry|
-          toc << %Q{<li><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
+          toc << %Q{<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
         end
 
         toc << '</ul>'
@@ -54,6 +54,7 @@ module Jekyll
                 id: id,
                 uniq: uniq,
                 text: text,
+                node_name: node.name,
                 content_node: header_content
             }
           end
