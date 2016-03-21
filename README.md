@@ -35,8 +35,8 @@ Jekyll's templates.
 
 1. `toc_only`  
    Generates the TOC itself as described [below](#generated-table-of-contents-html).
-   Mostly useful in cases where the TOC should not be immediately above the
-   content but at some other place of the page, i.e. an aside.
+   Mostly useful in cases where the TOC should _not_ be placed immediately
+   above the content but at some other place of the page, i.e. an aside.
 
 2. `inject_anchors`  
    Injects HTML anchors into the content without actually outputing the
@@ -48,16 +48,19 @@ Jekyll's templates.
      <span class="octicon octicon-link"></span>
    </a>
    ```
+   
+   This is only useful when the TOC itself should be placed at some other
+   location with the `toc_only` filter.
 
 3. `toc`  
-  This is the concatenation of the two above.
+  This is the concatenation of the two above, where the TOC is placed
+  directly above the content.
+  
   Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
   ```
   {{ content | toc }}
   ```
-
-  This prepends the `content` with a TOC and injects anchors to the headings.
 
 
 ## Generated Table of Contents HTML
