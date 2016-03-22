@@ -19,12 +19,6 @@ gems:
   - jekyll-toc
 ```
 
-Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
-
-```
-{{ content | toc }}
-```
-
 Set `toc: true` in your posts.
 
 ```yml
@@ -35,17 +29,51 @@ toc: true
 ---
 ```
 
+There are three Liquid filters available now, which all should be applied
+to some HTML content, e.g. the Liquid variable `content` available in
+Jekyll's templates.
+
+1. `toc_only`  
+   Generates the TOC itself as described [below](#generated-table-of-contents-html).
+   Mostly useful in cases where the TOC should _not_ be placed immediately
+   above the content but at some other place of the page, i.e. an aside.
+
+2. `inject_anchors`  
+   Injects HTML anchors into the content without actually outputing the
+   TOC itself.
+   They are of the form:
+   
+   ```html
+   <a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
+     <span class="octicon octicon-link"></span>
+   </a>
+   ```
+   
+   This is only useful when the TOC itself should be placed at some other
+   location with the `toc_only` filter.
+
+3. `toc`  
+  This is the concatenation of the two above, where the TOC is placed
+  directly above the content.
+  
+  Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
+
+  ```
+  {{ content | toc }}
+  ```
+
+
 ## Generated Table of Contents HTML
 
 jekyll-toc generates Unordered List. The final output is as follows.
 
 ```html
 <ul class="section-nav">
-  <li><a href="#heading1">Heading.1</a></li>
-  <li><a href="#heading2-1">Heading.2-1</a></li>
-  <li><a href="#heading2-2">Heading.2-2</a></li>
-  <li><a href="#heading3">Heading.3</a></li>
-  <li><a href="#heading2-3">Heading.2-3</a></li>
+  <li class="toc-entry toc-h1"><a href="#heading1">Heading.1</a></li>
+  <li class="toc-entry toc-h2"><a href="#heading2-1">Heading.2-1</a></li>
+  <li class="toc-entry toc-h2"><a href="#heading2-2">Heading.2-2</a></li>
+  <li class="toc-entry toc-h3"><a href="#heading3">Heading.3</a></li>
+  <li class="toc-entry toc-h2"><a href="#heading2-3">Heading.2-3</a></li>
 </ul>
 ```
 
@@ -68,3 +96,29 @@ The toc can be modified with CSS. The sample CSS is the following.
 ```
 
 ![screenshot](https://cloud.githubusercontent.com/assets/803398/5723662/f0bc84c8-9b88-11e4-986c-90608ca88184.png)
+
+Each TOC `li` entry has two CSS classes for further styling.
+The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
+Depending on the heading level each specific entry refers to, it has a second
+CSS class `toc-XX`, where `XX` is the HTML heading tag name.
+
+For example, the TOC entry linking to a heading `<h1>...</h1>` (a single
+`#` in Markdown) will get the CSS class `toc-h1`.
+
+That way, one can tune the depth of the TOC displayed on the site.  
+The following CSS will display only the first two heading levels and hides
+all other links:
+
+```css
+.toc-entry.toc-h1,
+.toc-entry.toc-h2
+{}
+.toc-entry.toc-h3,
+.toc-entry.toc-h4,
+.toc-entry.toc-h5,
+.toc-entry.toc-h6
+{
+  display: none;
+}
+```
+
