@@ -17,8 +17,9 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "nokogiri", "~> 1.6"
 
-  spec.add_development_dependency "appraisal"
   spec.add_development_dependency 'minitest', "~> 5.0"
+  spec.add_development_dependency "appraisal"
+  spec.add_development_dependency "codeclimate-test-reporter"
   spec.add_development_dependency "jekyll", "~> 2.0"
   spec.add_development_dependency "rake"
 end
