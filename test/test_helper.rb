@@ -1,8 +1,8 @@
-require 'jekyll'
-require 'minitest/autorun'
-
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
+
+require 'jekyll'
+require 'minitest/autorun'
 
 SIMPLE_HTML = <<EOL
 <h1>Simple H1</h1>

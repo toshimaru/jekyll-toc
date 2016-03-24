@@ -4,6 +4,7 @@
 [![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](http://badge.fury.io/rb/jekyll-toc)
 [![Dependency Status](https://gemnasium.com/toshimaru/jekyll-toc.svg)](https://gemnasium.com/toshimaru/jekyll-toc)
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
+[![Test Coverage](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/coverage.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc/coverage)
 
 # Usage
 
@@ -43,20 +44,20 @@ Jekyll's templates.
    Injects HTML anchors into the content without actually outputing the
    TOC itself.
    They are of the form:
-   
+
    ```html
    <a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
      <span class="octicon octicon-link"></span>
    </a>
    ```
-   
+
    This is only useful when the TOC itself should be placed at some other
    location with the `toc_only` filter.
 
 3. `toc`  
   This is the concatenation of the two above, where the TOC is placed
   directly above the content.
-  
+
   Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
   ```
@@ -122,4 +123,3 @@ all other links:
   display: none;
 }
 ```
-
