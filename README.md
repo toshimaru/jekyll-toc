@@ -6,7 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 [![Test Coverage](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/coverage.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc/coverage)
 
-# Usage
+# Installation
 
 Add jekyll-toc plugin in your site's `Gemfile`.
 
@@ -31,39 +31,47 @@ toc: true
 ---
 ```
 
+# Usage
+
 There are three Liquid filters available now, which all should be applied
 to some HTML content, e.g. the Liquid variable `content` available in
 Jekyll's templates.
 
-1. `toc_only`  
-   Generates the TOC itself as described [below](#generated-table-of-contents-html).
-   Mostly useful in cases where the TOC should _not_ be placed immediately
-   above the content but at some other place of the page, i.e. an aside.
+## Basic Usage
 
-2. `inject_anchors`  
-   Injects HTML anchors into the content without actually outputing the
-   TOC itself.
-   They are of the form:
+### `toc` filter
 
-   ```html
-   <a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
-     <span class="octicon octicon-link"></span>
-   </a>
-   ```
+Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
-   This is only useful when the TOC itself should be placed at some other
-   location with the `toc_only` filter.
+```
+{{ content | toc }}
+```
 
-3. `toc`  
-  This is the concatenation of the two above, where the TOC is placed
-  directly above the content.
+This filter places the TOC directly above the content.
 
-  Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
+## Advanced Usage
 
-  ```
-  {{ content | toc }}
-  ```
+If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
 
+### `toc_only` filter
+
+Generates the TOC itself as described [below](#generated-table-of-contents-html).
+Mostly useful in cases where the TOC should _not_ be placed immediately
+above the content but at some other place of the page, i.e. an aside.
+
+### `inject_anchors` filter
+
+Injects HTML anchors into the content without actually outputing the
+TOC itself. They are of the form:
+
+```html
+<a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
+  <span class="octicon octicon-link"></span>
+</a>
+```
+
+This is only useful when the TOC itself should be placed at some other
+location with the `toc_only` filter.
 
 ## Generated Table of Contents HTML
 
