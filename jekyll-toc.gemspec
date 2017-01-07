@@ -15,6 +15,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.required_ruby_version = ">= 2.1.0"
+
   spec.add_runtime_dependency "nokogiri", "~> 1.6"
 
   spec.add_development_dependency 'minitest', "~> 5.0"
