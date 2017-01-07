@@ -5,7 +5,10 @@ rvm:
   - 2.2
   - 2.3.1
   - 2.4.0
+# Put this in your .travis.yml
 gemfile:
+  - gemfiles/jekyll_3.3.gemfile
+  - gemfiles/jekyll_3.2.gemfile
   - gemfiles/jekyll_3.1.gemfile
   - gemfiles/jekyll_3.gemfile
   - gemfiles/jekyll_2.gemfile
