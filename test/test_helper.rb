@@ -16,6 +16,6 @@ EOL
 module TestHelpers
   def read_html_and_create_parser
     @parser = Jekyll::TableOfContents::Parser.new(SIMPLE_HTML)
-    assert_match /Simple H1/, @parser.doc.inner_html
+    assert_match(/Simple H1/, @parser.doc.inner_html)
   end
 end

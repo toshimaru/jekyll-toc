@@ -12,12 +12,12 @@ class TestTOCFilter < Minitest::Test
   def test_injects_anchors
     html = @parser.toc
 
-    assert_match /<a id="simple\-h1" class="anchor" href="#simple\-h1" aria\-hidden="true"><span.*span><\/a>Simple H1/, html
+    assert_match(/<a id="simple\-h1" class="anchor" href="#simple\-h1" aria\-hidden="true"><span.*span><\/a>Simple H1/, html)
   end
 
   def test_injects_toc_container
     html = @parser.toc
 
-    assert_match /<ul class="section-nav">/, html
+    assert_match(/<ul class="section-nav">/, html)
   end
 end
