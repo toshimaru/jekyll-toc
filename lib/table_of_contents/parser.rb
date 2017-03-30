@@ -13,11 +13,56 @@ module Jekyll
       def build_toc
         toc = %Q{<ul class="section-nav">\n}
 
+        min_h_num = 6
         @entries.each do |entry|
-          toc << %Q{<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
+          h_num = entry[:node_name][1].to_i
+          min_h_num = [min_h_num, h_num].min
         end
+        toc << build_lis(@entries, min_h_num)
 
         toc << '</ul>'
+      end
+
+      # Returns the list items for entries
+      def build_lis(entries, min_h_num)
+        lis = ""
+        i = 0
+        while i < entries.length do
+          entry = entries[i]
+          curr_h_num = entry[:node_name][1].to_i
+          if curr_h_num == min_h_num
+            
+            lis << %Q{<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a></li>\n}
+            
+          elsif curr_h_num > min_h_num
+          
+            lis << %Q{<ul>\n}
+            nest_entries = get_nest_entries(entries[i, entries.length], min_h_num)
+            lis << build_lis(nest_entries, min_h_num + 1)
+            lis << %Q{</ul>\n}
+            i += nest_entries.length - 1
+            
+          end
+          i += 1
+        end
+        lis
+      end
+
+      # Returns the entries in a nested list
+      # The nested list starts at the first entry in entries
+      # The nested list ends at the first entry in entries with depth min_h_num or greater
+      def get_nest_entries(entries, min_h_num)
+        nest_entries = []
+        for i in 0..(entries.length - 1)
+          nest_entry = entries[i]
+          nest_h_num = nest_entry[:node_name][1].to_i
+          if nest_h_num > min_h_num
+            nest_entries.push(nest_entry)
+          else
+            break
+          end
+        end
+        nest_entries
       end
 
       def inject_anchors_into_html
