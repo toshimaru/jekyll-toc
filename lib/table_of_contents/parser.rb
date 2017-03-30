@@ -49,8 +49,8 @@ module Jekyll
       end
 
       # Returns the entries in a nested list
-      # The nested list starts at the first entry in entries
-      # The nested list ends at the first entry in entries with depth min_h_num or greater
+      # The nested list starts at the first entry in entries (inclusive)
+      # The nested list ends at the first entry in entries with depth min_h_num or greater (exclusive)
       def get_nest_entries(entries, min_h_num)
         nest_entries = []
         for i in 0..(entries.length - 1)
