@@ -11,7 +11,7 @@ module Jekyll
       end
 
       def build_toc
-        toc = %Q{<ul class="section-nav" id="test">\n}
+        toc = %Q{<ul class="section-nav">\n}
 
         min_h_num = 6
         @entries.each do |entry|
