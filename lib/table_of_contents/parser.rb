@@ -90,10 +90,10 @@ module Jekyll
         build_toc + inject_anchors_into_html
       end
 
-      # parse logic is from html-pipeline toc_filter
-      # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
       private
 
+      # parse logic is from html-pipeline toc_filter
+      # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
       def parse_content
         entries = []
         headers = Hash.new(0)

@@ -37,19 +37,19 @@ There are three Liquid filters available now, which all should be applied
 to some HTML content, e.g. the Liquid variable `content` available in
 Jekyll's templates.
 
-## Basic Usage
+## 1. Basic Usage
 
 ### `toc` filter
 
 Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
-```
+```liquid
 {{ content | toc }}
 ```
 
 This filter places the TOC directly above the content.
 
-## Advanced Usage
+## 2. Advanced Usage
 
 If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
 
