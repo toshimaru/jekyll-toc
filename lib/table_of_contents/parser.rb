@@ -11,7 +11,7 @@ module Jekyll
       end
 
       def build_toc
-        toc = %Q{<ul class="section-nav">\n}
+        toc = %(<ul class="section-nav">\n)
 
         min_h_num = 6
         @entries.each do |entry|
@@ -33,17 +33,17 @@ module Jekyll
           if curr_h_num == min_h_num
             
             # If the current entry should not be indented in the list, add the entry to the list
-            lis << %Q{<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>}
+            lis << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
             if i + 1 < entries.length
               next_entry = entries[i + 1]
               next_h_num = next_entry[:node_name].delete("h").to_i
               if next_h_num > min_h_num
-                lis << %Q{\n}
-                lis << %Q{<ul>\n}
+                lis << %(\n)
+                lis << %(<ul>\n)
                 nest_entries = get_nest_entries(entries[i + 1, entries.length], min_h_num)
                 lis << build_lis(nest_entries, min_h_num + 1)
-                lis << %Q{</ul>\n}
+                lis << %(</ul>\n)
                 i += nest_entries.length
               end
             end
@@ -53,10 +53,10 @@ module Jekyll
           elsif curr_h_num > min_h_num
           
             # If the current entry should be indented in the list, generate a sublist
-            lis << %Q{<ul>\n}
+            lis << %(<ul>\n)
             nest_entries = get_nest_entries(entries[i, entries.length], min_h_num)
             lis << build_lis(nest_entries, min_h_num + 1)
-            lis << %Q{</ul>\n}
+            lis << %(</ul>\n)
             i += nest_entries.length - 1
             
           end
@@ -84,7 +84,7 @@ module Jekyll
 
       def inject_anchors_into_html
         @entries.each do |entry|
-          entry[:content_node].add_previous_sibling(%Q{<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>})
+          entry[:content_node].add_previous_sibling(%(<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>))
         end
 
         @doc.inner_html
