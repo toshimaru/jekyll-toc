@@ -70,7 +70,7 @@ module Jekyll
       # The nested list ends at the first entry in entries with depth min_h_num or greater (exclusive)
       def get_nest_entries(entries, min_h_num)
         nest_entries = []
-        for i in 0..(entries.length - 1)
+        (0..(entries.length - 1)).each do |i|
           nest_entry = entries[i]
           nest_h_num = nest_entry[:node_name].delete("h").to_i
           if nest_h_num > min_h_num
