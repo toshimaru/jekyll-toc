@@ -27,7 +27,7 @@ module Jekyll
       def build_lis(entries, min_h_num)
         lis = ''
         i = 0
-        while i < entries.length do
+        while i < entries.length
           entry = entries[i]
           curr_h_num = entry[:node_name].delete('h').to_i
           if curr_h_num == min_h_num
@@ -69,11 +69,8 @@ module Jekyll
         (0..(entries.length - 1)).each do |i|
           nest_entry = entries[i]
           nest_h_num = nest_entry[:node_name].delete('h').to_i
-          if nest_h_num > min_h_num
-            nest_entries.push(nest_entry)
-          else
-            break
-          end
+          break unless nest_h_num > min_h_num
+          nest_entries.push(nest_entry)
         end
         nest_entries
       end
