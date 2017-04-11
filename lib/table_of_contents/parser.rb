@@ -106,7 +106,8 @@ module Jekyll
 
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
-          next unless header_content == node.children.first
+          header_content = node.children.first
+          next unless header_content
 
           entries << {
             id: id,
