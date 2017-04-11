@@ -108,17 +108,17 @@ module Jekyll
           id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
           id.gsub!(' ', '-') # replace spaces with dash
 
-          uniq = (headers[id] > 0) ? "-#{headers[id]}" : ''
+          uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
-          if header_content = node.children.first
-            entries << {
-                id: id,
-                uniq: uniq,
-                text: text,
-                node_name: node.name,
-                content_node: header_content
-            }
-          end
+          next unless header_content == node.children.first
+
+          entries << {
+            id: id,
+            uniq: uniq,
+            text: text,
+            node_name: node.name,
+            content_node: header_content
+          }
         end
 
         entries
