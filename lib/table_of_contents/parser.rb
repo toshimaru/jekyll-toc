@@ -1,7 +1,7 @@
 module Jekyll
   module TableOfContents
     class Parser
-      PUNCTUATION_REGEXP = RUBY_VERSION > '1.9' ? /[^\p{Word}\- ]/u : /[^\w\- ]/
+      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       attr_reader :doc
 
