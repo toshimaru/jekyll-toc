@@ -17,6 +17,6 @@ class TestTOCOnlyFilter < Minitest::Test
   def test_does_not_return_content
     html = @parser.build_toc
 
-    assert_nil(/<h1>Simple H1<\/h1>/ =~ html)
+    assert_nil(%r{<h1>Simple H1</h1>} =~ html)
   end
 end
