@@ -1,6 +1,4 @@
 require 'test_helper'
-require_relative '../lib/jekyll-toc'
-
 
 class TestTOCFilter < Minitest::Test
   include TestHelpers
@@ -12,7 +10,7 @@ class TestTOCFilter < Minitest::Test
   def test_injects_anchors
     html = @parser.toc
 
-    assert_match(/<a id="simple\-h1" class="anchor" href="#simple\-h1" aria\-hidden="true"><span.*span><\/a>Simple H1/, html)
+    assert_match(%r{<a id="simple-h1" class="anchor" href="#simple-h1" aria-hidden="true"><span.*span></a>Simple H1}, html)
   end
 
   def test_injects_toc_container
