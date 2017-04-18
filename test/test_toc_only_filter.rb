@@ -1,5 +1,4 @@
 require 'test_helper'
-require_relative '../lib/jekyll-toc'
 
 class TestTOCOnlyFilter < Minitest::Test
   include TestHelpers

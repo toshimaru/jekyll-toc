@@ -1,8 +1,9 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'jekyll'
 require 'minitest/autorun'
+require 'jekyll'
+require 'jekyll-toc'
 
 SIMPLE_HTML = <<HTML
 <h1>Simple H1</h1>
