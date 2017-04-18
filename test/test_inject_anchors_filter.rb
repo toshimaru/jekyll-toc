@@ -1,5 +1,4 @@
 require 'test_helper'
-require_relative '../lib/jekyll-toc'
 
 class TestInjectAnchorsFilter < Minitest::Test
   include TestHelpers
