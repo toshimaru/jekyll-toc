@@ -8,20 +8,20 @@
 
 # Installation
 
-Add jekyll-toc plugin in your site's `Gemfile`.
+Add jekyll-toc plugin in your site's `Gemfile`, and run `bundle install`.
 
 ```ruby
 gem 'jekyll-toc'
 ```
 
-And add the jekyll-toc to your site's `_config.yml`.
+Add jekyll-toc to the `gems:` section in your site's `_config.yml`.
 
 ```yml
 gems:
   - jekyll-toc
 ```
 
-Set `toc: true` in your posts.
+Set `toc: true` in posts for which you want the TOC to appear.
 
 ```yml
 ---
@@ -33,15 +33,14 @@ toc: true
 
 # Usage
 
-There are three Liquid filters available now, which all should be applied
-to some HTML content, e.g. the Liquid variable `content` available in
-Jekyll's templates.
+There are three Liquid filters, which can be applied to HTML content,
+e.g. the Liquid variable `content` available in Jekyll's templates.
 
 ## 1. Basic Usage
 
 ### `toc` filter
 
-Add `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
+Add the `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
 ```liquid
 {{ content | toc }}
@@ -73,9 +72,9 @@ TOC itself. They are of the form:
 This is only useful when the TOC itself should be placed at some other
 location with the `toc_only` filter.
 
-## Generated Table of Contents HTML
+## Generated HTML
 
-jekyll-toc generates Unordered List. The final output is as follows.
+jekyll-toc generates an unordered list. The final output is as follows.
 
 ```html
 <ul class="section-nav">
