@@ -77,19 +77,33 @@ location with the `toc_only` filter.
 
 jekyll-toc generates Unordered List. The final output is as follows.
 
+**Heads-up**: As of v0.3, nested toc has been supported. If you update jekyll-toc from 0.2 to 0.3, please check [upgrade guide](https://github.com/toshimaru/jekyll-toc/wiki/0.3-Upgrade-Guide)
+
 ```html
 <ul class="section-nav">
-  <li class="toc-entry toc-h1"><a href="#heading1">Heading.1</a></li>
-  <li class="toc-entry toc-h2"><a href="#heading2-1">Heading.2-1</a></li>
-  <li class="toc-entry toc-h2"><a href="#heading2-2">Heading.2-2</a></li>
-  <li class="toc-entry toc-h3"><a href="#heading3">Heading.3</a></li>
-  <li class="toc-entry toc-h2"><a href="#heading2-3">Heading.2-3</a></li>
+  <li class="toc-entry toc-h1"><a href="#heading1">Heading.1</a>
+    <ul>
+      <li class="toc-entry toc-h2"><a href="#heading1-1">Heading.1-1</a></li>
+      <li class="toc-entry toc-h2"><a href="#heading1-2">Heading.1-2</a></li>
+    </ul>
+  </li>
+  <li class="toc-entry toc-h1"><a href="#heading2">Heading.2</a>
+    <ul>
+      <li class="toc-entry toc-h2"><a href="#heading2-1">Heading.2-1</a>
+        <ul>
+          <li class="toc-entry toc-h3"><a href="#heading2-1-1">Heading.2-1-1</a></li>
+          <li class="toc-entry toc-h3"><a href="#heading2-1-2">Heading.2-1-2</a></li>
+        </ul>
+      </li>
+      <li class="toc-entry toc-h2"><a href="#heading2-2">Heading.2-2</a></li>
+    </ul>
+  </li>
 </ul>
 ```
 
 It looks like the image below.
 
-![screenshot](https://cloud.githubusercontent.com/assets/803398/5722561/7f59e8aa-9b80-11e4-9ee5-27a15192ee83.png)
+![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
 
 ## CSS Styling
 
@@ -105,7 +119,7 @@ The toc can be modified with CSS. The sample CSS is the following.
 }
 ```
 
-![screenshot](https://cloud.githubusercontent.com/assets/803398/5723662/f0bc84c8-9b88-11e4-986c-90608ca88184.png)
+![screen shot](https://user-images.githubusercontent.com/803398/28401455-0ba60868-6d55-11e7-8159-0ae7591aee66.png)
 
 Each TOC `li` entry has two CSS classes for further styling.
 The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
