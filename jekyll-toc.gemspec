@@ -25,7 +25,7 @@ For more info: https://github.com/toshimaru/jekyll-toc/wiki/0.3-Upgrade-Guide)
 
   spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 1.0'
-  spec.add_development_dependency 'jekyll', '>= 2.0'
+  spec.add_development_dependency 'jekyll', '>= 3.0'
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
