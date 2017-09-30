@@ -12,12 +12,8 @@ module Jekyll
       end
 
       def build_toc
-        toc = %(<ul class="section-nav">\n)
-
         min_h_num = @entries.map { |e| e[:node_name].delete('h').to_i }.min
-        toc << build_lis(@entries, min_h_num)
-
-        toc << '</ul>'
+        %(<ul class="section-nav">\n#{build_lis(@entries, min_h_num)}</ul>)
       end
 
       def inject_anchors_into_html
