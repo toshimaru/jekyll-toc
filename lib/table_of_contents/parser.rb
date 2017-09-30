@@ -63,6 +63,7 @@ module Jekyll
       def build_lis(entries, min_h_num)
         lis = ''
         i = 0
+
         while i < entries.length
           entry = entries[i]
           curr_h_num = entry[:node_name].delete('h').to_i
@@ -74,11 +75,8 @@ module Jekyll
               next_entry = entries[i + 1]
               next_h_num = next_entry[:node_name].delete('h').to_i
               if next_h_num > min_h_num
-                lis << %(\n)
-                lis << %(<ul>\n)
                 nest_entries = get_nest_entries(entries[i + 1, entries.length], min_h_num)
-                lis << build_lis(nest_entries, min_h_num + 1)
-                lis << %(</ul>\n)
+                lis << %(\n<ul>\n#{build_lis(nest_entries, next_h_num)}</ul>\n)
                 i += nest_entries.length
               end
             end
@@ -86,10 +84,8 @@ module Jekyll
             lis << %(</li>\n)
           elsif curr_h_num > min_h_num
             # If the current entry should be indented in the list, generate a sublist
-            lis << %(<ul>\n)
             nest_entries = get_nest_entries(entries[i, entries.length], min_h_num)
-            lis << build_lis(nest_entries, min_h_num + 1)
-            lis << %(</ul>\n)
+            lis << %(<ul>\n#{build_lis(nest_entries, min_h_num + 1)}</ul>\n)
             i += nest_entries.length - 1
           end
           i += 1
