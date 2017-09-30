@@ -64,29 +64,29 @@ module Jekyll
         lis = ''
         i = 0
 
-        while i < entries.length
+        while i < entries.count
           entry = entries[i]
           curr_h_num = entry[:node_name].delete('h').to_i
           if curr_h_num == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
             lis << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
-            if i + 1 < entries.length
+            if i + 1 < entries.count
               next_entry = entries[i + 1]
               next_h_num = next_entry[:node_name].delete('h').to_i
               if next_h_num > min_h_num
-                nest_entries = get_nest_entries(entries[i + 1, entries.length], min_h_num)
+                nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
                 lis << %(\n<ul>\n#{build_toc_list(nest_entries, next_h_num)}</ul>\n)
-                i += nest_entries.length
+                i += nest_entries.count
               end
             end
             # Add the closing tag for the current entry in the list
             lis << %(</li>\n)
           elsif curr_h_num > min_h_num
             # If the current entry should be indented in the list, generate a sublist
-            nest_entries = get_nest_entries(entries[i, entries.length], min_h_num)
+            nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
             lis << %(<ul>\n#{build_toc_list(nest_entries, min_h_num + 1)}</ul>\n)
-            i += nest_entries.length - 1
+            i += nest_entries.count - 1
           end
           i += 1
         end
@@ -99,11 +99,11 @@ module Jekyll
       # The nested list ends at the first entry in entries with depth min_h_num or greater (exclusive)
       def get_nest_entries(entries, min_h_num)
         nest_entries = []
-        (0..(entries.length - 1)).each do |i|
+        (0...entries.count).each do |i|
           nest_entry = entries[i]
           nest_h_num = nest_entry[:node_name].delete('h').to_i
           break unless nest_h_num > min_h_num
-          nest_entries.push(nest_entry)
+          nest_entries << nest_entry
         end
         nest_entries
       end
