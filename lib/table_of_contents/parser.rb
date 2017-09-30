@@ -92,13 +92,6 @@ module Jekyll
             end
             # Add the closing tag for the current entry in the list
             lis << %(</li>\n)
-          elsif curr_h_num > min_h_num
-            # If the current entry should be indented in the list, generate a sublist
-            lis << %(<ul>\n)
-            nest_entries = get_nest_entries(entries[i, entries.length], min_h_num)
-            lis << build_lis(nest_entries, min_h_num + 1)
-            lis << %(</ul>\n)
-            i += nest_entries.length - 1
           end
           i += 1
         end
