@@ -14,11 +14,7 @@ module Jekyll
       def build_toc
         toc = %(<ul class="section-nav">\n)
 
-        min_h_num = 6
-        @entries.each do |entry|
-          h_num = entry[:node_name].delete('h').to_i
-          min_h_num = [min_h_num, h_num].min
-        end
+        min_h_num = @entries.map { |e| e[:node_name].delete('h').to_i }.min
         toc << build_lis(@entries, min_h_num)
 
         toc << '</ul>'
@@ -102,6 +98,7 @@ module Jekyll
           end
           i += 1
         end
+
         lis
       end
 
