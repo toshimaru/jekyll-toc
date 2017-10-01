@@ -75,8 +75,8 @@ module Jekyll
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                # binding.pry
-                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, next_entry[:h_num])}</ul>\n)
+                nest_min_h_num = nest_entries.map { |e| e[:h_num] }.min
+                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, nest_min_h_num)}</ul>\n)
                 i += nest_entries.count
               end
             end
@@ -85,7 +85,8 @@ module Jekyll
           elsif entry[:h_num] > min_h_num
             # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-            toc_list << %(<ul>\n#{build_toc_list(nest_entries, min_h_num + 1)}</ul>\n)
+            nest_min_h_num = nest_entries.map { |e| e[:h_num] }.min
+            toc_list << %(<ul>\n#{build_toc_list(nest_entries, nest_min_h_num)}</ul>\n)
             i += nest_entries.count - 1
           end
           i += 1
