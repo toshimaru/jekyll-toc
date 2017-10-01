@@ -98,10 +98,9 @@ module Jekyll
       # The nested list starts at the first entry in entries (inclusive)
       # The nested list ends at the first entry in entries with depth min_h_num or greater (exclusive)
       def get_nest_entries(entries, min_h_num)
-        (0...entries.count).inject([]) do |nest_entries, i|
-          nest_entry = entries[i]
-          break nest_entries unless nest_entry[:h_num] > min_h_num
-          nest_entries << nest_entry
+        entries.inject([]) do |nest_entries, entry|
+          break nest_entries if entry[:h_num] == min_h_num
+          nest_entries << entry
         end
       end
     end
