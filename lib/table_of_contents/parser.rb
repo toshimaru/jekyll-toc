@@ -12,7 +12,7 @@ module Jekyll
       end
 
       def build_toc
-        min_h_num = @entries.map { |e| e[:node_name].delete('h').to_i }.min
+        min_h_num = @entries.map { |e| e[:h_num] }.min
         %(<ul class="section-nav">\n#{build_toc_list(@entries, min_h_num)}</ul>)
       end
 
@@ -52,7 +52,8 @@ module Jekyll
             uniq: uniq,
             text: text,
             node_name: node.name,
-            content_node: header_content
+            content_node: header_content,
+            h_num: node.name.delete('h').to_i
           }
         end
 
@@ -61,37 +62,36 @@ module Jekyll
 
       # Returns the list items for entries
       def build_toc_list(entries, min_h_num)
-        lis = ''
+        toc_list = ''
         i = 0
 
         while i < entries.count
           entry = entries[i]
-          curr_h_num = entry[:node_name].delete('h').to_i
-          if curr_h_num == min_h_num
+          if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
-            lis << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
+            toc_list << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
             if i + 1 < entries.count
               next_entry = entries[i + 1]
-              next_h_num = next_entry[:node_name].delete('h').to_i
-              if next_h_num > min_h_num
+              if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                lis << %(\n<ul>\n#{build_toc_list(nest_entries, next_h_num)}</ul>\n)
+                # binding.pry
+                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, next_entry[:h_num])}</ul>\n)
                 i += nest_entries.count
               end
             end
             # Add the closing tag for the current entry in the list
-            lis << %(</li>\n)
-          elsif curr_h_num > min_h_num
+            toc_list << %(</li>\n)
+          elsif entry[:h_num] > min_h_num
             # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-            lis << %(<ul>\n#{build_toc_list(nest_entries, min_h_num + 1)}</ul>\n)
+            toc_list << %(<ul>\n#{build_toc_list(nest_entries, min_h_num + 1)}</ul>\n)
             i += nest_entries.count - 1
           end
           i += 1
         end
 
-        lis
+        toc_list
       end
 
       # Returns the entries in a nested list
@@ -100,8 +100,7 @@ module Jekyll
       def get_nest_entries(entries, min_h_num)
         (0...entries.count).inject([]) do |nest_entries, i|
           nest_entry = entries[i]
-          nest_h_num = nest_entry[:node_name].delete('h').to_i
-          break nest_entries unless nest_h_num > min_h_num
+          break nest_entries unless nest_entry[:h_num] > min_h_num
           nest_entries << nest_entry
         end
       end
