@@ -12,8 +12,7 @@ module Jekyll
       end
 
       def build_toc
-        min_h_num = @entries.map { |e| e[:h_num] }.min
-        %(<ul class="section-nav">\n#{build_toc_list(@entries, min_h_num)}</ul>)
+        %(<ul class="section-nav">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -61,9 +60,10 @@ module Jekyll
       end
 
       # Returns the list items for entries
-      def build_toc_list(entries, min_h_num)
-        toc_list = ''
+      def build_toc_list(entries)
         i = 0
+        toc_list = ''
+        min_h_num = entries.map { |e| e[:h_num] }.min
 
         while i < entries.count
           entry = entries[i]
@@ -75,8 +75,7 @@ module Jekyll
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                nest_min_h_num = nest_entries.map { |e| e[:h_num] }.min
-                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, nest_min_h_num)}</ul>\n)
+                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
                 i += nest_entries.count
               end
             end
@@ -85,8 +84,7 @@ module Jekyll
           elsif entry[:h_num] > min_h_num
             # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-            nest_min_h_num = nest_entries.map { |e| e[:h_num] }.min
-            toc_list << %(<ul>\n#{build_toc_list(nest_entries, nest_min_h_num)}</ul>\n)
+            toc_list << %(<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
             i += nest_entries.count - 1
           end
           i += 1
