@@ -4,8 +4,6 @@ module Jekyll
     class Parser
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
-      attr_reader :doc
-
       def initialize(html)
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         @entries = parse_content
