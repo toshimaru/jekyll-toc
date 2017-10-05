@@ -26,7 +26,7 @@ class TestVariousTocHtml < Minitest::Test
   def test_nested_toc
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1)
     doc = Nokogiri::HTML(parser.toc)
-    assert_equal(doc.css('ul.section-nav').to_s, <<-HTML
+    expected = <<-HTML
 <ul class="section-nav">
 <li class="toc-entry toc-h1">
 <a href="#h1">h1</a>
@@ -41,13 +41,14 @@ class TestVariousTocHtml < Minitest::Test
 </li>
 </ul>
     HTML
-    )
+
+    assert_equal(expected, doc.css('ul.section-nav').to_s)
   end
 
   def test_complex_nested_toc
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_2)
     doc = Nokogiri::HTML(parser.toc)
-    assert_equal(doc.css('ul.section-nav').to_s, <<-HTML
+    expected = <<-HTML
 <ul class="section-nav">
 <li class="toc-entry toc-h1">
 <a href="#h1">h1</a>
@@ -65,13 +66,14 @@ class TestVariousTocHtml < Minitest::Test
 </li>
 </ul>
     HTML
-    )
+
+    assert_equal(expected, doc.css('ul.section-nav').to_s)
   end
 
   def test_decremental_headings
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_3)
     doc = Nokogiri::HTML(parser.toc)
-    assert_equal(doc.css('ul.section-nav').to_s, <<-HTML
+    expected = <<-HTML
 <ul class="section-nav">
 <ul>
 <ul>
@@ -91,6 +93,7 @@ class TestVariousTocHtml < Minitest::Test
 <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
 </ul>
     HTML
-    )
+
+    assert_equal(expected, doc.css('ul.section-nav').to_s)
   end
 end
