@@ -58,7 +58,7 @@ module Jekyll
       end
 
       # Returns the list items for entries
-      def build_toc_list(entries)
+      def build_toc_list(entries, last_ul_used: false)
         i = 0
         toc_list = ''
         min_h_num = entries.map { |e| e[:h_num] }.min
@@ -73,7 +73,7 @@ module Jekyll
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
+                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
                 i += nest_entries.count
               end
             end
@@ -82,7 +82,13 @@ module Jekyll
           elsif entry[:h_num] > min_h_num
             # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-            toc_list << %(<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
+            if last_ul_used
+              toc_list << build_toc_list(nest_entries)
+              last_ul_used = false
+            else
+              toc_list << %(<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
+              last_ul_used = true
+            end
             i += nest_entries.count - 1
           end
           i += 1

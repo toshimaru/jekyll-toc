@@ -53,9 +53,7 @@ class TestVariousTocHtml < Minitest::Test
 <li class="toc-entry toc-h1">
 <a href="#h1">h1</a>
 <ul>
-<ul>
 <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
-</ul>
 <li class="toc-entry toc-h2">
 <a href="#h2">h2</a>
 <ul>
