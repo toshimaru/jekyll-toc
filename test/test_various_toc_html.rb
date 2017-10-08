@@ -73,21 +73,11 @@ class TestVariousTocHtml < Minitest::Test
     doc = Nokogiri::HTML(parser.toc)
     expected = <<-HTML
 <ul class="section-nav">
-<ul>
-<ul>
-<ul>
-<ul>
-<ul>
 <li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
-</ul>
 <li class="toc-entry toc-h5"><a href="#h5">h5</a></li>
-</ul>
 <li class="toc-entry toc-h4"><a href="#h4">h4</a></li>
-</ul>
 <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
-</ul>
 <li class="toc-entry toc-h2"><a href="#h2">h2</a></li>
-</ul>
 <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
 </ul>
     HTML

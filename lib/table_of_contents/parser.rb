@@ -83,7 +83,7 @@ module Jekyll
             # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
             if last_ul_used
-              toc_list << build_toc_list(nest_entries)
+              toc_list << build_toc_list(nest_entries, last_ul_used: true)
             else
               toc_list << %(<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
             end
