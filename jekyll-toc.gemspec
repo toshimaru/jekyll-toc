@@ -15,10 +15,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.post_install_message = %q(As of jekyll-toc 0.3, nested toc is supported! Please make sure your toc is not broken after update jekyll-toc.
-
-For more info: https://github.com/toshimaru/jekyll-toc/wiki/0.3-Upgrade-Guide)
-
   spec.required_ruby_version = '>= 2.1.0'
 
   spec.add_runtime_dependency 'nokogiri', '~> 1.6'
