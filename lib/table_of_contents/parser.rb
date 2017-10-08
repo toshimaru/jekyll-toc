@@ -84,10 +84,8 @@ module Jekyll
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
             if last_ul_used
               toc_list << build_toc_list(nest_entries)
-              last_ul_used = false
             else
               toc_list << %(<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
-              last_ul_used = true
             end
             i += nest_entries.count - 1
           end
