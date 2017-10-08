@@ -10,7 +10,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="section-nav">\n#{build_toc_list(@entries)}</ul>)
+        %(<ul class="section-nav">\n#{build_toc_list(@entries, last_ul_used: true)}</ul>)
       end
 
       def inject_anchors_into_html
