@@ -103,10 +103,10 @@ class TestKramdownList < Minitest::Test
 
     def test_kramdown_list_3
       text = <<-MARKDOWN
-  * level-1
-      * level-3
-    * level-2
-  * level-1
+* level-1
+    * level-3
+  * level-2
+* level-1
       MARKDOWN
       expected = <<-HTML
 <ul>
