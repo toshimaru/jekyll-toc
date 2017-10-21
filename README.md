@@ -21,6 +21,8 @@ plugins:
   - jekyll-toc
 ```
 
+**NOTE: If you're using older Jekyll version(v3.4 or earlier), use `gems` instead of `plugins`.**
+
 Set `toc: true` in posts for which you want the TOC to appear.
 
 ```yml
