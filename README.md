@@ -17,9 +17,11 @@ gem 'jekyll-toc'
 Add jekyll-toc to the `gems:` section in your site's `_config.yml`.
 
 ```yml
-gems:
+plugins:
   - jekyll-toc
 ```
+
+**NOTE: If you're using older Jekyll version(v3.4 or earlier), use `gems` instead of `plugins`.**
 
 Set `toc: true` in posts for which you want the TOC to appear.
 
@@ -75,8 +77,6 @@ location with the `toc_only` filter.
 ## Generated HTML
 
 jekyll-toc generates an unordered list. The final output is as follows.
-
-**Heads-up**: As of v0.3, nested toc has been supported. If you update jekyll-toc from 0.2 to 0.3, please check [upgrade guide](https://github.com/toshimaru/jekyll-toc/wiki/0.3-Upgrade-Guide)
 
 ```html
 <ul class="section-nav">
