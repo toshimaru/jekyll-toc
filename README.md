@@ -76,8 +76,6 @@ location with the `toc_only` filter.
 
 jekyll-toc generates an unordered list. The final output is as follows.
 
-**Heads-up**: As of v0.3, nested toc has been supported. If you update jekyll-toc from 0.2 to 0.3, please check [upgrade guide](https://github.com/toshimaru/jekyll-toc/wiki/0.3-Upgrade-Guide)
-
 ```html
 <ul class="section-nav">
   <li class="toc-entry toc-h1"><a href="#heading1">Heading.1</a>
