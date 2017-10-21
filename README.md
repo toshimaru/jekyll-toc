@@ -17,7 +17,7 @@ gem 'jekyll-toc'
 Add jekyll-toc to the `gems:` section in your site's `_config.yml`.
 
 ```yml
-gems:
+plugins:
   - jekyll-toc
 ```
 
