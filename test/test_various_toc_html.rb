@@ -76,7 +76,7 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, doc.css('ul.section-nav').to_s)
   end
 
-  def test_decremental_headings
+  def test_decremental_headings1
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_3)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<-HTML
@@ -94,7 +94,7 @@ class TestVariousTocHtml < Minitest::Test
   end
 
 
-  def test_decremental_headings
+  def test_decremental_headings2
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_4)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<-HTML

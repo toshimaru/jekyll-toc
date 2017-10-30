@@ -72,12 +72,15 @@ class TestKramdownList < Minitest::Test
 * level-1
     MARKDOWN
     expected = <<-HTML
+<pre><code>  * level-4
+* level-3   * level-2 * level-1
+</code></pre>
     HTML
 
     assert_equal(expected, Kramdown::Document.new(text).to_html)
   end
 
-  def test_kramdown_list_3
+  def test_kramdown_list_4
     text = <<-MARKDOWN
 * level-1
       * level-4
@@ -101,7 +104,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, Kramdown::Document.new(text).to_html)
   end
 
-    def test_kramdown_list_3
+    def test_kramdown_list_5
       text = <<-MARKDOWN
 * level-1
     * level-3
