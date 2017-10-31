@@ -1,6 +1,22 @@
 require 'test_helper'
 
 class TestKramdownList < Minitest::Test
+  # NOTE: kramdown automatically injects `id` attribute
+  def test_kramdown_heading
+    text = <<-MARKDOWN
+# h1
+
+## h2
+    MARKDOWN
+    expected = <<-HTML
+<h1 id="h1">h1</h1>
+
+<h2 id=\"h2\">h2</h2>
+    HTML
+
+    assert_equal(expected, Kramdown::Document.new(text).to_html)
+  end
+
   def test_kramdown_list_1
     text = <<-MARKDOWN
 * level-1
