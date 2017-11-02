@@ -39,4 +39,4 @@ module Jekyll
 end
 
 Liquid::Template.register_filter(Jekyll::TableOfContentsFilter)
-Liquid::Template.register_tag('toc', Jekyll::TocTag)
+# Liquid::Template.register_tag('toc', Jekyll::TocTag) # will be enabled at v1.0

@@ -33,6 +33,7 @@ module Jekyll
         entries = []
         headers = Hash.new(0)
 
+        # TODO: Use kramdown auto ids
         @doc.css('h1, h2, h3, h4, h5, h6').each do |node|
           text = node.text
           id = text.downcase
