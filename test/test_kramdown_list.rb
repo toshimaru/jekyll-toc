@@ -2,6 +2,7 @@ require 'test_helper'
 
 class TestKramdownList < Minitest::Test
   # NOTE: kramdown automatically injects `id` attribute
+  # TODO: test Japanese heading
   def test_kramdown_heading
     text = <<-MARKDOWN
 # h1
