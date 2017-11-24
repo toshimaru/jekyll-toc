@@ -13,27 +13,27 @@ module Jekyll
   module TableOfContentsFilter
     def toc_only(html)
       return html unless toc_enabled?
-      ::Jekyll::TableOfContents::Parser.new(html).build_toc
+      ::Jekyll::TableOfContents::Parser.new(html, toc_config).build_toc
     end
 
     def inject_anchors(html)
       return html unless toc_enabled?
-      ::Jekyll::TableOfContents::Parser.new(html).inject_anchors_into_html
+      ::Jekyll::TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
     end
 
     def toc(html)
       return html unless toc_enabled?
-      ::Jekyll::TableOfContents::Parser.new(html).toc
+      ::Jekyll::TableOfContents::Parser.new(html, toc_config).toc
     end
 
     private
 
     def toc_enabled?
-      page['toc'] == true
+      @context.registers[:page]['toc'] == true
     end
 
-    def page
-      @context.registers[:page]
+    def toc_config
+      @context.registers[:site].config["toc"]
     end
   end
 end

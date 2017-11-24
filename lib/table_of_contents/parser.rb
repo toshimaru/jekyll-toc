@@ -4,8 +4,15 @@ module Jekyll
     class Parser
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
-      def initialize(html)
+      DEFAULT_CONFIG = {
+        "min_level" => 1,
+        "max_level" => 6,
+      }
+
+      def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
+        options = DEFAULT_CONFIG.merge(options)
+        @toc_levels = options["min_level"]..options["max_level"]
         @entries = parse_content
       end
 
@@ -34,7 +41,7 @@ module Jekyll
         headers = Hash.new(0)
 
         # TODO: Use kramdown auto ids
-        @doc.css('h1, h2, h3, h4, h5, h6').each do |node|
+        @doc.css(toc_headings).each do |node|
           text = node.text
           id = text.downcase
           id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
@@ -104,6 +111,10 @@ module Jekyll
           break nest_entries if entry[:h_num] == min_h_num
           nest_entries << entry
         end
+      end
+
+      def toc_headings
+        @toc_levels.map { |level| "h#{level}" }.join(",")
       end
     end
   end
