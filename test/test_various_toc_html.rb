@@ -53,6 +53,18 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, doc.css('ul.section-nav').to_s)
   end
 
+  def test_nested_toc_with_min_and_max
+    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1, { "min_level" => 2, "max_level" => 5 })
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
+</ul>
+    HTML
+
+    assert_equal(expected, doc.css('ul.section-nav').to_s)
+  end
+
   def test_complex_nested_toc
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_2)
     doc = Nokogiri::HTML(parser.toc)
