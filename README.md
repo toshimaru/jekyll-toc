@@ -76,7 +76,7 @@ location with the `toc_only` filter.
 
 ## Generated HTML
 
-jekyll-toc generates an unordered list. The final output is as follows.
+jekyll-toc generates an unordered list. The HTML output is as follows.
 
 ```html
 <ul class="section-nav">
@@ -104,7 +104,13 @@ It looks like the image below.
 
 ![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
 
-## CSS Styling
+## Customization
+
+### TOC level
+
+TODO
+
+### CSS Styling
 
 The toc can be modified with CSS. The sample CSS is the following.
 
