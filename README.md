@@ -76,7 +76,7 @@ location with the `toc_only` filter.
 
 ## Generated HTML
 
-jekyll-toc generates an unordered list. The final output is as follows.
+jekyll-toc generates an unordered list. The HTML output is as follows.
 
 ```html
 <ul class="section-nav">
@@ -104,7 +104,21 @@ It looks like the image below.
 
 ![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
 
-## CSS Styling
+## Customization
+
+### TOC level
+
+The toc levels can be configured on `_config.yml`.
+
+```yml
+toc:
+  min_level: 2 # default: 1
+  max_level: 5 # default: 6
+```
+
+The default level range is `<h1>` to `<h6>`.
+
+### CSS Styling
 
 The toc can be modified with CSS. The sample CSS is the following.
 
@@ -122,25 +136,6 @@ The toc can be modified with CSS. The sample CSS is the following.
 
 Each TOC `li` entry has two CSS classes for further styling.
 The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
-Depending on the heading level each specific entry refers to, it has a second
-CSS class `toc-XX`, where `XX` is the HTML heading tag name.
 
-For example, the TOC entry linking to a heading `<h1>...</h1>` (a single
+Depending on the heading level each specific entry refers to, it has a second CSS class `toc-XX`, where `XX` is the HTML heading tag name. For example, the TOC entry linking to a heading `<h1>...</h1>` (a single
 `#` in Markdown) will get the CSS class `toc-h1`.
-
-That way, one can tune the depth of the TOC displayed on the site.  
-The following CSS will display only the first two heading levels and hides
-all other links:
-
-```css
-.toc-entry.toc-h1,
-.toc-entry.toc-h2
-{}
-.toc-entry.toc-h3,
-.toc-entry.toc-h4,
-.toc-entry.toc-h5,
-.toc-entry.toc-h6
-{
-  display: none;
-}
-```
