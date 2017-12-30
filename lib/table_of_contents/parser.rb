@@ -11,7 +11,7 @@ module Jekyll
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
-        options = DEFAULT_CONFIG.merge(options)
+        options = options.nil? ? DEFAULT_CONFIG.clone : DEFAULT_CONFIG.merge(options)
         @toc_levels = options["min_level"]..options["max_level"]
         @entries = parse_content
       end
