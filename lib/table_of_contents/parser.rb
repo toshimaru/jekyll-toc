@@ -11,7 +11,7 @@ module Jekyll
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
-        options = DEFAULT_CONFIG.merge(options)
+        options = generate_option_hash(options)
         @toc_levels = options["min_level"]..options["max_level"]
         @entries = parse_content
       end
@@ -115,6 +115,12 @@ module Jekyll
 
       def toc_headings
         @toc_levels.map { |level| "h#{level}" }.join(",")
+      end
+
+      def generate_option_hash(options)
+        DEFAULT_CONFIG.merge(options)
+      rescue TypeError
+        DEFAULT_CONFIG
       end
     end
   end
