@@ -13,7 +13,6 @@ gemfile:
   - gemfiles/jekyll_3.4.gemfile
   - gemfiles/jekyll_3.3.gemfile
   - gemfiles/jekyll_3.2.gemfile
-  - gemfiles/jekyll_3.1.gemfile
 addons:
   code_climate:
     repo_token: 6b81e393ea6ad38560386f650ea2fb0e57a7beb5e20f8c8364fabee30d5bff07
