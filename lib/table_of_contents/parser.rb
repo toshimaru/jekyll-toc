@@ -2,7 +2,7 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
+      PUNCTUATION_REGEXP = /[^\p{Word}\-\/ ]/u
 
       DEFAULT_CONFIG = {
         "min_level" => 1,
