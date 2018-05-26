@@ -2,7 +2,7 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      PUNCTUATION_REGEXP = /[^\p{Word}\-\/ ]/u
+      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       DEFAULT_CONFIG = {
         "min_level" => 1,
@@ -44,8 +44,11 @@ module Jekyll
         @doc.css(toc_headings).each do |node|
           text = node.text
           id = text.downcase
-          id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
+          id.gsub!(PUNCTUATION_REGEXP, ' ') # replace punctuation with spaces
+          id.gsub!(/\s+/,' ') # in case there were two or more special characters
           id.gsub!(' ', '-') # replace spaces with dash
+          id.gsub!(/-+/, '-') # in case there were two or more dashes
+          id.chomp!('-') # not at the end
 
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
