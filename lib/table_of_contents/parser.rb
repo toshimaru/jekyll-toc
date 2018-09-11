@@ -57,7 +57,7 @@ module Jekyll
             uniq: uniq,
             text: text,
             node_name: node.name,
-            no_toc: node.attribute('class')&.value&.include?('no_toc'),
+            no_toc: node.attribute('class') && node.attribute('class').value.include?('no_toc'),
             content_node: header_content,
             h_num: node.name.delete('h').to_i
           }
