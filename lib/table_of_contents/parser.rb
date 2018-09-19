@@ -7,17 +7,25 @@ module Jekyll
       DEFAULT_CONFIG = {
         "min_level" => 1,
         "max_level" => 6,
+        "list_class" => "section-nav",
+        "sublist_class" => "",
+        "item_class" => "toc-entry",
+        "item_prefix" => "toc-"
       }
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         options = generate_option_hash(options)
         @toc_levels = options["min_level"]..options["max_level"]
+        @list_class = options["list_class"]
+        @sublist_class = options["sublist_class"]
+        @item_class = options["item_class"]
+        @item_prefix = options["item_prefix"]
         @entries = parse_content
       end
 
       def build_toc
-        %(<ul class="section-nav">\n#{build_toc_list(@entries, last_ul_used: true)}</ul>)
+        %(<ul class="#{@list_class}">\n#{build_toc_list(@entries, last_ul_used: true)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -75,13 +83,14 @@ module Jekyll
           entry = entries[i]
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
-            toc_list << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
+            toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
             if i + 1 < entries.count
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
+                ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
+                toc_list << %(\n<ul#{ul_attributes}>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
                 i += nest_entries.count
               end
             end
@@ -93,7 +102,8 @@ module Jekyll
             if last_ul_used
               toc_list << build_toc_list(nest_entries, last_ul_used: true)
             else
-              toc_list << %(<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
+              ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
+              toc_list << %(<ul#{ul_attributes}">\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
             end
             i += nest_entries.count - 1
           end
