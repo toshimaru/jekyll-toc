@@ -82,6 +82,7 @@ module Jekyll
 
         while i < entries.count
           entry = entries[i]
+          ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
           if entry[:no_toc]
             # Do nothing / skip entry
           elsif entry[:h_num] == min_h_num
@@ -92,7 +93,6 @@ module Jekyll
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
                 toc_list << %(\n<ul#{ul_attributes}>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
                 i += nest_entries.count
               end
@@ -105,7 +105,6 @@ module Jekyll
             if last_ul_used
               toc_list << build_toc_list(nest_entries, last_ul_used: true)
             else
-              ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
               toc_list << %(<ul#{ul_attributes}">\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
             end
             i += nest_entries.count - 1
