@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/toshimaru/jekyll-toc.svg?branch=master)](https://travis-ci.org/toshimaru/jekyll-toc)
 [![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](http://badge.fury.io/rb/jekyll-toc)
-[![Dependency Status](https://gemnasium.com/toshimaru/jekyll-toc.svg)](https://gemnasium.com/toshimaru/jekyll-toc)
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cd56b207f327603662a1/test_coverage)](https://codeclimate.com/github/toshimaru/jekyll-toc/test_coverage)
 
@@ -20,8 +19,6 @@ Add jekyll-toc to the `gems:` section in your site's `_config.yml`.
 plugins:
   - jekyll-toc
 ```
-
-**NOTE: If you're using older Jekyll version(v3.4 or earlier), use `gems` instead of `plugins`.**
 
 Set `toc: true` in posts for which you want the TOC to appear.
 
