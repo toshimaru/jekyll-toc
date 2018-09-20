@@ -65,6 +65,7 @@ module Jekyll
             uniq: uniq,
             text: text,
             node_name: node.name,
+            no_toc: node.attribute('class') && node.attribute('class').value.include?('no_toc'),
             content_node: header_content,
             h_num: node.name.delete('h').to_i
           }
@@ -81,7 +82,9 @@ module Jekyll
 
         while i < entries.count
           entry = entries[i]
-          if entry[:h_num] == min_h_num
+          if entry[:no_toc]
+            # Do nothing / skip entry
+          elsif entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
             toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
