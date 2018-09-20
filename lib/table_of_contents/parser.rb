@@ -14,7 +14,8 @@ module Jekyll
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         options = generate_option_hash(options)
-        @toc_levels = options['min_level']..options['max_level']
+        @toc_levels = options["min_level"]..options["max_level"]
+        @ignore_within = options["ignore_within"]
         @entries = parse_content
       end
 
@@ -41,6 +42,10 @@ module Jekyll
       def parse_content
         entries = []
         headers = Hash.new(0)
+
+        if @ignore_within
+          @doc.css(@ignore_within).remove
+        end
 
         # TODO: Use kramdown auto ids
         @doc.css(toc_headings).reject { |n| n.classes.include?('no_toc') }.each do |node|

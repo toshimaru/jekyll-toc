@@ -133,6 +133,26 @@ toc:
 
 The default level range is `<h1>` to `<h6>`.
 
+### Ignore within
+
+It can be configured to ignore elements within a selector:
+
+```yml
+toc:
+  ignore_within: .exclude
+```
+
+```html
+<h1>h1</h1>
+<div class="exclude">
+  <h2>h2</h2>
+  <h3>h3</h3>
+</div>
+<h4>h4</h4>
+```
+
+Which would result in only the `<h1>` & `<h4>` within the example being included in the TOC.
+
 ### CSS Styling
 
 The toc can be modified with CSS. The sample CSS is the following.
