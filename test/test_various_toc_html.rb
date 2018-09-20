@@ -247,4 +247,40 @@ class TestVariousTocHtml < Minitest::Test
 
     assert_equal(expected, actual)
   end
+
+TEST_HTML_IGNORE = <<-HTML
+<h1>h1</h1>
+<div class="exclude">
+<h2>h2</h2>
+</div>
+<h3>h3</h3>
+<div class="exclude">
+<h4>h4</h4>
+<h4>h5</h4>
+</div>
+<h6>h6</h6>
+HTML
+
+  def test_nested_toc_with_ignore_within_option
+    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE, { "ignore_within" => '.exclude'})
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h1">
+<a href="#h1">h1</a>
+<ul>
+<li class="toc-entry toc-h3">
+<a href="#h3">h3</a>
+<ul>
+<li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+
+    assert_equal(expected, actual)
+  end
 end
