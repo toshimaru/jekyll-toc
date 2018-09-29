@@ -70,7 +70,7 @@ module Jekyll
       # Returns the list items for entries
       def build_toc_list(entries, last_ul_used: false)
         i = 0
-        toc_list = +''
+        toc_list = ''.dup
         min_h_num = entries.map { |e| e[:h_num] }.min
 
         while i < entries.count
