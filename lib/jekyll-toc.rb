@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 require 'table_of_contents/parser'
 
