@@ -44,6 +44,12 @@ class TestVariousTocHtml < Minitest::Test
 <h4 class="no_toc">no_toc h4</h4>
   HTML
 
+  TEST_JAPANESE_HTML = <<-HTML
+<h1>あ</h1>
+<h2>い</h2>
+<h3>う</h3>
+  HTML
+
   def test_nested_toc
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1)
     doc = Nokogiri::HTML(parser.toc)
@@ -167,6 +173,29 @@ class TestVariousTocHtml < Minitest::Test
 <li class="toc-entry toc-h4"><a href="#h4">h4</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+
+    assert_equal(expected, actual)
+  end
+
+  def test_japanese_toc
+    parser = Jekyll::TableOfContents::Parser.new(TEST_JAPANESE_HTML)
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h1">
+<a href="#%E3%81%82">あ</a>
+<ul>
+<li class="toc-entry toc-h2">
+<a href="#%E3%81%84">い</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#%E3%81%86">う</a></li>
 </ul>
 </li>
 </ul>

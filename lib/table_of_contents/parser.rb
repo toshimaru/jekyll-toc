@@ -19,7 +19,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="section-nav">\n#{build_toc_list(@entries, last_ul_used: true)}</ul>)
+        %(<ul class="section-nav">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -68,7 +68,7 @@ module Jekyll
       end
 
       # Returns the list items for entries
-      def build_toc_list(entries, last_ul_used: false)
+      def build_toc_list(entries)
         i = 0
         toc_list = ''.dup
         min_h_num = entries.map { |e| e[:h_num] }.min
@@ -83,7 +83,7 @@ module Jekyll
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
+                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
                 i += nest_entries.count
               end
             end
@@ -92,11 +92,7 @@ module Jekyll
           elsif entry[:h_num] > min_h_num
             # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-            if last_ul_used
-              toc_list << build_toc_list(nest_entries, last_ul_used: true)
-            else
-              toc_list << %(<ul>\n#{build_toc_list(nest_entries, last_ul_used: true)}</ul>\n)
-            end
+            toc_list << build_toc_list(nest_entries)
             i += nest_entries.count - 1
           end
           i += 1
@@ -116,7 +112,7 @@ module Jekyll
       end
 
       def toc_headings
-        @toc_levels.map { |level| "h#{level}" }.join(",")
+        @toc_levels.map { |level| "h#{level}" }.join(',')
       end
 
       def generate_option_hash(options)

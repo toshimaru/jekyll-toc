@@ -4,7 +4,6 @@ require 'test_helper'
 
 class TestKramdownList < Minitest::Test
   # NOTE: kramdown automatically injects `id` attribute
-  # TODO: test Japanese heading
   def test_kramdown_heading
     text = <<-MARKDOWN
 # h1
@@ -14,10 +13,27 @@ class TestKramdownList < Minitest::Test
     expected = <<-HTML
 <h1 id="h1">h1</h1>
 
-<h2 id=\"h2\">h2</h2>
+<h2 id="h2">h2</h2>
     HTML
+    actual = Kramdown::Document.new(text).to_html
 
-    assert_equal(expected, Kramdown::Document.new(text).to_html)
+    assert_equal(expected, actual)
+  end
+
+  def test_japanese_heading
+    text = <<-MARKDOWN
+# 日本語見出し１
+
+## 日本語見出し２
+    MARKDOWN
+    expected = <<-HTML
+<h1 id="section">日本語見出し１</h1>
+
+<h2 id="section-1">日本語見出し２</h2>
+    HTML
+    actual = Kramdown::Document.new(text).to_html
+
+    assert_equal(expected, actual)
   end
 
   def test_kramdown_list_1
@@ -49,8 +65,9 @@ class TestKramdownList < Minitest::Test
   </li>
 </ul>
     HTML
+    actual = Kramdown::Document.new(text).to_html
 
-    assert_equal(expected, Kramdown::Document.new(text).to_html)
+    assert_equal(expected, actual)
   end
 
   def test_kramdown_list_2
@@ -79,8 +96,9 @@ class TestKramdownList < Minitest::Test
   </li>
 </ul>
     HTML
+    actual = Kramdown::Document.new(text).to_html
 
-    assert_equal(expected, Kramdown::Document.new(text).to_html)
+    assert_equal(expected, actual)
   end
 
   def test_kramdown_list_3
@@ -95,8 +113,9 @@ class TestKramdownList < Minitest::Test
 * level-3   * level-2 * level-1
 </code></pre>
     HTML
+    actual = Kramdown::Document.new(text).to_html
 
-    assert_equal(expected, Kramdown::Document.new(text).to_html)
+    assert_equal(expected, actual)
   end
 
   def test_kramdown_list_4
@@ -119,18 +138,19 @@ class TestKramdownList < Minitest::Test
   <li>level-1</li>
 </ul>
     HTML
+    actual = Kramdown::Document.new(text).to_html
 
-    assert_equal(expected, Kramdown::Document.new(text).to_html)
+    assert_equal(expected, actual)
   end
 
-    def test_kramdown_list_5
-      text = <<-MARKDOWN
+  def test_kramdown_list_5
+    text = <<-MARKDOWN
 * level-1
     * level-3
   * level-2
 * level-1
-      MARKDOWN
-      expected = <<-HTML
+    MARKDOWN
+    expected = <<-HTML
 <ul>
   <li>level-1
     <ul>
@@ -140,8 +160,9 @@ class TestKramdownList < Minitest::Test
   </li>
   <li>level-1</li>
 </ul>
-      HTML
+    HTML
+    actual = Kramdown::Document.new(text).to_html
 
-      assert_equal(expected, Kramdown::Document.new(text).to_html)
-    end
+    assert_equal(expected, actual)
+  end
 end
