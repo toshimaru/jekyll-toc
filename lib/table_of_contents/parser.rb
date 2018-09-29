@@ -41,7 +41,7 @@ module Jekyll
         headers = Hash.new(0)
 
         # TODO: Use kramdown auto ids
-        @doc.css(toc_headings).each do |node|
+        @doc.css(toc_headings).reject { |n| n.classes.include?('no_toc') }.each do |node|
           text = node.text
           id = text.downcase
           id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
@@ -57,7 +57,6 @@ module Jekyll
             uniq: uniq,
             text: text,
             node_name: node.name,
-            no_toc: node.attribute('class') && node.attribute('class').value.include?('no_toc'),
             content_node: header_content,
             h_num: node.name.delete('h').to_i
           }
@@ -74,9 +73,7 @@ module Jekyll
 
         while i < entries.count
           entry = entries[i]
-          if entry[:no_toc]
-            # Do nothing / skip entry
-          elsif entry[:h_num] == min_h_num
+          if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
             toc_list << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
