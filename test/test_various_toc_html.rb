@@ -3,6 +3,12 @@
 require 'test_helper'
 
 class TestVariousTocHtml < Minitest::Test
+  # https://github.com/toshimaru/jekyll-toc/issues/45
+  ANGLE_BRACKT_HTML = <<-HTML
+<h1>h1</h1>
+<h1>&lt;base href&gt;</h1>
+  HTML
+
   TEST_HTML_1 = <<-HTML
 <h1>h1</h1>
 <h3>h3</h3>
@@ -200,6 +206,20 @@ class TestVariousTocHtml < Minitest::Test
 </li>
 </ul>
 </li>
+</ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+
+    assert_equal(expected, actual)
+  end
+
+  def test_angle_bracket
+    parser = Jekyll::TableOfContents::Parser.new(ANGLE_BRACKT_HTML)
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
+<li class="toc-entry toc-h1"><a href="#base-href">&lt;base href&gt;</a></li>
 </ul>
     HTML
     actual = doc.css('ul.section-nav').to_s
