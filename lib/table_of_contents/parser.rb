@@ -5,14 +5,14 @@ module Jekyll
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       DEFAULT_CONFIG = {
-        "min_level" => 1,
-        "max_level" => 6,
-      }
+        'min_level' => 1,
+        'max_level' => 6
+      }.freeze
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         options = generate_option_hash(options)
-        @toc_levels = options["min_level"]..options["max_level"]
+        @toc_levels = options['min_level']..options['max_level']
         @entries = parse_content
       end
 
@@ -45,7 +45,7 @@ module Jekyll
           text = node.text
           id = text.downcase
           id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
-          id.gsub!(' ', '-') # replace spaces with dash
+          id.tr!(' ', '-') # replace spaces with dash
 
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
