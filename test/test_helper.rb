@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start
 
@@ -12,7 +14,6 @@ SIMPLE_HTML = <<-HTML.freeze
   <h4>Simple H4</h4>
   <h5>Simple H5</h5>
   <h6>Simple H6</h6>
-  <h1 class="no_toc">No-toc H1</h1>
 HTML
 
 module TestHelpers

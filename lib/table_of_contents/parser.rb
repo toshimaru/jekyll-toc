@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
@@ -5,14 +7,14 @@ module Jekyll
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       DEFAULT_CONFIG = {
-        "min_level" => 1,
-        "max_level" => 6,
-      }
+        'min_level' => 1,
+        'max_level' => 6
+      }.freeze
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         options = generate_option_hash(options)
-        @toc_levels = options["min_level"]..options["max_level"]
+        @toc_levels = options['min_level']..options['max_level']
         @entries = parse_content
       end
 
@@ -41,11 +43,11 @@ module Jekyll
         headers = Hash.new(0)
 
         # TODO: Use kramdown auto ids
-        @doc.css(toc_headings).each do |node|
+        @doc.css(toc_headings).reject { |n| n.classes.include?('no_toc') }.each do |node|
           text = node.text
           id = text.downcase
           id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
-          id.gsub!(' ', '-') # replace spaces with dash
+          id.tr!(' ', '-') # replace spaces with dash
 
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
@@ -57,7 +59,6 @@ module Jekyll
             uniq: uniq,
             text: text,
             node_name: node.name,
-            no_toc: node.attribute('class') && node.attribute('class').value.include?('no_toc'),
             content_node: header_content,
             h_num: node.name.delete('h').to_i
           }
@@ -69,14 +70,12 @@ module Jekyll
       # Returns the list items for entries
       def build_toc_list(entries, last_ul_used: false)
         i = 0
-        toc_list = ''
+        toc_list = ''.dup
         min_h_num = entries.map { |e| e[:h_num] }.min
 
         while i < entries.count
           entry = entries[i]
-          if entry[:no_toc]
-            # Do nothing / skip entry
-          elsif entry[:h_num] == min_h_num
+          if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
             toc_list << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist

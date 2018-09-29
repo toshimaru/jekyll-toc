@@ -103,6 +103,16 @@ It looks like the image below.
 
 ## Customization
 
+### Skip TOC(`no_toc`)
+
+The heding is ignored in the toc when you add `no_toc` to the class.
+
+```html
+<h1>h1</h1>
+<h1 class="no_toc">This heding is ignored in the toc</h1>
+<h2>h2</h2>
+```
+
 ### TOC level
 
 The toc levels can be configured on `_config.yml`.
