@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TestVariousTocHtml < Minitest::Test
@@ -33,13 +35,13 @@ class TestVariousTocHtml < Minitest::Test
 
   NO_TOC_HTML = <<-HTML
 <h1>h1</h1>
+<h1 class="no_toc">no_toc h1</h1>
 <h2>h2</h2>
-<h2>h2</h2>
+<h2 class="no_toc">no_toc h2</h2>
 <h3>h3</h3>
-<h3>h3</h3>
+<h3 class="no_toc">no_toc h3</h3>
 <h4>h4</h4>
-<h4>h4</h4>
-<h1 class="no_toc">No-toc H1</h1>
+<h4 class="no_toc">no_toc h4</h4>
   HTML
 
   def test_nested_toc
@@ -156,16 +158,13 @@ class TestVariousTocHtml < Minitest::Test
 <li class="toc-entry toc-h1">
 <a href="#h1">h1</a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#h2">h2</a></li>
 <li class="toc-entry toc-h2">
-<a href="#h2-1">h2</a>
+<a href="#h2">h2</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
 <li class="toc-entry toc-h3">
-<a href="#h3-1">h3</a>
+<a href="#h3">h3</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#h4">h4</a></li>
-<li class="toc-entry toc-h4"><a href="#h4-1">h4</a></li>
 </ul>
 </li>
 </ul>
