@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 require 'table_of_contents/parser'
 
@@ -33,7 +35,7 @@ module Jekyll
     end
 
     def toc_config
-      @context.registers[:site].config["toc"] || {}
+      @context.registers[:site].config['toc'] || {}
     end
   end
 end
