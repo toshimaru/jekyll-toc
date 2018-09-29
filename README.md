@@ -5,6 +5,16 @@
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cd56b207f327603662a1/test_coverage)](https://codeclimate.com/github/toshimaru/jekyll-toc/test_coverage)
 
+# Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Generated HTML](#generated-html)
+- [Customization](#customization)
+  - [Skip TOC](#skip-toc)
+  - [TOC levels](#toc-levels)
+  - [CSS Styling](#css-styling)
+
 # Installation
 
 Add jekyll-toc plugin in your site's `Gemfile`, and run `bundle install`.
@@ -73,6 +83,8 @@ location with the `toc_only` filter.
 
 ## Generated HTML
 
+![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
+
 jekyll-toc generates an unordered list. The HTML output is as follows.
 
 ```html
@@ -97,13 +109,9 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 </ul>
 ```
 
-It looks like the image below.
-
-![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
-
 ## Customization
 
-### Skip TOC(`no_toc`)
+### Skip TOC
 
 The heding is ignored in the toc when you add `no_toc` to the class.
 
@@ -113,7 +121,7 @@ The heding is ignored in the toc when you add `no_toc` to the class.
 <h2>h2</h2>
 ```
 
-### TOC level
+### TOC levels
 
 The toc levels can be configured on `_config.yml`.
 
