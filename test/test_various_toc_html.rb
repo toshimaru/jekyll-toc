@@ -31,6 +31,17 @@ class TestVariousTocHtml < Minitest::Test
 <h5>h5</h5>
   HTML
 
+  NO_TOC_HTML = <<-HTML
+<h1>h1</h1>
+<h2>h2</h2>
+<h2>h2</h2>
+<h3>h3</h3>
+<h3>h3</h3>
+<h4>h4</h4>
+<h4>h4</h4>
+<h1 class="no_toc">No-toc H1</h1>
+  HTML
+
   def test_nested_toc
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1)
     doc = Nokogiri::HTML(parser.toc)
@@ -49,8 +60,9 @@ class TestVariousTocHtml < Minitest::Test
 </li>
 </ul>
     HTML
+    actual = doc.css('ul.section-nav').to_s
 
-    assert_equal(expected, doc.css('ul.section-nav').to_s)
+    assert_equal(expected, actual)
   end
 
   def test_nested_toc_with_min_and_max
@@ -61,8 +73,9 @@ class TestVariousTocHtml < Minitest::Test
 <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
 </ul>
     HTML
+    actual = doc.css('ul.section-nav').to_s
 
-    assert_equal(expected, doc.css('ul.section-nav').to_s)
+    assert_equal(expected, actual)
   end
 
   def test_complex_nested_toc
@@ -84,8 +97,9 @@ class TestVariousTocHtml < Minitest::Test
 </li>
 </ul>
     HTML
+    actual = doc.css('ul.section-nav').to_s
 
-    assert_equal(expected, doc.css('ul.section-nav').to_s)
+    assert_equal(expected, actual)
   end
 
   def test_decremental_headings1
@@ -101,10 +115,10 @@ class TestVariousTocHtml < Minitest::Test
 <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
 </ul>
     HTML
+    actual = doc.css('ul.section-nav').to_s
 
-    assert_equal(expected, doc.css('ul.section-nav').to_s)
+    assert_equal(expected, actual)
   end
-
 
   def test_decremental_headings2
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_4)
@@ -132,5 +146,36 @@ class TestVariousTocHtml < Minitest::Test
     HTML
 
     assert_equal(expected, doc.css('ul.section-nav').to_s)
+  end
+
+  def test_no_toc
+    parser = Jekyll::TableOfContents::Parser.new(NO_TOC_HTML)
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h1">
+<a href="#h1">h1</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#h2">h2</a></li>
+<li class="toc-entry toc-h2">
+<a href="#h2-1">h2</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
+<li class="toc-entry toc-h3">
+<a href="#h3-1">h3</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#h4">h4</a></li>
+<li class="toc-entry toc-h4"><a href="#h4-1">h4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+
+    assert_equal(expected, actual)
   end
 end
