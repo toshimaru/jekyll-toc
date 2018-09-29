@@ -20,7 +20,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, actual)
   end
 
-    def test_kramdown_heading
+  def test_japanese_heading
     text = <<-MARKDOWN
 # 日本語見出し１
 
