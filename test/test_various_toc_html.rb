@@ -3,10 +3,28 @@
 require 'test_helper'
 
 class TestVariousTocHtml < Minitest::Test
-  # https://github.com/toshimaru/jekyll-toc/issues/45
+  # ref. https://github.com/toshimaru/jekyll-toc/issues/45
   ANGLE_BRACKT_HTML = <<-HTML
 <h1>h1</h1>
 <h1>&lt;base href&gt;</h1>
+<h1>&amp; &lt; &gt;</h1>
+  HTML
+
+  NO_TOC_HTML = <<-HTML
+<h1>h1</h1>
+<h1 class="no_toc">no_toc h1</h1>
+<h2>h2</h2>
+<h2 class="no_toc">no_toc h2</h2>
+<h3>h3</h3>
+<h3 class="no_toc">no_toc h3</h3>
+<h4>h4</h4>
+<h4 class="no_toc">no_toc h4</h4>
+  HTML
+
+  TEST_JAPANESE_HTML = <<-HTML
+<h1>あ</h1>
+<h2>い</h2>
+<h3>う</h3>
   HTML
 
   TEST_HTML_1 = <<-HTML
@@ -37,23 +55,6 @@ class TestVariousTocHtml < Minitest::Test
 <h2>h2</h2>
 <h4>h4</h4>
 <h5>h5</h5>
-  HTML
-
-  NO_TOC_HTML = <<-HTML
-<h1>h1</h1>
-<h1 class="no_toc">no_toc h1</h1>
-<h2>h2</h2>
-<h2 class="no_toc">no_toc h2</h2>
-<h3>h3</h3>
-<h3 class="no_toc">no_toc h3</h3>
-<h4>h4</h4>
-<h4 class="no_toc">no_toc h4</h4>
-  HTML
-
-  TEST_JAPANESE_HTML = <<-HTML
-<h1>あ</h1>
-<h2>い</h2>
-<h3>う</h3>
   HTML
 
   def test_nested_toc
@@ -220,6 +221,7 @@ class TestVariousTocHtml < Minitest::Test
 <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
 <li class="toc-entry toc-h1"><a href="#base-href">&lt;base href&gt;</a></li>
+<li class="toc-entry toc-h1"><a href="#--">&amp; &lt; &gt;</a></li>
 </ul>
     HTML
     actual = doc.css('ul.section-nav').to_s
