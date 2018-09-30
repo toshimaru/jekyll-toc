@@ -4,7 +4,7 @@ require 'test_helper'
 
 class TestVariousTocHtml < Minitest::Test
   # ref. https://github.com/toshimaru/jekyll-toc/issues/45
-  ANGLE_BRACKT_HTML = <<-HTML
+  ANGLE_BRACKET_HTML = <<-HTML
 <h1>h1</h1>
 <h1>&lt;base href&gt;</h1>
 <h1>&amp; &lt; &gt;</h1>
@@ -21,10 +21,15 @@ class TestVariousTocHtml < Minitest::Test
 <h4 class="no_toc">no_toc h4</h4>
   HTML
 
-  TEST_JAPANESE_HTML = <<-HTML
+  JAPANESE_HEADINGS_HTML = <<-HTML
 <h1>あ</h1>
 <h2>い</h2>
 <h3>う</h3>
+  HTML
+
+  TAGS_INSIDE_HEADINGS_HTML = <<-HTML
+<h2><strong>h2</strong></h2>
+<h2><em>h2</em></h2>
   HTML
 
   TEST_HTML_1 = <<-HTML
@@ -192,7 +197,7 @@ class TestVariousTocHtml < Minitest::Test
   end
 
   def test_japanese_toc
-    parser = Jekyll::TableOfContents::Parser.new(TEST_JAPANESE_HTML)
+    parser = Jekyll::TableOfContents::Parser.new(JAPANESE_HEADINGS_HTML)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<-HTML
 <ul class="section-nav">
@@ -215,13 +220,27 @@ class TestVariousTocHtml < Minitest::Test
   end
 
   def test_angle_bracket
-    parser = Jekyll::TableOfContents::Parser.new(ANGLE_BRACKT_HTML)
+    parser = Jekyll::TableOfContents::Parser.new(ANGLE_BRACKET_HTML)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<-HTML
 <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
 <li class="toc-entry toc-h1"><a href="#base-href">&lt;base href&gt;</a></li>
 <li class="toc-entry toc-h1"><a href="#--">&amp; &lt; &gt;</a></li>
+</ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+
+    assert_equal(expected, actual)
+  end
+
+  def test_tags_inside_heading
+    parser = Jekyll::TableOfContents::Parser.new(TAGS_INSIDE_HEADINGS_HTML)
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#h2">h2</a></li>
+<li class="toc-entry toc-h2"><a href="#h2-1">h2</a></li>
 </ul>
     HTML
     actual = doc.css('ul.section-nav').to_s
