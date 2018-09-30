@@ -57,7 +57,7 @@ module Jekyll
           entries << {
             id: id,
             uniq: uniq,
-            text: text,
+            text: CGI.escapeHTML(text),
             node_name: node.name,
             content_node: header_content,
             h_num: node.name.delete('h').to_i
