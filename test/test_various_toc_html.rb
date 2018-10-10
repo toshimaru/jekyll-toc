@@ -283,4 +283,24 @@ HTML
 
     assert_equal(expected, actual)
   end
+
+  TEST_EXPLICIT_ID = <<-HTML
+<h1>h1</h1>
+<h1 id="second">h2</h1>
+<h1 id="third">h3</h1>
+  HTML
+
+  def test_toc_with_explicit_id
+    parser = Jekyll::TableOfContents::Parser.new(TEST_EXPLICIT_ID, { "ignore_within" => '.exclude'})
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<-HTML
+<ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
+<li class="toc-entry toc-h1"><a href="#second">h2</a></li>
+<li class="toc-entry toc-h1"><a href="#third">h3</a></li>
+</ul>
+    HTML
+
+    assert_equal(expected, doc.css('ul.section-nav').to_s)
+  end
 end

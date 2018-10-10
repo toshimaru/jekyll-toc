@@ -50,9 +50,14 @@ module Jekyll
         # TODO: Use kramdown auto ids
         @doc.css(toc_headings).reject { |n| n.classes.include?('no_toc') }.each do |node|
           text = node.text
-          id = text.downcase
-          id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
-          id.tr!(' ', '-') # replace spaces with dash
+          id = if node.attribute('id')
+            node.attribute('id')
+          else
+            text
+              .downcase
+              .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
+              .tr(' ', '-') # replace spaces with dash
+          end
 
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
