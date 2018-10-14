@@ -5,7 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cd56b207f327603662a1/test_coverage)](https://codeclimate.com/github/toshimaru/jekyll-toc/test_coverage)
 
-# Table of Contents
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -15,7 +15,7 @@
   - [TOC levels](#toc-levels)
   - [CSS Styling](#css-styling)
 
-# Installation
+## Installation
 
 Add jekyll-toc plugin in your site's `Gemfile`, and run `bundle install`.
 
@@ -40,14 +40,14 @@ toc: true
 ---
 ```
 
-# Usage
+## Usage
 
 There are three Liquid filters, which can be applied to HTML content,
 e.g. the Liquid variable `content` available in Jekyll's templates.
 
-## 1. Basic Usage
+### 1. Basic Usage
 
-### `toc` filter
+#### `toc` filter
 
 Add the `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
@@ -57,17 +57,17 @@ Add the `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
 This filter places the TOC directly above the content.
 
-## 2. Advanced Usage
+### 2. Advanced Usage
 
 If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
 
-### `toc_only` filter
+#### `toc_only` filter
 
 Generates the TOC itself as described [below](#generated-table-of-contents-html).
 Mostly useful in cases where the TOC should _not_ be placed immediately
 above the content but at some other place of the page, i.e. an aside.
 
-### `inject_anchors` filter
+#### `inject_anchors` filter
 
 Injects HTML anchors into the content without actually outputing the
 TOC itself. They are of the form:
@@ -81,7 +81,7 @@ TOC itself. They are of the form:
 This is only useful when the TOC itself should be placed at some other
 location with the `toc_only` filter.
 
-## Generated HTML
+### Generated HTML
 
 ![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
 
@@ -109,21 +109,21 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 </ul>
 ```
 
-## Customization
+### Customization
 
-### Skip TOC
+#### Skip TOC
 
-The heding is ignored in the toc when you add `no_toc` to the class.
+The heading is ignored in the toc when you add `no_toc` to the class.
 
 ```html
 <h1>h1</h1>
-<h1 class="no_toc">This heding is ignored in the toc</h1>
+<h1 class="no_toc">This heading is ignored in the toc</h1>
 <h2>h2</h2>
 ```
 
-### TOC levels
+#### TOC levels
 
-The toc levels can be configured on `_config.yml`.
+The TOC levels can be configured on `_config.yml`.
 
 ```yml
 toc:
@@ -133,7 +133,7 @@ toc:
 
 The default level range is `<h1>` to `<h6>`.
 
-### Ignore within
+#### Ignore within
 
 It can be configured to ignore elements within a selector:
 
@@ -153,21 +153,21 @@ toc:
 
 Which would result in only the `<h1>` & `<h4>` within the example being included in the TOC.
 
-### CSS Styling
+#### CSS Styling
 
 The toc can be modified with CSS. The sample CSS is the following.
 
 ```css
 .section-nav {
-  background-color: #FFF;
+  background-color: #fff;
   margin: 5px 0;
   padding: 10px 30px;
-  border: 1px solid #E8E8E8;
+  border: 1px solid #e8e8e8;
   border-radius: 3px;
 }
 ```
 
-![screen shot](https://user-images.githubusercontent.com/803398/28401455-0ba60868-6d55-11e7-8159-0ae7591aee66.png)
+![screenshot](https://user-images.githubusercontent.com/803398/28401455-0ba60868-6d55-11e7-8159-0ae7591aee66.png)
 
 Each TOC `li` entry has two CSS classes for further styling.
 The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
