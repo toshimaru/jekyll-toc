@@ -50,14 +50,10 @@ module Jekyll
         # TODO: Use kramdown auto ids
         @doc.css(toc_headings).reject { |n| n.classes.include?('no_toc') }.each do |node|
           text = node.text
-          id = if node.attribute('id')
-            node.attribute('id')
-          else
-            text
-              .downcase
-              .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
-              .tr(' ', '-') # replace spaces with dash
-          end
+          id = node.attribute('id') || text
+               .downcase
+               .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
+               .tr(' ', '-') # replace spaces with dash
 
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
@@ -117,6 +113,7 @@ module Jekyll
       def get_nest_entries(entries, min_h_num)
         entries.inject([]) do |nest_entries, entry|
           break nest_entries if entry[:h_num] == min_h_num
+
           nest_entries << entry
         end
       end
