@@ -4,9 +4,11 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
+      NO_TOC_CLASS_NAME = 'no_toc'
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       DEFAULT_CONFIG = {
+        'no_toc_section_class' => 'no_toc_section',
         'min_level' => 1,
         'max_level' => 6
       }.freeze
@@ -14,8 +16,8 @@ module Jekyll
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         options = generate_option_hash(options)
-        @toc_levels = options["min_level"]..options["max_level"]
-        @ignore_within = options["ignore_within"]
+        @toc_levels = options['min_level']..options['max_level']
+        @no_toc_section_class = options['no_toc_section_class']
         @entries = parse_content
       end
 
@@ -40,15 +42,11 @@ module Jekyll
       # parse logic is from html-pipeline toc_filter
       # https://github.com/jch/html-pipeline/blob/v1.1.0/lib/html/pipeline/toc_filter.rb
       def parse_content
-        entries = []
         headers = Hash.new(0)
 
-        if @ignore_within
-          @doc.css(@ignore_within).remove
-        end
-
-        # TODO: Use kramdown auto ids
-        @doc.css(toc_headings).reject { |n| n.classes.include?('no_toc') }.each do |node|
+        (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
+          .reject { |n| n.classes.include?(NO_TOC_CLASS_NAME) }
+          .inject([]) do |entries, node|
           text = node.text
           id = node.attribute('id') || text
                .downcase
@@ -58,7 +56,7 @@ module Jekyll
           uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
           headers[id] += 1
           header_content = node.children.first
-          next unless header_content
+          next entries unless header_content
 
           entries << {
             id: id,
@@ -69,8 +67,6 @@ module Jekyll
             h_num: node.name.delete('h').to_i
           }
         end
-
-        entries
       end
 
       # Returns the list items for entries
@@ -120,6 +116,10 @@ module Jekyll
 
       def toc_headings
         @toc_levels.map { |level| "h#{level}" }.join(',')
+      end
+
+      def toc_headings_in_no_toc_section
+        @toc_levels.map { |level| ".#{@no_toc_section_class} h#{level}" }.join(',')
       end
 
       def generate_option_hash(options)
