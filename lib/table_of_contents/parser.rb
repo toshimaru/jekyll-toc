@@ -19,6 +19,10 @@ module Jekyll
         @entries = parse_content
       end
 
+      def toc
+        build_toc + inject_anchors_into_html
+      end
+
       def build_toc
         %(<ul class="section-nav">\n#{build_toc_list(@entries)}</ul>)
       end
@@ -29,10 +33,6 @@ module Jekyll
         end
 
         @doc.inner_html
-      end
-
-      def toc
-        build_toc + inject_anchors_into_html
       end
 
       private
