@@ -12,6 +12,7 @@
 - [Generated HTML](#generated-html)
 - [Customization](#customization)
   - [Skip TOC](#skip-toc)
+  - [Skip TOC Section](#skip-toc-section)
   - [TOC levels](#toc-levels)
   - [CSS Styling](#css-styling)
 
@@ -121,9 +122,29 @@ The heading is ignored in the toc when you add `no_toc` to the class.
 <h2>h2</h2>
 ```
 
+#### Skip TOC Section
+
+It can be configured to ignore elements within a selector:
+
+```yml
+toc:
+  no_toc_section_class: no_toc_within # default: no_toc_section
+```
+
+```html
+<h1>h1</h1>
+<div class="no_toc_within">
+  <h2>h2</h2>
+  <h3>h3</h3>
+</div>
+<h4>h4</h4>
+```
+
+Which would result in only the `<h1>` & `<h4>` within the example being included in the TOC.
+
 #### TOC levels
 
-The TOC levels can be configured on `_config.yml`.
+The toc levels can be configured on `_config.yml`.
 
 ```yml
 toc:
@@ -132,26 +153,6 @@ toc:
 ```
 
 The default level range is `<h1>` to `<h6>`.
-
-#### Ignore within
-
-It can be configured to ignore elements within a selector:
-
-```yml
-toc:
-  ignore_within: .exclude
-```
-
-```html
-<h1>h1</h1>
-<div class="exclude">
-  <h2>h2</h2>
-  <h3>h3</h3>
-</div>
-<h4>h4</h4>
-```
-
-Which would result in only the `<h1>` & `<h4>` within the example being included in the TOC.
 
 #### CSS Styling
 
