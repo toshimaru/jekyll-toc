@@ -353,3 +353,25 @@ class TestVariousTocHtml < Minitest::Test
     assert_includes(html, %(<a id="third" class="anchor" href="#third" aria-hidden="true">))
   end
 end
+
+def test_custom_css_classes
+  parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1, { "item_class" => "custom-item", "list_class" => "custom-list", "sublist_class" => "custom-sublist", "item_prefix" => "custom-prefix-" })
+  doc = Nokogiri::HTML(parser.toc)
+  expected = <<-HTML
+<ul class="custom-list">
+<li class="custom-item custom-prefix-h1">
+<a href="#h1">h1</a>
+<ul class="custom-sublist">
+<li class="custom-item custom-prefix-h3">
+<a href="#h3">h3</a>
+<ul class="custom-sublist">
+<li class="custom-item custom-prefix-h6"><a href="#h6">h6</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  HTML
+
+  assert_equal(expected, doc.css('ul.custom-list').to_s)
+end
