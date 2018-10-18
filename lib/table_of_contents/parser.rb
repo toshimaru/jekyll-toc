@@ -10,7 +10,11 @@ module Jekyll
       DEFAULT_CONFIG = {
         'no_toc_section_class' => 'no_toc_section',
         'min_level' => 1,
-        'max_level' => 6
+        'max_level' => 6,
+        "list_class" => "section-nav",
+        "sublist_class" => "",
+        "item_class" => "toc-entry",
+        "item_prefix" => "toc-"
       }.freeze
 
       def initialize(html, options = {})
@@ -18,6 +22,10 @@ module Jekyll
         options = generate_option_hash(options)
         @toc_levels = options['min_level']..options['max_level']
         @no_toc_section_class = options['no_toc_section_class']
+        @list_class = options["list_class"]
+        @sublist_class = options["sublist_class"]
+        @item_class = options["item_class"]
+        @item_prefix = options["item_prefix"]
         @entries = parse_content
       end
 
@@ -26,7 +34,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="section-nav">\n#{build_toc_list(@entries)}</ul>)
+        %(<ul class="#{@list_class}">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -77,15 +85,16 @@ module Jekyll
 
         while i < entries.count
           entry = entries[i]
+          ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
-            toc_list << %(<li class="toc-entry toc-#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
+            toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
             if i + 1 < entries.count
               next_entry = entries[i + 1]
               if next_entry[:h_num] > min_h_num
                 nest_entries = get_nest_entries(entries[i + 1, entries.count], min_h_num)
-                toc_list << %(\n<ul>\n#{build_toc_list(nest_entries)}</ul>\n)
+                toc_list << %(\n<ul#{ul_attributes}>\n#{build_toc_list(nest_entries)}</ul>\n)
                 i += nest_entries.count
               end
             end
