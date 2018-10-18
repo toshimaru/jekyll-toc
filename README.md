@@ -70,8 +70,8 @@ above the content but at some other place of the page, i.e. an aside.
 
 #### `inject_anchors` filter
 
-Injects HTML anchors into the content without actually outputing the
-TOC itself. They are of the form:
+Injects HTML anchors into the content without actually outputing the TOC itself. 
+They are of the form:
 
 ```html
 <a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
@@ -124,27 +124,29 @@ The heading is ignored in the toc when you add `no_toc` to the class.
 
 #### Skip TOC Section
 
-It can be configured to ignore elements within a selector:
-
-```yml
-toc:
-  no_toc_section_class: no_toc_within # default: no_toc_section
-```
+The headings are ignored inside the element which has `no_toc_section` class.
 
 ```html
 <h1>h1</h1>
-<div class="no_toc_within">
-  <h2>h2</h2>
-  <h3>h3</h3>
+<div class="no_toc_section">
+  <h2>This heading is ignored in the toc</h2>
+  <h3>This heading is ignored in the toc</h3>
 </div>
 <h4>h4</h4>
 ```
 
 Which would result in only the `<h1>` & `<h4>` within the example being included in the TOC.
 
+The class can be configured on `_config.yml`:
+
+```yml
+toc:
+  no_toc_section_class: exclude # default: no_toc_section
+```
+
 #### TOC levels
 
-The toc levels can be configured on `_config.yml`.
+The toc levels can be configured on `_config.yml`:
 
 ```yml
 toc:
