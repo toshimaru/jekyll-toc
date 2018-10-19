@@ -5,3 +5,14 @@ AllCops:
 
 Metrics/LineLength: 
   Max: 100
+  Exclude:
+    - 'test/**/*'
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
