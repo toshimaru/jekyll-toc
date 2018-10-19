@@ -11,10 +11,10 @@ module Jekyll
         'no_toc_section_class' => 'no_toc_section',
         'min_level' => 1,
         'max_level' => 6,
-        "list_class" => "section-nav",
-        "sublist_class" => "",
-        "item_class" => "toc-entry",
-        "item_prefix" => "toc-"
+        'list_class' => 'section-nav',
+        'sublist_class' => '',
+        'item_class' => 'toc-entry',
+        'item_prefix' => 'toc-'
       }.freeze
 
       def initialize(html, options = {})
@@ -22,10 +22,10 @@ module Jekyll
         options = generate_option_hash(options)
         @toc_levels = options['min_level']..options['max_level']
         @no_toc_section_class = options['no_toc_section_class']
-        @list_class = options["list_class"]
-        @sublist_class = options["sublist_class"]
-        @item_class = options["item_class"]
-        @item_prefix = options["item_prefix"]
+        @list_class = options['list_class']
+        @sublist_class = options['sublist_class']
+        @item_class = options['item_class']
+        @item_prefix = options['item_prefix']
         @entries = parse_content
       end
 
@@ -61,7 +61,7 @@ module Jekyll
                .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
                .tr(' ', '-') # replace spaces with dash
 
-          uniq = headers[id] > 0 ? "-#{headers[id]}" : ''
+          uniq = headers[id].positive? ? "-#{headers[id]}" : ''
           headers[id] += 1
           header_content = node.children.first
           next entries unless header_content
@@ -80,12 +80,12 @@ module Jekyll
       # Returns the list items for entries
       def build_toc_list(entries)
         i = 0
-        toc_list = ''.dup
+        toc_list = +''
         min_h_num = entries.map { |e| e[:h_num] }.min
 
         while i < entries.count
           entry = entries[i]
-          ul_attributes = @sublist_class.empty? ? "" : %( class="#{@sublist_class}")
+          ul_attributes = @sublist_class.empty? ? '' : %( class="#{@sublist_class}")
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
             toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
