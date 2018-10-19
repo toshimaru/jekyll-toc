@@ -5,12 +5,12 @@ require 'test_helper'
 class TestKramdownList < Minitest::Test
   # NOTE: kramdown automatically injects `id` attribute
   def test_kramdown_heading
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
 # h1
 
 ## h2
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <h1 id="h1">h1</h1>
 
 <h2 id="h2">h2</h2>
@@ -21,12 +21,12 @@ class TestKramdownList < Minitest::Test
   end
 
   def test_japanese_heading
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
 # 日本語見出し１
 
 ## 日本語見出し２
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <h1 id="section">日本語見出し１</h1>
 
 <h2 id="section-1">日本語見出し２</h2>
@@ -37,14 +37,14 @@ class TestKramdownList < Minitest::Test
   end
 
   def test_kramdown_list_1
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
 * level-1
   * level-2
     * level-3
       * level-4
         * level-5
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <ul>
   <li>level-1
     <ul>
@@ -71,14 +71,14 @@ class TestKramdownList < Minitest::Test
   end
 
   def test_kramdown_list_2
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
 * level-1
     * level-3
   * level-2
       * level-4
         * level-5
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <ul>
   <li>level-1
     <ul>
@@ -102,13 +102,13 @@ class TestKramdownList < Minitest::Test
   end
 
   def test_kramdown_list_3
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
       * level-4
     * level-3
   * level-2
 * level-1
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <pre><code>  * level-4
 * level-3   * level-2 * level-1
 </code></pre>
@@ -119,14 +119,14 @@ class TestKramdownList < Minitest::Test
   end
 
   def test_kramdown_list_4
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
 * level-1
       * level-4
     * level-3
   * level-2
 * level-1
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <ul>
   <li>level-1
     * level-4
@@ -144,13 +144,13 @@ class TestKramdownList < Minitest::Test
   end
 
   def test_kramdown_list_5
-    text = <<-MARKDOWN
+    text = <<~MARKDOWN
 * level-1
     * level-3
   * level-2
 * level-1
     MARKDOWN
-    expected = <<-HTML
+    expected = <<~HTML
 <ul>
   <li>level-1
     <ul>
