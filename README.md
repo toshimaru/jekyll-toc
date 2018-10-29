@@ -154,6 +154,20 @@ toc:
   max_level: 5 # default: 6
 ```
 
+You can apply custom CSS classes to the generated `<ul>` and `<li>` tags.
+
+```yml
+toc:
+  # Default is "section-nav":
+  list_class: my-list-class
+  # Default is no class for sublists:
+  sublist_class: my-sublist-class
+  # Default is "toc-entry":
+  item_class: my-item-class
+  # Default is "toc-":
+  item_prefix: item-
+```
+
 The default level range is `<h1>` to `<h6>`.
 
 #### CSS Styling
