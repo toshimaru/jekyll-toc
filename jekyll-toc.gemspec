@@ -15,9 +15,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.2.2'
+  spec.required_ruby_version = '>= 2.3'
 
-  spec.add_runtime_dependency 'nokogiri', '~> 1.7'
+  spec.add_runtime_dependency 'nokogiri', '~> 1.8'
 
   spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 1.0'
@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rubocop'
 end
