@@ -7,9 +7,7 @@ AllCops:
     - Gemfile
 
 Metrics/LineLength: 
-  Max: 100
-  Exclude:
-    - 'test/**/*'
+  Enabled: false
 
 Metrics/MethodLength:
   Enabled: false
