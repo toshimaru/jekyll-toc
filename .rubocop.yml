@@ -19,3 +19,7 @@ Metrics/AbcSize:
 
 Metrics/ClassLength:
   Enabled: false
+
+Style/FileName:
+  Enabled: false
+
