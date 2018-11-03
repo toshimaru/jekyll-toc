@@ -1,7 +1,10 @@
 AllCops:
   TargetRubyVersion: 2.3
   Exclude:
+    - '*.gemspec'
     - 'gemfiles/*'
+    - Rakefile
+    - Gemfile
 
 Metrics/LineLength: 
   Max: 100
