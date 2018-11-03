@@ -86,7 +86,7 @@ class TestVariousTocHtml < Minitest::Test
   end
 
   def test_nested_toc_with_min_and_max
-    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1, { 'min_level' => 2, 'max_level' => 5 })
+    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1, 'min_level' => 2, 'max_level' => 5)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
       <ul class="section-nav">
@@ -299,7 +299,7 @@ class TestVariousTocHtml < Minitest::Test
   HTML
 
   def test_nested_toc_with_no_toc_section_class_option
-    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_2, { 'no_toc_section_class' => 'exclude' })
+    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_2, 'no_toc_section_class' => 'exclude')
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
       <ul class="section-nav">
@@ -356,7 +356,7 @@ class TestVariousTocHtml < Minitest::Test
   def test_custom_css_classes
     parser = Jekyll::TableOfContents::Parser.new(
       TEST_HTML_1,
-      { 'item_class' => 'custom-item', 'list_class' => 'custom-list', 'sublist_class' => 'custom-sublist', 'item_prefix' => 'custom-prefix-' }
+      'item_class' => 'custom-item', 'list_class' => 'custom-list', 'sublist_class' => 'custom-sublist', 'item_prefix' => 'custom-prefix-'
     )
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
