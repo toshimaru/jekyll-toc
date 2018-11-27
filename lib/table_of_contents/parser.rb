@@ -127,7 +127,15 @@ module Jekyll
       end
 
       def toc_headings_in_no_toc_section
-        @toc_levels.map { |level| ".#{@no_toc_section_class} h#{level}" }.join(',')
+        if @no_toc_section_class.is_a? Array
+          @no_toc_section_class.map { |cls| toc_headings_within(cls) }.join(',')
+        else
+          toc_headings_within(@no_toc_section_class)
+        end
+      end
+
+      def toc_headings_within(class_name)
+        @toc_levels.map { |level| ".#{class_name} h#{level}" }.join(',')
       end
 
       def generate_option_hash(options)
