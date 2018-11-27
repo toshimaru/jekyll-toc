@@ -341,7 +341,7 @@ class TestVariousTocHtml < Minitest::Test
     <h6>h6</h6>
   HTML
 
-  def test_nested_toc_with_no_toc_section_class_option
+  def test_multiple_no_toc_section_classes
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_3, 'no_toc_section_class' => ['no_toc_section', 'exclude'])
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
