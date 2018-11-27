@@ -144,6 +144,16 @@ toc:
   no_toc_section_class: exclude # default: no_toc_section
 ```
 
+Configuring mutiple classes are allowed:
+
+```yml
+toc:
+  no_toc_section_class: 
+    - no_toc_section
+    - exclude
+    - your_custom_skip_class_name
+```
+
 #### TOC levels
 
 The toc levels can be configured on `_config.yml`:
