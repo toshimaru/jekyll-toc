@@ -328,6 +328,49 @@ class TestVariousTocHtml < Minitest::Test
     assert_includes(html, '<h5>h5</h5>')
   end
 
+  TEST_HTML_IGNORE_3 = <<~HTML
+    <h1>h1</h1>
+    <div class="no_toc_section">
+    <h2>h2</h2>
+    </div>
+    <h3>h3</h3>
+    <div class="exclude">
+    <h4>h4</h4>
+    <h5>h5</h5>
+    </div>
+    <h6>h6</h6>
+  HTML
+
+  def test_nested_toc_with_no_toc_section_class_option
+    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_3, 'no_toc_section_class' => ['no_toc_section', 'exclude'])
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<~HTML
+      <ul class="section-nav">
+      <li class="toc-entry toc-h1">
+      <a href="#h1">h1</a>
+      <ul>
+      <li class="toc-entry toc-h3">
+      <a href="#h3">h3</a>
+      <ul>
+      <li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
+      </ul>
+      </li>
+      </ul>
+      </li>
+      </ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+    assert_equal(expected, actual)
+
+    html = parser.inject_anchors_into_html
+    assert_match(%r{<h1>.+</h1>}m, html)
+    assert_match(%r{<h3>.+</h3>}m, html)
+    assert_match(%r{<h6>.+</h6>}m, html)
+    assert_includes(html, '<h2>h2</h2>')
+    assert_includes(html, '<h4>h4</h4>')
+    assert_includes(html, '<h5>h5</h5>')
+  end
+
   TEST_EXPLICIT_ID = <<~HTML
     <h1>h1</h1>
     <h1 id="second">h2</h1>
