@@ -144,7 +144,7 @@ toc:
   no_toc_section_class: exclude # default: no_toc_section
 ```
 
-Configuring mutiple classes are allowed:
+Configuring multiple classes for `no_toc_section_class` is allowed:
 
 ```yml
 toc:
