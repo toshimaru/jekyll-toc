@@ -41,6 +41,15 @@ toc: true
 ---
 ```
 
+Or set `enable_by_default: true` in `_config.yml` to enable for all posts.
+
+```yml
+toc:
+  enable_by_default: true
+```
+
+With this option, setting `toc: false` in a post's frontmatter to disable the TOC on that post.
+
 ## Usage
 
 There are three Liquid filters, which can be applied to HTML content,
