@@ -13,6 +13,7 @@ module Jekyll
         'max_level' => 6,
         'list_class' => 'section-nav',
         'sublist_class' => '',
+        'injection_template' => '',
         'item_class' => 'toc-entry',
         'item_prefix' => 'toc-'
       }.freeze
@@ -23,6 +24,7 @@ module Jekyll
         @toc_levels = options['min_level']..options['max_level']
         @no_toc_section_class = options['no_toc_section_class']
         @list_class = options['list_class']
+        @injection_template = options['injection_template']
         @sublist_class = options['sublist_class']
         @item_class = options['item_class']
         @item_prefix = options['item_prefix']
@@ -37,11 +39,18 @@ module Jekyll
         %(<ul class="#{@list_class}">\n#{build_toc_list(@entries)}</ul>)
       end
 
-      def inject_anchors_into_html
+      def inject_anchors_into_html(context)
         @entries.each do |entry|
-          entry[:content_node].add_previous_sibling(
-            %(<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
-          )
+          if @injection_template == ''
+            entry[:content_node].add_previous_sibling(
+              %(<a id="#{entry[:id]}#{entry[:uniq]}" class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
+            )
+          else
+            template = File.read(@injection_template)
+            context.merge('heading_id' => entry[:id].value, 'heading_text' => entry[:content_node].content)
+            inject_markup = Liquid::Template.parse(template).render(context)
+            entry[:content_node].replace(inject_markup)
+          end
         end
 
         @doc.inner_html

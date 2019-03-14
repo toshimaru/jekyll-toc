@@ -201,3 +201,28 @@ The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
 
 Depending on the heading level each specific entry refers to, it has a second CSS class `toc-XX`, where `XX` is the HTML heading tag name. For example, the TOC entry linking to a heading `<h1>...</h1>` (a single
 `#` in Markdown) will get the CSS class `toc-h1`.
+
+#### Anchor injection
+
+Anchor injection can be customized with a liquid template:
+
+```yml
+toc:
+  injection_template: 'path/to/template.html'
+```
+
+The template is supplied with the original text content (`heading_text`) and id (`heading_id`) for each heading element:
+
+```liquid
+<!-- Append an anchor pilcrow after the heading text, Sphinx style: -->
+{{ heading_text }} <a class="anchor" aria-hidden="true" href="{{ page.url }}{{ heading_id }}">¶</a>
+```
+
+The above template, when injected on an `<h1>`, yeilds html like the following:
+
+```html
+<h1 id="this-is-a-heading">
+  <!-- Append an anchor pilcrow after the heading text, Sphinx style: -->
+  This is a heading <a class="anchor" aria-hidden="true" href="example.com/this/page.html#this-is-a-heading">¶</a>
+</h1>
+```
