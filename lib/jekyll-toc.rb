@@ -41,7 +41,7 @@ module Jekyll
 
       if enabled_on_page == nil
         return enabled_site_wide
-      else:
+      else
         return page_specific
       end
     end
