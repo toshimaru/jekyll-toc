@@ -16,7 +16,7 @@ module Jekyll
   # Jekyll Table of Contents filter plugin
   module TableOfContentsFilter
     def toc_only(html)
-      return html unless toc_enabled?
+      return '' unless toc_enabled?
 
       ::Jekyll::TableOfContents::Parser.new(html, toc_config).build_toc
     end
@@ -36,7 +36,14 @@ module Jekyll
     private
 
     def toc_enabled?
-      @context.registers[:page]['toc'] == true
+      enabled_site_wide = @context.registers[:site].config['toc']['enable_by_default'] == true
+      enabled_on_page = @context.registers[:page]['toc']
+
+      if enabled_on_page == nil
+        return enabled_site_wide
+      else:
+        return page_specific
+      end
     end
 
     def toc_config
