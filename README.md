@@ -9,6 +9,8 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
+  - [1. Basic Usage](#1-basic-usage)
+  - [2. Advanced Usage](#2-advanced-usage)
 - [Generated HTML](#generated-html)
 - [Customization](#customization)
   - [Skip TOC](#skip-toc)
@@ -64,13 +66,13 @@ If you'd like separated TOC and content, you can use `toc_only` and `inject_anch
 
 #### `toc_only` filter
 
-Generates the TOC itself as described [below](#generated-table-of-contents-html).
+Generates the TOC itself as described [below](#generated-html).
 Mostly useful in cases where the TOC should _not_ be placed immediately
 above the content but at some other place of the page, i.e. an aside.
 
 #### `inject_anchors` filter
 
-Injects HTML anchors into the content without actually outputing the TOC itself. 
+Injects HTML anchors into the content without actually outputting the TOC itself.
 They are of the form:
 
 ```html
@@ -82,9 +84,7 @@ They are of the form:
 This is only useful when the TOC itself should be placed at some other
 location with the `toc_only` filter.
 
-### Generated HTML
-
-![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
+## Generated HTML
 
 jekyll-toc generates an unordered list. The HTML output is as follows.
 
@@ -110,9 +110,11 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 </ul>
 ```
 
-### Customization
+![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)s
 
-#### Skip TOC
+## Customization
+
+### Skip TOC
 
 The heading is ignored in the toc when you add `no_toc` to the class.
 
@@ -122,7 +124,7 @@ The heading is ignored in the toc when you add `no_toc` to the class.
 <h2>h2</h2>
 ```
 
-#### Skip TOC Section
+### Skip TOC Section
 
 The headings are ignored inside the element which has `no_toc_section` class.
 
@@ -148,13 +150,13 @@ Configuring multiple classes for `no_toc_section_class` is allowed:
 
 ```yml
 toc:
-  no_toc_section_class: 
+  no_toc_section_class:
     - no_toc_section
     - exclude
     - your_custom_skip_class_name
 ```
 
-#### TOC levels
+### TOC levels
 
 The toc levels can be configured on `_config.yml`:
 
@@ -180,7 +182,7 @@ toc:
 
 The default level range is `<h1>` to `<h6>`.
 
-#### CSS Styling
+### CSS Styling
 
 The toc can be modified with CSS. The sample CSS is the following.
 
