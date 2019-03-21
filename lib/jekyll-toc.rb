@@ -16,7 +16,7 @@ module Jekyll
   # Jekyll Table of Contents filter plugin
   module TableOfContentsFilter
     def toc_only(html)
-      return html unless toc_enabled?
+      return '' unless toc_enabled?
 
       ::Jekyll::TableOfContents::Parser.new(html, toc_config).build_toc
     end
