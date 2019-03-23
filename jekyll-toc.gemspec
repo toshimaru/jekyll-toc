@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.3'
 
-  spec.add_runtime_dependency 'nokogiri', '~> 1.8'
+  spec.add_runtime_dependency 'nokogiri', '~> 1.9'
 
   spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'jekyll', '>= 3.5'
