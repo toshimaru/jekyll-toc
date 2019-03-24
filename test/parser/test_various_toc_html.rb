@@ -396,6 +396,27 @@ class TestVariousTocHtml < Minitest::Test
     assert_includes(html, %(<a class="anchor" href="#third" aria-hidden="true">))
   end
 
+
+  TEST_UNIQ_ID = <<~HTML
+    <h1>h1</h1>
+    <h1>h1</h1>
+    <h1>h1</h1>
+  HTML
+
+  def test_anchor_is_uniq
+    parser = Jekyll::TableOfContents::Parser.new(TEST_UNIQ_ID)
+    doc = Nokogiri::HTML(parser.toc)
+    expected = <<~HTML
+      <ul class="section-nav">
+      <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
+      <li class="toc-entry toc-h1"><a href="#h1-1">h1</a></li>
+      <li class="toc-entry toc-h1"><a href="#h1-2">h1</a></li>
+      </ul>
+    HTML
+    actual = doc.css('ul.section-nav').to_s
+    assert_equal(expected, actual)
+  end
+
   def test_custom_css_classes
     parser = Jekyll::TableOfContents::Parser.new(
       TEST_HTML_1,
