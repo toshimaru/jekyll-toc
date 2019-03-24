@@ -12,7 +12,6 @@ gemfile:
   - gemfiles/jekyll_3.8.gemfile
   - gemfiles/jekyll_3.7.gemfile
   - gemfiles/jekyll_3.6.gemfile
-  - gemfiles/jekyll_3.5.gemfile
 before_script:
   # Download cc-test-reporter
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
