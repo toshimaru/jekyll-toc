@@ -39,7 +39,7 @@ module Jekyll
 
       def inject_anchors_into_html
         @entries.each do |entry|
-          entry[:content_node].add_previous_sibling(
+          entry[:header_content].add_previous_sibling(
             %(<a class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
           )
         end
@@ -73,7 +73,7 @@ module Jekyll
             uniq: uniq,
             text: CGI.escapeHTML(text),
             node_name: node.name,
-            content_node: header_content,
+            header_content: header_content,
             h_num: node.name.delete('h').to_i
           }
         end
