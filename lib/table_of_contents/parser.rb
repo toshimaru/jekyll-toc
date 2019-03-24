@@ -40,7 +40,7 @@ module Jekyll
       def inject_anchors_into_html
         @entries.each do |entry|
           entry[:header_content].add_previous_sibling(
-            %(<a class="anchor" href="##{entry[:id]}#{entry[:uniq]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
+            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
           )
         end
 
@@ -63,12 +63,11 @@ module Jekyll
                .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
                .tr(' ', '-') # replace spaces with dash
 
-          uniq = headers[id].positive? ? "-#{headers[id]}" : ''
+          suffix_num = headers[id]
           headers[id] += 1
 
           entries << {
-            id: id,
-            uniq: uniq,
+            id: suffix_num.zero? ? id : "#{id}-#{suffix_num}",
             text: CGI.escapeHTML(text),
             node_name: node.name,
             header_content: node.children.first,
@@ -87,7 +86,7 @@ module Jekyll
           entry = entries[i]
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
-            toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}#{entry[:uniq]}">#{entry[:text]}</a>)
+            toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
             next_i = i + 1
             if next_i < entries.count && entries[next_i][:h_num] > min_h_num
