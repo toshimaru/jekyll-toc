@@ -391,9 +391,9 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, actual)
 
     html = parser.inject_anchors_into_html
-    assert_includes(html, %(<a id="h1" class="anchor" href="#h1" aria-hidden="true">))
-    assert_includes(html, %(<a id="second" class="anchor" href="#second" aria-hidden="true">))
-    assert_includes(html, %(<a id="third" class="anchor" href="#third" aria-hidden="true">))
+    assert_includes(html, %(<a class="anchor" href="#h1" aria-hidden="true">))
+    assert_includes(html, %(<a class="anchor" href="#second" aria-hidden="true">))
+    assert_includes(html, %(<a class="anchor" href="#third" aria-hidden="true">))
   end
 
   def test_custom_css_classes
