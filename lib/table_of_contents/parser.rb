@@ -65,15 +65,13 @@ module Jekyll
 
           uniq = headers[id].positive? ? "-#{headers[id]}" : ''
           headers[id] += 1
-          header_content = node.children.first
-          next entries unless header_content
 
           entries << {
             id: id,
             uniq: uniq,
             text: CGI.escapeHTML(text),
             node_name: node.name,
-            header_content: header_content,
+            header_content: node.children.first,
             h_num: node.name.delete('h').to_i
           }
         end
