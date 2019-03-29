@@ -13,7 +13,7 @@ module Jekyll
         'list_class' => 'section-nav',
         'sublist_class' => '',
         'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-',
+        'item_prefix' => 'toc-'
       }.freeze
 
       def initialize(options)

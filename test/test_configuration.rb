@@ -15,7 +15,7 @@ class TestConfiguration < Minitest::Test
   end
 
   def test_type_error
-    configuration = Jekyll::TableOfContents::Configuration.new("TypeError!")
+    configuration = Jekyll::TableOfContents::Configuration.new('TypeError!')
 
     assert_equal configuration.toc_levels, 1..6
     assert_equal configuration.no_toc_section_class, 'no_toc_section'
