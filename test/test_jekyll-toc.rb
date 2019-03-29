@@ -5,11 +5,11 @@ require 'test_helper'
 class TestTableOfContentsFilter < Minitest::Test
   include Jekyll::TableOfContentsFilter
 
-  DUMMY_HTML = "<div>Dummy HTML Content</div>"
-  
+  DUMMY_HTML = '<div>Dummy HTML Content</div>'
+
   def setup
     stubbed_context = Struct.new(:registers)
-    @context = stubbed_context.new(page: "xxx")
+    @context = stubbed_context.new(page: 'xxx')
     @context
   end
 
