@@ -7,25 +7,9 @@ module Jekyll
       NO_TOC_CLASS_NAME = 'no_toc'
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
-      DEFAULT_CONFIG = {
-        'no_toc_section_class' => 'no_toc_section',
-        'min_level' => 1,
-        'max_level' => 6,
-        'list_class' => 'section-nav',
-        'sublist_class' => '',
-        'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-'
-      }.freeze
-
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
-        options = generate_option_hash(options)
-        @toc_levels = options['min_level']..options['max_level']
-        @no_toc_section_class = options['no_toc_section_class']
-        @list_class = options['list_class']
-        @sublist_class = options['sublist_class']
-        @item_class = options['item_class']
-        @item_prefix = options['item_prefix']
+        @configuration = Configuration.new(options)
         @entries = parse_content
       end
 
@@ -34,7 +18,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="#{@list_class}">\n#{build_toc_list(@entries)}</ul>)
+        %(<ul class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -86,7 +70,7 @@ module Jekyll
           entry = entries[i]
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
-            toc_list << %(<li class="#{@item_class} #{@item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
+            toc_list << %(<li class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
             next_i = i + 1
             if next_i < entries.count && entries[next_i][:h_num] > min_h_num
@@ -120,29 +104,23 @@ module Jekyll
       end
 
       def toc_headings
-        @toc_levels.map { |level| "h#{level}" }.join(',')
+        @configuration.toc_levels.map { |level| "h#{level}" }.join(',')
       end
 
       def toc_headings_in_no_toc_section
-        if @no_toc_section_class.is_a? Array
-          @no_toc_section_class.map { |cls| toc_headings_within(cls) }.join(',')
+        if @configuration.no_toc_section_class.is_a? Array
+          @configuration.no_toc_section_class.map { |cls| toc_headings_within(cls) }.join(',')
         else
-          toc_headings_within(@no_toc_section_class)
+          toc_headings_within(@configuration.no_toc_section_class)
         end
       end
 
       def toc_headings_within(class_name)
-        @toc_levels.map { |level| ".#{class_name} h#{level}" }.join(',')
-      end
-
-      def generate_option_hash(options)
-        DEFAULT_CONFIG.merge(options)
-      rescue TypeError
-        DEFAULT_CONFIG
+        @configuration.toc_levels.map { |level| ".#{class_name} h#{level}" }.join(',')
       end
 
       def ul_attributes
-        @ul_attributes ||= @sublist_class.empty? ? '' : %( class="#{@sublist_class}")
+        @ul_attributes ||= @configuration.sublist_class.empty? ? '' : %( class="#{@configuration.sublist_class}")
       end
     end
   end

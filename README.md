@@ -12,6 +12,7 @@
   - [1. Basic Usage](#1-basic-usage)
   - [2. Advanced Usage](#2-advanced-usage)
 - [Generated HTML](#generated-html)
+- [Default Configuration](#default-configuration)
 - [Customization](#customization)
   - [Skip TOC](#skip-toc)
   - [Skip TOC Section](#skip-toc-section)
@@ -111,6 +112,19 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 ```
 
 ![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)s
+
+## Default Configuration 
+
+```yml
+toc:
+  min_level: 1
+  max_level: 6
+  no_toc_section_class: no_toc_section
+  list_class: section-nav
+  sublist_class: ''
+  item_class: toc-entry
+  item_prefix: toc-
+```
 
 ## Customization
 
