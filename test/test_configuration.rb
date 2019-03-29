@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+require 'test_helper'
+
+class TestConfiguration < Minitest::Test
+  def test_default_conf1guration
+    configuration = Jekyll::TableOfContents::Configuration.new({})
+
+    assert_equal configuration.toc_levels, 1..6
+    assert_equal configuration.no_toc_section_class, 'no_toc_section'
+    assert_equal configuration.list_class, 'section-nav'
+    assert_equal configuration.sublist_class, ''
+    assert_equal configuration.item_class, 'toc-entry'
+    assert_equal configuration.item_prefix, 'toc-'
+  end
+end
