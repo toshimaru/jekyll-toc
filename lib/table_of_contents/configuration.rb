@@ -7,13 +7,13 @@ module Jekyll
       attr_accessor :toc_levels, :no_toc_section_class, :list_class, :sublist_class, :item_class, :item_prefix
 
       DEFAULT_CONFIG = {
-        'no_toc_section_class' => 'no_toc_section',
         'min_level' => 1,
         'max_level' => 6,
+        'no_toc_section_class' => 'no_toc_section',
         'list_class' => 'section-nav',
         'sublist_class' => '',
         'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-'
+        'item_prefix' => 'toc-',
       }.freeze
 
       def initialize(options)
