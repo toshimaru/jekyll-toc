@@ -7,25 +7,16 @@ module Jekyll
       NO_TOC_CLASS_NAME = 'no_toc'
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
-      DEFAULT_CONFIG = {
-        'no_toc_section_class' => 'no_toc_section',
-        'min_level' => 1,
-        'max_level' => 6,
-        'list_class' => 'section-nav',
-        'sublist_class' => '',
-        'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-'
-      }.freeze
-
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
-        options = generate_option_hash(options)
-        @toc_levels = options['min_level']..options['max_level']
-        @no_toc_section_class = options['no_toc_section_class']
-        @list_class = options['list_class']
-        @sublist_class = options['sublist_class']
-        @item_class = options['item_class']
-        @item_prefix = options['item_prefix']
+        configuration = Configuration.new(options)
+
+        @toc_levels = configuration.toc_levels
+        @no_toc_section_class = configuration.no_toc_section_class
+        @list_class = configuration.list_class
+        @sublist_class = configuration.sublist_class
+        @item_class = configuration.item_class
+        @item_prefix = configuration.item_prefix
         @entries = parse_content
       end
 
@@ -133,12 +124,6 @@ module Jekyll
 
       def toc_headings_within(class_name)
         @toc_levels.map { |level| ".#{class_name} h#{level}" }.join(',')
-      end
-
-      def generate_option_hash(options)
-        DEFAULT_CONFIG.merge(options)
-      rescue TypeError
-        DEFAULT_CONFIG
       end
 
       def ul_attributes

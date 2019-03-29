@@ -18,12 +18,12 @@ module Jekyll
       def initialize(options)
         options = generate_option_hash(options)
 
-        toc_levels = options['min_level']..options['max_level']
-        no_toc_section_class = options['no_toc_section_class']
-        list_class = options['list_class']
-        sublist_class = options['sublist_class']
-        item_class = options['item_class']
-        item_prefix = options['item_prefix']
+        @toc_levels = options['min_level']..options['max_level']
+        @no_toc_section_class = options['no_toc_section_class']
+        @list_class = options['list_class']
+        @sublist_class = options['sublist_class']
+        @item_class = options['item_class']
+        @item_prefix = options['item_prefix']
       end
 
       private

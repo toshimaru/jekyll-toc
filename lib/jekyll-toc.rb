@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
+require 'table_of_contents/configuration'
 require 'table_of_contents/parser'
 
 module Jekyll
