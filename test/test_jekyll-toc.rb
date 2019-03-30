@@ -8,8 +8,7 @@ class TestTableOfContentsFilter < Minitest::Test
   DUMMY_HTML = '<div>Dummy HTML Content</div>'
 
   def setup
-    stubbed_context = Struct.new(:registers)
-    @context = stubbed_context.new(page: 'xxx')
+    @context = Struct.new(:registers).new(page: { "toc" => false })
   end
 
   def test_toc_only
