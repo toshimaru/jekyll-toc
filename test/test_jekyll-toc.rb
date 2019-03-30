@@ -10,7 +10,6 @@ class TestTableOfContentsFilter < Minitest::Test
   def setup
     stubbed_context = Struct.new(:registers)
     @context = stubbed_context.new(page: 'xxx')
-    @context
   end
 
   def test_toc_only
