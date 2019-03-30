@@ -9,7 +9,7 @@ module Jekyll
   class TocTag < Liquid::Tag
     def render(context)
       return '' unless context.registers[:page]['toc']
-  
+
       content_html = context.registers[:page].content
       ::Jekyll::TableOfContents::Parser.new(content_html).build_toc
     end
@@ -18,8 +18,8 @@ module Jekyll
   # Jekyll Table of Contents filter plugin
   module TableOfContentsFilter
     def toc_only(html)
-      Jekyll.logger.warn 'Deprecation: toc_only filter is deprecated and will be remove in jekyll-toc 1.0.',
-        'Use `{% toc %}` instead of {{ contents | toc_only }}`.'
+      Jekyll.logger.warn 'Deprecation: toc_only filter is deprecated and will be remove in jekyll-toc v1.0.',
+                         'Use `{% toc %}` instead of {{ contents | toc_only }}`.'
       return '' unless toc_enabled?
 
       ::Jekyll::TableOfContents::Parser.new(html, toc_config).build_toc
