@@ -65,11 +65,26 @@ This filter places the TOC directly above the content.
 
 If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
 
-#### `toc_only` filter
+#### ~~`toc_only` filter~~
+
+⚠️ Please use `{% toc %}` instead of `{{ contents | toc_only }}`.
 
 Generates the TOC itself as described [below](#generated-html).
 Mostly useful in cases where the TOC should _not_ be placed immediately
 above the content but at some other place of the page, i.e. an aside.
+
+#### toc tag
+
+```html
+<div>
+  <div id="table-of-contents">
+    {% toc %}
+  </div>
+  <div id="markdown-content">
+    {{ content }}
+  </div>
+</div>
+```
 
 #### `inject_anchors` filter
 
@@ -77,7 +92,7 @@ Injects HTML anchors into the content without actually outputting the TOC itself
 They are of the form:
 
 ```html
-<a id="heading11" class="anchor" href="#heading1-1" aria-hidden="true">
+<a class="anchor" href="#heading1-1" aria-hidden="true">
   <span class="octicon octicon-link"></span>
 </a>
 ```
