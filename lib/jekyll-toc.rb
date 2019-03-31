@@ -2,45 +2,49 @@
 
 require 'nokogiri'
 require 'table_of_contents/configuration'
-require 'table_of_contents/helper'
 require 'table_of_contents/parser'
 
 module Jekyll
   # toc tag for Jekyll
   class TocTag < Liquid::Tag
-    include TableOfContents::Helper
-
     def render(context)
       return '' unless context.registers[:page]['toc']
 
       content_html = context.registers[:page]['content']
-      TableOfContents::Parser.new(content_html).build_toc
+      ::Jekyll::TableOfContents::Parser.new(content_html).build_toc
     end
   end
 
   # Jekyll Table of Contents filter plugin
   module TableOfContentsFilter
-    include TableOfContents::Helper
-
-    # Deprecated method. Removed in v1.0.
     def toc_only(html)
       Jekyll.logger.warn 'Deprecation: toc_only filter is deprecated and will be remove in jekyll-toc v1.0.',
                          'Use `{% toc %}` instead of `{{ contents | toc_only }}`.'
       return '' unless toc_enabled?
 
-      TableOfContents::Parser.new(html, toc_config).build_toc
+      ::Jekyll::TableOfContents::Parser.new(html, toc_config).build_toc
     end
 
     def inject_anchors(html)
       return html unless toc_enabled?
 
-      TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
+      ::Jekyll::TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
     end
 
     def toc(html)
       return html unless toc_enabled?
 
-      TableOfContents::Parser.new(html, toc_config).toc
+      ::Jekyll::TableOfContents::Parser.new(html, toc_config).toc
+    end
+
+    private
+
+    def toc_enabled?
+      @context.registers[:page]['toc'] == true
+    end
+
+    def toc_config
+      @context.registers[:site].config['toc'] || {}
     end
   end
 end
