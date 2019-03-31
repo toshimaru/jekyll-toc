@@ -11,30 +11,32 @@ module Jekyll
       return '' unless context.registers[:page]['toc']
 
       content_html = context.registers[:page]['content']
-      ::Jekyll::TableOfContents::Parser.new(content_html).build_toc
+      toc_config = context.registers[:site].config['toc'] || {}
+      TableOfContents::Parser.new(content_html, toc_config).build_toc
     end
   end
 
   # Jekyll Table of Contents filter plugin
   module TableOfContentsFilter
+    # Deprecated method. Removed in v1.0.
     def toc_only(html)
       Jekyll.logger.warn 'Deprecation: toc_only filter is deprecated and will be remove in jekyll-toc v1.0.',
                          'Use `{% toc %}` instead of `{{ contents | toc_only }}`.'
       return '' unless toc_enabled?
 
-      ::Jekyll::TableOfContents::Parser.new(html, toc_config).build_toc
+      TableOfContents::Parser.new(html, toc_config).build_toc
     end
 
     def inject_anchors(html)
       return html unless toc_enabled?
 
-      ::Jekyll::TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
+      TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
     end
 
     def toc(html)
       return html unless toc_enabled?
 
-      ::Jekyll::TableOfContents::Parser.new(html, toc_config).toc
+      TableOfContents::Parser.new(html, toc_config).toc
     end
 
     private
