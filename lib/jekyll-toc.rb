@@ -10,7 +10,7 @@ module Jekyll
     def render(context)
       return '' unless context.registers[:page]['toc']
 
-      content_html = context.registers[:page].content
+      content_html = context.registers[:page]['content']
       ::Jekyll::TableOfContents::Parser.new(content_html).build_toc
     end
   end
