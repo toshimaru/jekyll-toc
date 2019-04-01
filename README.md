@@ -14,10 +14,11 @@
 - [Generated HTML](#generated-html)
 - [Default Configuration](#default-configuration)
 - [Customization](#customization)
+  - [TOC levels](#toc-levels)
   - [Skip TOC](#skip-toc)
   - [Skip TOC Section](#skip-toc-section)
-  - [TOC levels](#toc-levels)
   - [CSS Styling](#css-styling)
+  - [Custom CSS Class](#custom-css-class)
 
 ## Installation
 
@@ -126,7 +127,7 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 </ul>
 ```
 
-![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)s
+![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
 
 ## Default Configuration 
 
@@ -142,6 +143,18 @@ toc:
 ```
 
 ## Customization
+
+### TOC levels
+
+The toc levels can be configured on `_config.yml`:
+
+```yml
+toc:
+  min_level: 2 # default: 1
+  max_level: 5 # default: 6
+```
+
+The default level range is `<h1>` to `<h6>`.
 
 ### Skip TOC
 
@@ -185,32 +198,6 @@ toc:
     - your_custom_skip_class_name
 ```
 
-### TOC levels
-
-The toc levels can be configured on `_config.yml`:
-
-```yml
-toc:
-  min_level: 2 # default: 1
-  max_level: 5 # default: 6
-```
-
-You can apply custom CSS classes to the generated `<ul>` and `<li>` tags.
-
-```yml
-toc:
-  # Default is "section-nav":
-  list_class: my-list-class
-  # Default is no class for sublists:
-  sublist_class: my-sublist-class
-  # Default is "toc-entry":
-  item_class: my-item-class
-  # Default is "toc-":
-  item_prefix: item-
-```
-
-The default level range is `<h1>` to `<h6>`.
-
 ### CSS Styling
 
 The toc can be modified with CSS. The sample CSS is the following.
@@ -227,8 +214,23 @@ The toc can be modified with CSS. The sample CSS is the following.
 
 ![screenshot](https://user-images.githubusercontent.com/803398/28401455-0ba60868-6d55-11e7-8159-0ae7591aee66.png)
 
-Each TOC `li` entry has two CSS classes for further styling.
-The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
+Each TOC `li` entry has two CSS classes for further styling. The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
 
 Depending on the heading level each specific entry refers to, it has a second CSS class `toc-XX`, where `XX` is the HTML heading tag name. For example, the TOC entry linking to a heading `<h1>...</h1>` (a single
 `#` in Markdown) will get the CSS class `toc-h1`.
+
+### Custom CSS Class
+
+You can apply custom CSS classes to the generated `<ul>` and `<li>` tags.
+
+```yml
+toc:
+  # Default is "section-nav":
+  list_class: my-list-class
+  # Default is no class for sublists:
+  sublist_class: my-sublist-class
+  # Default is "toc-entry":
+  item_class: my-item-class
+  # Default is "toc-":
+  item_prefix: item-
+```
