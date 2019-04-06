@@ -4,7 +4,6 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      NO_TOC_CLASS_NAME = 'no_toc'
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       def initialize(html, options = {})
@@ -39,7 +38,7 @@ module Jekyll
         headers = Hash.new(0)
 
         (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
-          .reject { |n| n.classes.include?(NO_TOC_CLASS_NAME) }
+          .reject { |n| n.classes.include?(@configuration.no_toc_class) }
           .inject([]) do |entries, node|
           text = node.text
           id = node.attribute('id') || text
