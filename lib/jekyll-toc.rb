@@ -21,7 +21,7 @@ module Jekyll
     # Deprecated method. Removed in v1.0.
     def toc_only(html)
       Jekyll.logger.warn 'Deprecation: toc_only filter is deprecated and will be remove in jekyll-toc v1.0.',
-                         'Use `{% toc %}` instead of `{{ contents | toc_only }}`.'
+                         'Use `{% toc %}` instead of `{{ content | toc_only }}`.'
       return '' unless toc_enabled?
 
       TableOfContents::Parser.new(html, toc_config).build_toc
