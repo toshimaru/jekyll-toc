@@ -66,15 +66,13 @@ This filter places the TOC directly above the content.
 
 If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
 
-#### ~~`toc_only` filter~~
+#### ~~`toc_only` filter~~ `toc` tag
 
 ⚠️ Please use `{% toc %}` instead of `{{ content | toc_only }}`.
 
 Generates the TOC itself as described [below](#generated-html).
 Mostly useful in cases where the TOC should _not_ be placed immediately
 above the content but at some other place of the page, i.e. an aside.
-
-#### toc tag
 
 ```html
 <div>
