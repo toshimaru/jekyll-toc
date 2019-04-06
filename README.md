@@ -87,7 +87,7 @@ above the content but at some other place of the page, i.e. an aside.
 
 #### Current Limitation
 
-**`{% toc %}` can available in [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collection](https://jekyllrb.com/docs/collections/). If any concern or issue, please report it on [issue](https://github.com/toshimaru/jekyll-toc/issues/new).**
+**`{% toc %}` can be available only in [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/). If any concern or issue, please report it on [issue](https://github.com/toshimaru/jekyll-toc/issues/new).**
 
 #### `inject_anchors` filter
 
