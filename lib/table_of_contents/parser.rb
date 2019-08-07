@@ -23,7 +23,7 @@ module Jekyll
       def inject_anchors_into_html
         @entries.each do |entry|
           entry[:header_content].add_previous_sibling(
-            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
+            %(<a class="anchor" name="#{entry[:id]}" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
           )
         end
 
