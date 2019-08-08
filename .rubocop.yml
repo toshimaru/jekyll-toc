@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Exclude:
     - '*.gemspec'
     - 'gemfiles/*'
@@ -19,4 +19,10 @@ Metrics/ClassLength:
   Enabled: false
 
 Style/FileName:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/WordArray:
   Enabled: false
