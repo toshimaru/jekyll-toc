@@ -396,7 +396,6 @@ class TestVariousTocHtml < Minitest::Test
     assert_includes(html, %(<a class="anchor" href="#third" aria-hidden="true">))
   end
 
-
   TEST_UNIQ_ID = <<~HTML
     <h1>h1</h1>
     <h1>h1</h1>
