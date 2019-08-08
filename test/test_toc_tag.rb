@@ -13,7 +13,7 @@ class TestTableOfContentsTag < Minitest::Test
 
   def test_toc_tag
     context = @stubbed_context.new(
-      page: @stubbed_context2.new({ 'toc' => false }, '<h1>test</h1>'), 
+      page: @stubbed_context2.new({ 'toc' => false }, '<h1>test</h1>'),
       site: @stubbed_context1.new({ 'toc' => nil })
     )
     tag = Jekyll::TocTag.parse('toc_tag', '', Tokenizer.new(''), ParseContext.new)
