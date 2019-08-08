@@ -4,7 +4,7 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u.freeze
+      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
