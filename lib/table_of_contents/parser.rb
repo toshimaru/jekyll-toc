@@ -25,6 +25,9 @@ module Jekyll
 
       def inject_anchors_into_html
         @entries.each do |entry|
+	  # Add id to h-element
+	  entry[:header_parent].set_attribute("id", "#{entry[:id]}")
+		  
           entry[:header_content].add_previous_sibling(
             %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
           )
@@ -57,6 +60,7 @@ module Jekyll
             id: suffix_num.zero? ? id : "#{id}-#{suffix_num}",
             text: CGI.escapeHTML(text),
             node_name: node.name,
+            header_parent: node,
             header_content: node.children.first,
             h_num: node.name.delete('h').to_i
           }
