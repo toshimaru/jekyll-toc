@@ -28,9 +28,9 @@ module Jekyll
 	  # Add id to h-element
 	  entry[:header_parent].set_attribute("id", "#{entry[:id]}")
 		  
-          entry[:header_content].add_previous_sibling(
-            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
-          )
+	  # Add link icon after text
+	  entry[:header_content].add_next_sibling(%(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">&nbsp;&#128279;</a>)
+
         end
 
         @doc.inner_html
