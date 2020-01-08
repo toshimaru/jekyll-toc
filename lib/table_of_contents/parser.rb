@@ -20,7 +20,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
+        %(<ul id="toc" class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -29,9 +29,18 @@ module Jekyll
 	  entry[:header_parent].set_attribute("id", "#{entry[:id]}")
 		  
 	  # Add link icon after text
-	  entry[:header_content].add_next_sibling(%(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">&nbsp;&#128279;</a>)
+	  entry[:header_content].add_next_sibling(
+	    %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">&nbsp;&#128279;</a>
+	  )
 
-        end
+	  # Add link 'nav to toc'
+	  arrToTop = [ 2, 3 ]
+	  if arrToTop.include?(entry[:h_num]) then
+	    entry[:header_content].add_next_sibling(
+	      %(<span style="float: right"><a href="#toc" aria-hidden="true">&#x21A5;</a></span>)
+	    )
+	  end
+       end
 
         @doc.inner_html
       end
