@@ -37,7 +37,7 @@ module Jekyll
           arrToTop = [ 2, 3 ]
           if arrToTop.include?(entry[:h_num]) then
             entry[:header_content].add_next_sibling(
-              %(<span style="float: right"><a href="#toc" aria-hidden="true">&#x21A5;</a></span>)
+              %(<span style="float: right"><a class="anchor_to_top" href="#toc" aria-hidden="true">&#x21A5;</a></span>)
             )
           end
        end
