@@ -39,11 +39,9 @@ module Jekyll
           # Add link 'nav to toc'
           arr_to_top = [2, 3]
           next unless arr_to_top.include?(entry[:h_num])
-          #if arr_to_top.include?(entry[:h_num])
-            entry[:header_content].add_next_sibling(
-              %(<span style="float: right"><a class="anchor_to_top" href="#toc" aria-hidden="true">&#x21A5;</a></span>)
-            )
-          #end
+          entry[:header_content].add_next_sibling(
+            %(<span style="float: right"><a class="anchor_to_top" href="#toc" aria-hidden="true">&#x21A5;</a></span>)
+          )
         end
 
         @doc.inner_html
