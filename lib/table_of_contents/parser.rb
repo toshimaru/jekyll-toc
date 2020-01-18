@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'erb'
-include ERB::Util
 
 # Jekyll Modul, the root of everything
 module Jekyll
@@ -7,6 +8,8 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
+      include ERB::Util
+
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
 
       def initialize(html, options = {})
@@ -26,7 +29,7 @@ module Jekyll
       def inject_anchors_into_html
         @entries.each do |entry|
           # Add id to h-element
-          entry[:header_parent].set_attribute('id', "#{entry[:id]}")
+          entry[:header_parent].set_attribute('id', "#{entry[:id]}.to_s")
 
           # Add link icon after text
           entry[:header_content].add_next_sibling(
