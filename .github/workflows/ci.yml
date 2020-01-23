@@ -16,12 +16,6 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-${{ matrix.ruby }}-bundler-${{ hashFiles('**/Gemfile.lock')}}
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.ruby }}-bundler-
     - name: bundle install
       run: bundle install --jobs 4 --retry 3 --path vendor/bundle
     - name: Run RSpec
