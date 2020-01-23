@@ -6,7 +6,6 @@ jobs:
       matrix:
         ruby: [2.6]
     runs-on: ubuntu-latest
-    name: RSpec
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby ${{ matrix.ruby }}
