@@ -1,0 +1,28 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    strategy:
+      matrix:
+        ruby: [2.4, 2.5, 2.6, 2.7]
+    runs-on: ubuntu-latest
+    name: RSpec
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby ${{ matrix.ruby }}
+      uses: eregon/use-ruby-action@master
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-${{ matrix.ruby }}-bundler-${{ hashFiles('**/Gemfile.lock')}}
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.ruby }}-bundler-
+    - name: bundle install
+      run: bundle install --jobs 4 --retry 3 --path vendor/bundle
+    - name: Run RSpec
+      run: bundle exec rake
