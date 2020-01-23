@@ -13,9 +13,6 @@ jobs:
       uses: eregon/use-ruby-action@master
       with:
         ruby-version: ${{ matrix.ruby }}
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
     - name: bundle install
       run: bundle install --jobs 4 --retry 3 --path vendor/bundle
     - name: Run RSpec
