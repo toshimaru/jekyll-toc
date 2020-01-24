@@ -20,6 +20,8 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: bundle install
-      run: bundle install --jobs 4 --retry 3
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
     - name: Run Test
       run: bundle exec rake
