@@ -1,17 +1,10 @@
-name: CI
+name: RuboCop
 on: [push]
 jobs:
   build:
     strategy:
       matrix:
-        ruby: [2.4, 2.5, 2.6, 2.7]
-        gemfile:
-        - gemfiles/jekyll_4.0.gemfile
-        - gemfiles/jekyll_3.8.gemfile
-        - gemfiles/jekyll_3.7.gemfile
-        - gemfiles/jekyll_3.6.gemfile
-    env:
-      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+        ruby: [2.6]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,5 +14,5 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
     - name: bundle install
       run: bundle install --jobs 4 --retry 3
-    - name: Run Test
-      run: bundle exec rake
+    - name: Run RuboCop
+      run: bundle exec rubocop
