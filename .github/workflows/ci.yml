@@ -10,6 +10,9 @@ jobs:
         - gemfiles/jekyll_3.8.gemfile
         - gemfiles/jekyll_3.7.gemfile
         - gemfiles/jekyll_3.6.gemfile
+        exclude:
+        - ruby: 2.4
+          gemfile: gemfiles/jekyll_4.0.gemfile
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     runs-on: ubuntu-latest
