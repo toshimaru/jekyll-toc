@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'nokogiri', '~> 1.9'
 
   spec.add_development_dependency 'appraisal'
-  spec.add_development_dependency 'jekyll', '>= 3.5'
+  spec.add_development_dependency 'jekyll', '>= 3.7'
   spec.add_development_dependency 'minitest', '~> 5.11'
   spec.add_development_dependency 'minitest-reporters'
   spec.add_development_dependency 'pry'
