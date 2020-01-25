@@ -1,6 +1,6 @@
 # jekyll-toc
 
-[![Build Status](https://travis-ci.org/toshimaru/jekyll-toc.svg?branch=master)](https://travis-ci.org/toshimaru/jekyll-toc)
+![CI](https://github.com/toshimaru/jekyll-toc/workflows/CI/badge.svg)
 [![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](http://badge.fury.io/rb/jekyll-toc)
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cd56b207f327603662a1/test_coverage)](https://codeclimate.com/github/toshimaru/jekyll-toc/test_coverage)
