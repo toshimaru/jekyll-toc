@@ -64,13 +64,12 @@ This filter places the TOC directly above the content.
 
 ### 2. Advanced Usage
 
-If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
+If you'd like separated TOC and content, you can use `{% toc %}` tag(or `toc_only` filter) and `inject_anchors` filter.
 
-#### `toc_only` filter
-
-⚠️ ~~Please use `{% toc %}` instead of `{{ content | toc_only }}`.~~
+#### `{% toc %}` tag
 
 Generates the TOC itself as described [below](#generated-html).
+
 Mostly useful in cases where the TOC should _not_ be placed immediately
 above the content but at some other place of the page, i.e. an aside.
 
@@ -85,9 +84,22 @@ above the content but at some other place of the page, i.e. an aside.
 </div>
 ```
 
-#### Current Limitation
+:warning: **`{% toc %}` Tag Limitation**
 
-**`{% toc %}` can be available only in [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/). If any concern or issue, please report it on [issue](https://github.com/toshimaru/jekyll-toc/issues/new).**
+`{% toc %}` can be available only in [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/). If you'd like to use `{% toc %}` except posts or collections, please use `toc_only` filter as described below.
+
+#### `toc_only` filter
+
+```html
+<div>
+  <div id="table-of-contents">
+    {{ content | toc_only }}
+  </div>
+  <div id="markdown-content">
+    {{ content | inject_anchors }}
+  </div>
+</div>
+```
 
 #### `inject_anchors` filter
 
