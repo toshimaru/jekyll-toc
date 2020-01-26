@@ -2,6 +2,13 @@
 
 source "https://rubygems.org"
 
+gem "appraisal"
+gem "minitest-reporters"
+gem "minitest"
+gem "pry"
+gem "rake"
+gem "rubocop"
+gem "simplecov"
 gem "jekyll", "3.7"
 
 gemspec path: "../"
