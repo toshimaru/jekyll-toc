@@ -19,14 +19,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.4'
 
-  spec.add_runtime_dependency 'jekyll', '>= 3.7'
-  spec.add_runtime_dependency 'nokogiri', '~> 1.9'
-
-  spec.add_development_dependency 'appraisal'
-  spec.add_development_dependency 'minitest'
-  spec.add_development_dependency 'minitest-reporters'
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'simplecov'
+  spec.add_dependency 'jekyll', '>= 3.7'
+  spec.add_dependency 'nokogiri', '~> 1.9'
 end
