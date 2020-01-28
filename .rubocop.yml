@@ -6,9 +6,6 @@ AllCops:
     - Rakefile
     - Gemfile
 
-Metrics/LineLength: 
-  Enabled: false
-
 Metrics/MethodLength:
   Enabled: false
 
@@ -18,11 +15,14 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Enabled: false
 
-Style/FileName:
-  Enabled: false
-
 Style/BracesAroundHashParameters:
   Enabled: false
 
 Style/WordArray:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Layout/LineLength: 
   Enabled: false

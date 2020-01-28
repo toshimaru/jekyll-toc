@@ -10,7 +10,7 @@ module Jekyll
     class Parser
       include ERB::Util
 
-      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u
+      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u.freeze
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
