@@ -5,7 +5,8 @@ module Jekyll
     # jekyll-toc configuration class
     class Configuration
       attr_accessor :toc_levels, :no_toc_class, :no_toc_section_class,
-                    :list_class, :sublist_class, :item_class, :item_prefix
+                    :list_class, :sublist_class, :item_class, :item_prefix,
+                    :anchor_id_url_encoded
 
       DEFAULT_CONFIG = {
         'min_level' => 1,
@@ -14,7 +15,8 @@ module Jekyll
         'list_class' => 'section-nav',
         'sublist_class' => '',
         'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-'
+        'item_prefix' => 'toc-',
+        'anchor_id_url_encoded' => false
       }.freeze
 
       def initialize(options)
@@ -27,6 +29,7 @@ module Jekyll
         @sublist_class = options['sublist_class']
         @item_class = options['item_class']
         @item_prefix = options['item_prefix']
+        @anchor_id_url_encoded = options['anchor_id_url_encoded']
       end
 
       private
