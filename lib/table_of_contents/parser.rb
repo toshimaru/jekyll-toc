@@ -48,7 +48,9 @@ module Jekyll
                .downcase
                .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
                .tr(' ', '-') # replace spaces with dash
-          id = url_encode(id)
+          if (@configuration.anchor_id_url_encoded)
+            id = url_encode(id)
+          end
 
           suffix_num = headers[id]
           headers[id] += 1
