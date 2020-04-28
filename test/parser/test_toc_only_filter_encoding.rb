@@ -19,7 +19,7 @@ class TestTOCOnlyFilterEncodingOn < Minitest::Test
     assert_match(/<a href="#simple-h2b">/, html)
     assert_match(/<a href="#sub-h3">/, html)
     assert_match(/<a href="#simple-h3b">/, html)
-    assert_match(/<a href="#simple-h3c-%C3%BC%C3%A4%C3%B6">/, html)
+    assert_match(/<a href="#simple-h3c ÜÄÖ">/, html)
   end
 
   def test_does_not_return_content
