@@ -30,7 +30,7 @@ class TestOptionError < Minitest::Test
     expected = EXPECTED_HTML
     assert_equal(expected, doc.css('ul.section-nav').to_s)
   end
- 
+
   def test_option_is_array
     parser = Jekyll::TableOfContents::Parser.new(BASE_HTML, [])
     doc = Nokogiri::HTML(parser.toc)

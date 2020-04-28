@@ -1,9 +1,9 @@
 # jekyll-toc
 
-[![Build Status](https://travis-ci.org/toshimaru/jekyll-toc.svg?branch=master)](https://travis-ci.org/toshimaru/jekyll-toc)
-[![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](http://badge.fury.io/rb/jekyll-toc)
-[![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/cd56b207f327603662a1/test_coverage)](https://codeclimate.com/github/toshimaru/jekyll-toc/test_coverage)
+![CI](https://github.com/n13org/jekyll-toc-navtotop/workflows/CI/badge.svg)
+[![Gem Version](https://badge.fury.io/rb/jekyll-toc-navtotop.svg)](http://badge.fury.io/rb/jekyll-toc-navtotop)
+[![Code Climate](https://codeclimate.com/github/n13org/jekyll-toc-navtotop/badges/gpa.svg)](https://codeclimate.com/github/n13org/jekyll-toc-navtotop)
+
 
 ## Table of Contents
 
@@ -64,9 +64,9 @@ This filter places the TOC directly above the content.
 
 ### 2. Advanced Usage
 
-If you'd like separated TOC and content, you can use `toc_only` and `inject_anchors` filters.
+If you'd like separated TOC and content, you can use `{% toc %}` tag (or `toc_only` filter) and `inject_anchors` filter.
 
-#### `toc_only` filter
+### `toc_only` filter
 
 ⚠️ ~~Please use `{% toc %}` instead of `{{ content | toc_only }}`.~~
 
@@ -85,9 +85,20 @@ above the content but at some other place of the page, i.e. an aside.
 </div>
 ```
 
+:warning: **`{% toc %}` Tag Limitation**
 #### Current Limitation
-
+`{% toc %}` can be available only in [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/). If you'd like to use `{% toc %}` except posts or collections, please use `toc_only` filter as described below.
 **`{% toc %}` can be available only in [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/). If any concern or issue, please report it on [issue](https://github.com/toshimaru/jekyll-toc/issues/new).**
+```html
+<div>
+  <div id="table-of-contents">
+    {{ content | toc_only }}
+  </div>
+  <div id="markdown-content">
+    {{ content | inject_anchors }}
+  </div>
+</div>
+```
 
 #### `inject_anchors` filter
 
@@ -150,6 +161,7 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+  anchor_id_url_encoded: false
 ```
 
 ## Customization
