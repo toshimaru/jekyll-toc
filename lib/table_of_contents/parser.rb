@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-include ERB::Util
 # Jekyll Modul, the root of everything
 module Jekyll
   # Module to wrap the classes for TOC creation
