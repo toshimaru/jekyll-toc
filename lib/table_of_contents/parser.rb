@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'erb'
+require "erb"
+include ERB::Util
 
-# Jekyll Modul, the root of everything
 module Jekyll
   # Module to wrap the classes for TOC creation
   module TableOfContents
@@ -62,7 +62,9 @@ module Jekyll
                .downcase
                .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
                .tr(' ', '-') # replace spaces with dash
-          id = url_encode(id)
+          if (@configuration.anchor_id_url_encoded)
+            id = url_encode(id)
+          end
 
           suffix_num = headers[id]
           headers[id] += 1
