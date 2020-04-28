@@ -12,7 +12,7 @@ class TestTOCOnlyFilterEncodingOn < Minitest::Test
   def test_injects_toc_container_with_anchor_id_url_encoded
     html = @parser.build_toc
 
-    assert_match(/<ul class="section-nav">/, html)
+    assert_match(/<ul id="toc" class="section-nav">/, html)
 
     assert_match(/<a href="#123">/, html)
     assert_match(/<a href="#simple-h2a">/, html)
@@ -38,7 +38,7 @@ class TestTOCOnlyFilterEncodingOn < Minitest::Test
     def test_injects_toc_container_without_anchor_id_url_encoded
       html = @parser.build_toc
   
-      assert_match(/<ul class="section-nav">/, html)
+      assert_match(/<ul id="toc" class="section-nav">/, html)
   
       assert_match(/<a href="#123">/, html)
       assert_match(/<a href="#simple-h2a">/, html)
