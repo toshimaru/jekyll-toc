@@ -151,6 +151,7 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+  anchor_id_url_encoded: false
 ```
 
 ## Customization

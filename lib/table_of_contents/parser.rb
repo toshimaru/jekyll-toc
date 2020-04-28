@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "erb"
+include ERB::Util
+
 module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
@@ -45,6 +48,9 @@ module Jekyll
                .downcase
                .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
                .tr(' ', '-') # replace spaces with dash
+          if (@configuration.anchor_id_url_encoded)
+            id = url_encode(id)
+          end
 
           suffix_num = headers[id]
           headers[id] += 1
