@@ -23,7 +23,7 @@ module Jekyll
       def inject_anchors_into_html
         @entries.each do |entry|
           # Add id to h-element
-          entry[:header_parent].set_attribute('id', "#{entry[:id]}")
+          entry[:header_parent].set_attribute('id', entry[:id].to_s)
 
           entry[:header_content].add_previous_sibling(
             %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">#{@configuration.inject_anchors_content}</a>)
