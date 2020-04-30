@@ -31,6 +31,6 @@ class TestTOCFilter < Minitest::Test
   def test_injects_toc_container
     html = @parser.toc
 
-    assert_match(/<ul class="section-nav">/, html)
+    assert_match(/<ul id="toc" class="section-nav">/, html)
   end
 end
