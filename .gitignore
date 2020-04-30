@@ -1,5 +1,12 @@
+# gems
 *.gem
 /Gemfile.lock
-/.bundle/
-/coverage
 *.gemfile.lock
+/gems/
+
+# tests / test coverage
+/coverage
+
+# bundler
+/.bundle/
+/vendor/bundle/
