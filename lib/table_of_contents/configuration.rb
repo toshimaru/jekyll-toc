@@ -5,16 +5,19 @@ module Jekyll
     # jekyll-toc configuration class
     class Configuration
       attr_accessor :toc_levels, :no_toc_class, :no_toc_section_class,
-                    :list_class, :sublist_class, :item_class, :item_prefix
+                    :list_class, :list_id, :sublist_class, :item_class, :item_prefix,
+                    :inject_anchors_content
 
       DEFAULT_CONFIG = {
         'min_level' => 1,
         'max_level' => 6,
         'no_toc_section_class' => 'no_toc_section',
         'list_class' => 'section-nav',
+        'list_id' => 'toc',
         'sublist_class' => '',
         'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-'
+        'item_prefix' => 'toc-',
+        'inject_anchors_content' => 'MyLinkAnchor'
       }.freeze
 
       def initialize(options)
@@ -24,9 +27,11 @@ module Jekyll
         @no_toc_class = 'no_toc'
         @no_toc_section_class = options['no_toc_section_class']
         @list_class = options['list_class']
+        @list_id = options['list_id']
         @sublist_class = options['sublist_class']
         @item_class = options['item_class']
         @item_prefix = options['item_prefix']
+        @inject_anchors_content = options['inject_anchors_content']
       end
 
       private

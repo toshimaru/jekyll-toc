@@ -17,7 +17,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
+        %(<ul id="#{@configuration.list_id}" class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
@@ -26,7 +26,7 @@ module Jekyll
           entry[:header_parent].set_attribute('id', "#{entry[:id]}")
 
           entry[:header_content].add_previous_sibling(
-            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
+            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">#{@configuration.inject_anchors_content}</a>)
           )
         end
 
