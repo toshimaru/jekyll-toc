@@ -1,8 +1,11 @@
 AllCops:
   TargetRubyVersion: 2.4
   Exclude:
-    - '*.gemspec'
-    - 'gemfiles/*'
+    - "*.gemspec"
+    - "gemfiles/*"
+    - gems/**/*
+    - node_modules/**/*
+    - vendor/bundle/**/*
     - Rakefile
     - Gemfile
 
@@ -15,14 +18,32 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Enabled: false
 
-Style/BracesAroundHashParameters:
-  Enabled: false
-
 Style/WordArray:
   Enabled: false
 
 Naming/FileName:
   Enabled: false
 
-Layout/LineLength: 
+Layout/LineLength:
   Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
