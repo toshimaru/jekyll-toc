@@ -320,9 +320,9 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, actual)
 
     html = parser.inject_anchors_into_html
-    assert_match(%r{<h1>.+</h1>}m, html)
-    assert_match(%r{<h3>.+</h3>}m, html)
-    assert_match(%r{<h6>.+</h6>}m, html)
+    assert_match(%r{<h1 id="h1">.+</h1>}m, html)
+    assert_match(%r{<h3 id="h3">.+</h3>}m, html)
+    assert_match(%r{<h6 id="h6">.+</h6>}m, html)
     assert_includes(html, '<h2>h2</h2>')
     assert_includes(html, '<h4>h4</h4>')
     assert_includes(html, '<h5>h5</h5>')
@@ -363,9 +363,9 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, actual)
 
     html = parser.inject_anchors_into_html
-    assert_match(%r{<h1>.+</h1>}m, html)
-    assert_match(%r{<h3>.+</h3>}m, html)
-    assert_match(%r{<h6>.+</h6>}m, html)
+    assert_match(%r{<h1 id="h1">.+</h1>}m, html)
+    assert_match(%r{<h3 id="h3">.+</h3>}m, html)
+    assert_match(%r{<h6 id="h6">.+</h6>}m, html)
     assert_includes(html, '<h2>h2</h2>')
     assert_includes(html, '<h4>h4</h4>')
     assert_includes(html, '<h5>h5</h5>')
