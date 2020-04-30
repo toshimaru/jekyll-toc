@@ -3,10 +3,9 @@ AllCops:
   Exclude:
     - "*.gemspec"
     - "gemfiles/*"
-    - /gems/
-    - /vendor/bundle/
-    - gems/
-    - vendor/bundle/
+    - gems/**/*
+    - node_modules/**/*
+    - vendor/bundle/**/*
     - Rakefile
     - Gemfile
 
@@ -23,6 +22,9 @@ Style/WordArray:
   Enabled: false
 
 Naming/FileName:
+  Enabled: false
+
+Layout/EndOfLine:
   Enabled: false
 
 Layout/LineLength:
