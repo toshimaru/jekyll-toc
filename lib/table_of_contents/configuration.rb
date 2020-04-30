@@ -16,7 +16,7 @@ module Jekyll
         'sublist_class' => '',
         'item_class' => 'toc-entry',
         'item_prefix' => 'toc-',
-        'inject_anchors_content' => '&#128279;&nbsp;'
+        'inject_anchors_content' => 'MyLinkAnchor'
       }.freeze
 
       def initialize(options)
