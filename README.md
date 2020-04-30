@@ -100,8 +100,9 @@ above the content but at some other place of the page, i.e. an aside.
 
 #### `inject_anchors` filter
 
-Injects HTML anchors into the content without actually outputting the TOC itself.
-They are of the form:
+Injects HTML anchors into the content without actually outputting the TOC itself.  
+
+They are of the form (usage of [octicons](https://github.com/primer/octicons) as icon collection):
 
 ```html
 <a class="anchor" href="#heading1-1" aria-hidden="true">
@@ -109,8 +110,23 @@ They are of the form:
 </a>
 ```
 
-This is only useful when the TOC itself should be placed at some other
-location with the `toc_only` filter.
+They are of the form (unicode symbol):
+
+```html
+<a class="anchor" href="#heading1-1" aria-hidden="true">
+  &#128279;&nbsp;
+</a>
+```
+
+This is useful when the TOC itself should be placed at some other location with the `toc_only` filter.  
+
+The second usecase is when you want to **share a link** to the page and link directly to the headline / section.  
+
+There is a new configuration `inject_anchors_content` key, possible values are (or what you prefer)
+
+* `&#128279;&nbsp;` (default) to add a unicode symbol (chain) for an link
+* `<span class="octicon octicon-link"></span>` to use the octicon icon
+* ` ` an empty string or a space is for **hide** the anchor
 
 ## Generated HTML
 

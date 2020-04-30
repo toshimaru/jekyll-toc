@@ -13,6 +13,7 @@ class TestConfiguration < Minitest::Test
     assert_equal configuration.sublist_class, ''
     assert_equal configuration.item_class, 'toc-entry'
     assert_equal configuration.item_prefix, 'toc-'
+    assert_equal configuration.inject_anchors_content, '&#128279;&nbsp;'
   end
 
   def test_type_error
@@ -25,5 +26,6 @@ class TestConfiguration < Minitest::Test
     assert_equal configuration.sublist_class, ''
     assert_equal configuration.item_class, 'toc-entry'
     assert_equal configuration.item_prefix, 'toc-'
+    assert_equal configuration.inject_anchors_content, '&#128279;&nbsp;'
   end
 end
