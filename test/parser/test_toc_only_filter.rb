@@ -12,7 +12,7 @@ class TestTOCOnlyFilter < Minitest::Test
   def test_injects_toc_container
     html = @parser.build_toc
 
-    assert_match(/<ul class="section-nav">/, html)
+    assert_match(/<ul id=\"toc\" class="section-nav">/, html)
   end
 
   def test_does_not_return_content

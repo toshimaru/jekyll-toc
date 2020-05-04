@@ -112,6 +112,14 @@ They are of the form:
 This is only useful when the TOC itself should be placed at some other
 location with the `toc_only` filter.
 
+## Testing
+
+To run the tests you `rake`. First install gem packages local and run `rake test`.
+
+```shell
+rake test
+```
+
 ## Generated HTML
 
 jekyll-toc generates an unordered list. The HTML output is as follows.
@@ -151,6 +159,7 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+  anchor_id_url_encoded: false
 ```
 
 ## Customization

@@ -66,7 +66,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -89,7 +89,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_1, 'min_level' => 2, 'max_level' => 5)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
       </ul>
     HTML
@@ -102,7 +102,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_2)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -126,7 +126,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_3)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
       <li class="toc-entry toc-h5"><a href="#h5">h5</a></li>
       <li class="toc-entry toc-h4"><a href="#h4">h4</a></li>
@@ -144,7 +144,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_4)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -172,7 +172,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(NO_TOC_HTML)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -200,7 +200,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(JAPANESE_HEADINGS_HTML)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#%E3%81%82">あ</a>
       <ul>
@@ -223,7 +223,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(ANGLE_BRACKET_HTML)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#base-href">&lt;base href&gt;</a></li>
       <li class="toc-entry toc-h1"><a href="#--">&amp; &lt; &gt;</a></li>
@@ -238,7 +238,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TAGS_INSIDE_HEADINGS_HTML)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h2"><a href="#h2">h2</a></li>
       <li class="toc-entry toc-h2"><a href="#h2-1">h2</a></li>
       </ul>
@@ -261,7 +261,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -279,9 +279,9 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, actual)
 
     html = parser.inject_anchors_into_html
-    assert_match(%r{<h1>.+</h1>}m, html)
-    assert_match(%r{<h3>.+</h3>}m, html)
-    assert_match(%r{<h6>.+</h6>}m, html)
+    assert_match(%r{<h1 id=".+">.+</h1>}m, html)
+    assert_match(%r{<h3 id=".+">.+</h3>}m, html)
+    assert_match(%r{<h6 id=".+">.+</h6>}m, html)
     assert_includes(html, '<h2>h2</h2>')
   end
 
@@ -302,7 +302,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_2, 'no_toc_section_class' => 'exclude')
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -320,9 +320,9 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, actual)
 
     html = parser.inject_anchors_into_html
-    assert_match(%r{<h1>.+</h1>}m, html)
-    assert_match(%r{<h3>.+</h3>}m, html)
-    assert_match(%r{<h6>.+</h6>}m, html)
+    assert_match(%r{<h1 id=".+">.+</h1>}m, html)
+    assert_match(%r{<h3 id=".+">.+</h3>}m, html)
+    assert_match(%r{<h6 id=".+">.+</h6>}m, html)
     assert_includes(html, '<h2>h2</h2>')
     assert_includes(html, '<h4>h4</h4>')
     assert_includes(html, '<h5>h5</h5>')
@@ -345,7 +345,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_3, 'no_toc_section_class' => ['no_toc_section', 'exclude'])
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1">
       <a href="#h1">h1</a>
       <ul>
@@ -363,9 +363,9 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, actual)
 
     html = parser.inject_anchors_into_html
-    assert_match(%r{<h1>.+</h1>}m, html)
-    assert_match(%r{<h3>.+</h3>}m, html)
-    assert_match(%r{<h6>.+</h6>}m, html)
+    assert_match(%r{<h1 id=".+">.+</h1>}m, html)
+    assert_match(%r{<h3 id=".+">.+</h3>}m, html)
+    assert_match(%r{<h6 id=".+">.+</h6>}m, html)
     assert_includes(html, '<h2>h2</h2>')
     assert_includes(html, '<h4>h4</h4>')
     assert_includes(html, '<h5>h5</h5>')
@@ -381,7 +381,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_EXPLICIT_ID)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#second">h2</a></li>
       <li class="toc-entry toc-h1"><a href="#third">h3</a></li>
@@ -406,7 +406,7 @@ class TestVariousTocHtml < Minitest::Test
     parser = Jekyll::TableOfContents::Parser.new(TEST_UNIQ_ID)
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#h1-1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#h1-2">h1</a></li>
@@ -423,7 +423,7 @@ class TestVariousTocHtml < Minitest::Test
     )
     doc = Nokogiri::HTML(parser.toc)
     expected = <<~HTML
-      <ul class="custom-list">
+      <ul id="toc" class="custom-list">
       <li class="custom-item custom-prefix-h1">
       <a href="#h1">h1</a>
       <ul class="custom-sublist">

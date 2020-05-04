@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
+require "erb"
+include ERB::Util
+
 module Jekyll
+  # Module to wrap the classes for TOC creation
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
+      include ERB::Util
+
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u.freeze
 
       def initialize(html, options = {})
@@ -17,13 +23,24 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
+        %(<ul id="toc" class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
       end
 
       def inject_anchors_into_html
         @entries.each do |entry|
-          entry[:header_content].add_previous_sibling(
-            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
+          # Add id to h-element
+          entry[:header_parent].set_attribute('id', "#{entry[:id]}.to_s")
+
+          # Add link icon after text
+          entry[:header_content].add_next_sibling(
+            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">&nbsp;&#128279;</a>)
+          )
+
+          # Add link 'nav to toc'
+          arr_to_top = [2, 3]
+          next unless arr_to_top.include?(entry[:h_num])
+          entry[:header_content].add_next_sibling(
+            %(<span style="float: right"><a class="anchor_to_top" href="#toc" aria-hidden="true">&#x21A5;</a></span>)
           )
         end
 
@@ -45,6 +62,9 @@ module Jekyll
                .downcase
                .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
                .tr(' ', '-') # replace spaces with dash
+          if (@configuration.anchor_id_url_encoded)
+            id = url_encode(id)
+          end
 
           suffix_num = headers[id]
           headers[id] += 1
@@ -53,6 +73,7 @@ module Jekyll
             id: suffix_num.zero? ? id : "#{id}-#{suffix_num}",
             text: CGI.escapeHTML(text),
             node_name: node.name,
+            header_parent: node,
             header_content: node.children.first,
             h_num: node.name.delete('h').to_i
           }
