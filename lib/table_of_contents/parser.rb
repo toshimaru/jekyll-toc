@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "erb"
-include ERB::Util
+require 'table_of_contents/helper'
 
 module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u.freeze
+      include ERB::Util
+      include Helper
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
@@ -44,10 +44,7 @@ module Jekyll
           .reject { |n| n.classes.include?(@configuration.no_toc_class) }
           .inject([]) do |entries, node|
           text = node.text
-          id = node.attribute('id') || text
-               .downcase
-               .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
-               .tr(' ', '-') # replace spaces with dash
+          id = node.attribute('id') || generate_toc_id(text)
           id = url_encode(id)
 
           suffix_num = headers[id]
