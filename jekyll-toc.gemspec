@@ -2,11 +2,11 @@
 
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'version'
+require 'table_of_contents/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'jekyll-toc'
-  spec.version       = JekyllToc::VERSION
+  spec.version       = Jekyll::TableOfContents::VERSION
   spec.summary       = 'Jekyll Table of Contents plugin'
   spec.description   = 'Jekyll (Ruby static website generator) plugin which generates a table of contents.'
   spec.authors       = %w(toshimaru torbjoernk)
