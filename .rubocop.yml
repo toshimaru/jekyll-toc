@@ -3,6 +3,7 @@ AllCops:
   Exclude:
     - "*.gemspec"
     - "gemfiles/*"
+    - "vendor/**/*"
     - Rakefile
     - Gemfile
 
