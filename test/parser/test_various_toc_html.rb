@@ -170,6 +170,10 @@ class TestVariousTocHtml < Minitest::Test
     HTML
 
     assert_equal(expected, parser.build_toc)
+    html_with_anchors = parser.inject_anchors_into_html
+    assert_match(%r{<a class="anchor" href="#%E3%81%82" aria-hidden="true"><span.*span></a>あ}, html_with_anchors)
+    assert_match(%r{<a class="anchor" href="#%E3%81%84" aria-hidden="true"><span.*span></a>い}, html_with_anchors)
+    assert_match(%r{<a class="anchor" href="#%E3%81%86" aria-hidden="true"><span.*span></a>う}, html_with_anchors)
   end
 
   # ref. https://github.com/toshimaru/jekyll-toc/issues/45
