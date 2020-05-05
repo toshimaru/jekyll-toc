@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require 'table_of_contents/helper'
+
 module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u.freeze
+      include ::Jekyll::TableOfContents::Helper
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
@@ -22,6 +24,7 @@ module Jekyll
 
       def inject_anchors_into_html
         @entries.each do |entry|
+          # NOTE: `entry[:id]` is automatically URL encoded by Nokogiri
           entry[:header_content].add_previous_sibling(
             %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
           )
@@ -41,10 +44,7 @@ module Jekyll
           .reject { |n| n.classes.include?(@configuration.no_toc_class) }
           .inject([]) do |entries, node|
           text = node.text
-          id = node.attribute('id') || text
-               .downcase
-               .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
-               .tr(' ', '-') # replace spaces with dash
+          id = node.attribute('id') || generate_toc_id(text)
 
           suffix_num = headers[id]
           headers[id] += 1
