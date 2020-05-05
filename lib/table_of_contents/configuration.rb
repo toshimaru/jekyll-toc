@@ -4,8 +4,8 @@ module Jekyll
   module TableOfContents
     # jekyll-toc configuration class
     class Configuration
-      attr_accessor :toc_levels, :no_toc_class, :no_toc_section_class,
-                    :list_class, :sublist_class, :item_class, :item_prefix
+      attr_reader :toc_levels, :no_toc_class, :no_toc_section_class,
+                  :list_class, :sublist_class, :item_class, :item_prefix
 
       DEFAULT_CONFIG = {
         'min_level' => 1,
