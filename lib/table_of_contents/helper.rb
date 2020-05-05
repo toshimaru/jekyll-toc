@@ -7,9 +7,10 @@ module Jekyll
       PUNCTUATION_REGEXP = /[^\p{Word}\- ]/u.freeze
 
       def generate_toc_id(text)
-        text.downcase
-            .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
-            .tr(' ', '-') # replace spaces with dash
+        text = text.downcase
+                   .gsub(PUNCTUATION_REGEXP, '') # remove punctuation
+                   .tr(' ', '-') # replace spaces with dash
+        CGI.escape(text)
       end
     end
   end

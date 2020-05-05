@@ -6,8 +6,7 @@ module Jekyll
   module TableOfContents
     # Parse html contents and generate table of contents
     class Parser
-      include ERB::Util
-      include Helper
+      include ::Jekyll::TableOfContents::Helper
 
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
@@ -45,7 +44,6 @@ module Jekyll
           .inject([]) do |entries, node|
           text = node.text
           id = node.attribute('id') || generate_toc_id(text)
-          id = url_encode(id)
 
           suffix_num = headers[id]
           headers[id] += 1
