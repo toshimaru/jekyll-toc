@@ -21,12 +21,6 @@ class TestVariousTocHtml < Minitest::Test
     <h4 class="no_toc">no_toc h4</h4>
   HTML
 
-  JAPANESE_HEADINGS_HTML = <<~HTML
-    <h1>あ</h1>
-    <h2>い</h2>
-    <h3>う</h3>
-  HTML
-
   TAGS_INSIDE_HEADINGS_HTML = <<~HTML
     <h2><strong>h2</strong></h2>
     <h2><em>h2</em></h2>
@@ -197,26 +191,26 @@ class TestVariousTocHtml < Minitest::Test
   end
 
   def test_japanese_toc
-    parser = Jekyll::TableOfContents::Parser.new(JAPANESE_HEADINGS_HTML)
-    doc = Nokogiri::HTML(parser.toc)
-    expected = <<~HTML
+    parser = Jekyll::TableOfContents::Parser.new(<<~HTML)
+      <h1>あ</h1>
+      <h2>い</h2>
+      <h3>う</h3>
+    HTML
+    expected = <<~HTML.chomp
       <ul class="section-nav">
-      <li class="toc-entry toc-h1">
-      <a href="#%E3%81%82">あ</a>
+      <li class="toc-entry toc-h1"><a href="#あ">あ</a>
       <ul>
-      <li class="toc-entry toc-h2">
-      <a href="#%E3%81%84">い</a>
+      <li class="toc-entry toc-h2"><a href="#い">い</a>
       <ul>
-      <li class="toc-entry toc-h3"><a href="#%E3%81%86">う</a></li>
+      <li class="toc-entry toc-h3"><a href="#う">う</a></li>
       </ul>
       </li>
       </ul>
       </li>
       </ul>
     HTML
-    actual = doc.css('ul.section-nav').to_s
 
-    assert_equal(expected, actual)
+    assert_equal(expected, parser.build_toc)
   end
 
   def test_angle_bracket
