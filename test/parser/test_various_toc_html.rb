@@ -205,25 +205,20 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, parser.build_toc)
   end
 
-  TEST_HTML_IGNORE = <<~HTML
-    <h1>h1</h1>
-    <div class="no_toc_section">
-    <h2>h2</h2>
-    </div>
-    <h3>h3</h3>
-    <h6>h6</h6>
-  HTML
-
   def test_nested_toc_with_no_toc_section_class
-    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE)
-    doc = Nokogiri::HTML(parser.toc)
-    expected = <<~HTML
+    parser = Jekyll::TableOfContents::Parser.new(<<~HTML)
+      <h1>h1</h1>
+      <div class="no_toc_section">
+      <h2>h2</h2>
+      </div>
+      <h3>h3</h3>
+      <h6>h6</h6>
+    HTML
+    expected = <<~HTML.chomp
       <ul class="section-nav">
-      <li class="toc-entry toc-h1">
-      <a href="#h1">h1</a>
+      <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
-      <li class="toc-entry toc-h3">
-      <a href="#h3">h3</a>
+      <li class="toc-entry toc-h3"><a href="#h3">h3</a>
       <ul>
       <li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
       </ul>
@@ -232,8 +227,7 @@ class TestVariousTocHtml < Minitest::Test
       </li>
       </ul>
     HTML
-    actual = doc.css('ul.section-nav').to_s
-    assert_equal(expected, actual)
+    assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
     assert_match(%r{<h1>.+</h1>}m, html)
@@ -279,29 +273,24 @@ class TestVariousTocHtml < Minitest::Test
     assert_includes(html, '<h5>h5</h5>')
   end
 
-  TEST_HTML_IGNORE_3 = <<~HTML
-    <h1>h1</h1>
-    <div class="no_toc_section">
-    <h2>h2</h2>
-    </div>
-    <h3>h3</h3>
-    <div class="exclude">
-    <h4>h4</h4>
-    <h5>h5</h5>
-    </div>
-    <h6>h6</h6>
-  HTML
-
   def test_multiple_no_toc_section_classes
-    parser = Jekyll::TableOfContents::Parser.new(TEST_HTML_IGNORE_3, 'no_toc_section_class' => ['no_toc_section', 'exclude'])
-    doc = Nokogiri::HTML(parser.toc)
-    expected = <<~HTML
+    parser = Jekyll::TableOfContents::Parser.new(<<~HTML, 'no_toc_section_class' => ['no_toc_section', 'exclude'])
+      <h1>h1</h1>
+      <div class="no_toc_section">
+      <h2>h2</h2>
+      </div>
+      <h3>h3</h3>
+      <div class="exclude">
+      <h4>h4</h4>
+      <h5>h5</h5>
+      </div>
+      <h6>h6</h6>
+    HTML
+    expected = <<~HTML.chomp
       <ul class="section-nav">
-      <li class="toc-entry toc-h1">
-      <a href="#h1">h1</a>
+      <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
-      <li class="toc-entry toc-h3">
-      <a href="#h3">h3</a>
+      <li class="toc-entry toc-h3"><a href="#h3">h3</a>
       <ul>
       <li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
       </ul>
@@ -310,8 +299,7 @@ class TestVariousTocHtml < Minitest::Test
       </li>
       </ul>
     HTML
-    actual = doc.css('ul.section-nav').to_s
-    assert_equal(expected, actual)
+    assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
     assert_match(%r{<h1>.+</h1>}m, html)
@@ -322,24 +310,20 @@ class TestVariousTocHtml < Minitest::Test
     assert_includes(html, '<h5>h5</h5>')
   end
 
-  TEST_EXPLICIT_ID = <<~HTML
-    <h1>h1</h1>
-    <h1 id="second">h2</h1>
-    <h1 id="third">h3</h1>
-  HTML
-
   def test_toc_with_explicit_id
-    parser = Jekyll::TableOfContents::Parser.new(TEST_EXPLICIT_ID)
-    doc = Nokogiri::HTML(parser.toc)
-    expected = <<~HTML
+    parser = Jekyll::TableOfContents::Parser.new(<<~HTML)
+      <h1>h1</h1>
+      <h1 id="second">h2</h1>
+      <h1 id="third">h3</h1>
+    HTML
+    expected = <<~HTML.chomp
       <ul class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#second">h2</a></li>
       <li class="toc-entry toc-h1"><a href="#third">h3</a></li>
       </ul>
     HTML
-    actual = doc.css('ul.section-nav').to_s
-    assert_equal(expected, actual)
+    assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
     assert_includes(html, %(<a class="anchor" href="#h1" aria-hidden="true">))
@@ -360,6 +344,7 @@ class TestVariousTocHtml < Minitest::Test
       <li class="toc-entry toc-h1"><a href="#h1-2">h1</a></li>
       </ul>
     HTML
+
     assert_equal(expected, parser.build_toc)
   end
 
@@ -368,14 +353,11 @@ class TestVariousTocHtml < Minitest::Test
       TEST_HTML,
       'item_class' => 'custom-item', 'list_class' => 'custom-list', 'sublist_class' => 'custom-sublist', 'item_prefix' => 'custom-prefix-'
     )
-    doc = Nokogiri::HTML(parser.toc)
-    expected = <<~HTML
+    expected = <<~HTML.chomp
       <ul class="custom-list">
-      <li class="custom-item custom-prefix-h1">
-      <a href="#h1">h1</a>
+      <li class="custom-item custom-prefix-h1"><a href="#h1">h1</a>
       <ul class="custom-sublist">
-      <li class="custom-item custom-prefix-h3">
-      <a href="#h3">h3</a>
+      <li class="custom-item custom-prefix-h3"><a href="#h3">h3</a>
       <ul class="custom-sublist">
       <li class="custom-item custom-prefix-h6"><a href="#h6">h6</a></li>
       </ul>
@@ -385,6 +367,6 @@ class TestVariousTocHtml < Minitest::Test
       </ul>
     HTML
 
-    assert_equal(expected, doc.css('ul.custom-list').to_s)
+    assert_equal(expected, parser.build_toc)
   end
 end
