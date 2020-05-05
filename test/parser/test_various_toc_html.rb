@@ -157,11 +157,11 @@ class TestVariousTocHtml < Minitest::Test
     HTML
     expected = <<~HTML.chomp
       <ul class="section-nav">
-      <li class="toc-entry toc-h1"><a href="#あ">あ</a>
+      <li class="toc-entry toc-h1"><a href="#%E3%81%82">あ</a>
       <ul>
-      <li class="toc-entry toc-h2"><a href="#い">い</a>
+      <li class="toc-entry toc-h2"><a href="#%E3%81%84">い</a>
       <ul>
-      <li class="toc-entry toc-h3"><a href="#う">う</a></li>
+      <li class="toc-entry toc-h3"><a href="#%E3%81%86">う</a></li>
       </ul>
       </li>
       </ul>
