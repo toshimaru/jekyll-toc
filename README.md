@@ -19,6 +19,7 @@
   - [Skip TOC Section](#skip-toc-section)
   - [CSS Styling](#css-styling)
   - [Custom CSS Class](#custom-css-class)
+  - [Using Unordered/Ordered lists](#using-unorderedordered-lists)
 
 ## Installation
 
@@ -151,6 +152,7 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+  use_ordered_list: false
 ```
 
 ## Customization
@@ -245,3 +247,39 @@ toc:
   # Default is "toc-":
   item_prefix: item-
 ```
+
+### Using Unordered/Ordered lists
+
+By default the table of contents will be generated as an unordered list via `<ul></ul>` tags. This can be configured to use ordered lists instead `<ol></ol>`.
+This can be configured in `_config.yml`:
+
+```yml
+toc:
+  use_ordered_list: true # default is false
+```
+
+In order to change the list type, use the [list-style-type](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type) css property.
+Add a class to the `sublist_class` configuration to append it to the `ol` tags so that you can add the `list-style-type` property.
+
+Example
+
+```yml
+toc:
+  use_ordered_list: true
+  list_class: my-list-class
+  sublist_class: my-sublist-class
+```
+
+```css
+.my-list-class {
+  list-style-type: upper-alpha;
+}
+
+.my-sublist-class: {
+  list-style-type: lower-alpha;
+}
+```
+
+This will produce:
+
+![screenshot](https://user-images.githubusercontent.com/7675276/85813980-a0ea5a80-b719-11ea-9458-ccf9b86a778b.png)

@@ -8,6 +8,9 @@ module Jekyll
     class Parser
       include ::Jekyll::TableOfContents::Helper
 
+      ORDERED_LIST_HTML_TAG = 'ol'
+      UNORDERED_LIST_HTML_TAG = 'ul'
+
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         @configuration = Configuration.new(options)
@@ -19,7 +22,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<ul class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</ul>)
+        %(<#{list_tag} class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</#{list_tag}>)
       end
 
       def inject_anchors_into_html
@@ -74,7 +77,7 @@ module Jekyll
             next_i = i + 1
             if next_i < entries.count && entries[next_i][:h_num] > min_h_num
               nest_entries = get_nest_entries(entries[next_i, entries.count], min_h_num)
-              toc_list << %(\n<ul#{ul_attributes}>\n#{build_toc_list(nest_entries)}</ul>\n)
+              toc_list << %(\n<#{list_tag}#{ul_attributes}>\n#{build_toc_list(nest_entries)}</#{list_tag}>\n)
               i += nest_entries.count
             end
             # Add the closing tag for the current entry in the list
@@ -120,6 +123,14 @@ module Jekyll
 
       def ul_attributes
         @ul_attributes ||= @configuration.sublist_class.empty? ? '' : %( class="#{@configuration.sublist_class}")
+      end
+
+      def use_ordered_list?
+        @configuration.use_ordered_list
+      end
+
+      def list_tag
+        use_ordered_list? ? ORDERED_LIST_HTML_TAG : UNORDERED_LIST_HTML_TAG
       end
     end
   end
