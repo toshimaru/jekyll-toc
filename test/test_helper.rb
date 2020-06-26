@@ -20,7 +20,7 @@ SIMPLE_HTML = <<~HTML
 HTML
 
 module TestHelpers
-  def read_html_and_create_parser
-    @parser = Jekyll::TableOfContents::Parser.new(SIMPLE_HTML)
+  def read_html_and_create_parser(options = {})
+    @parser = Jekyll::TableOfContents::Parser.new(SIMPLE_HTML, options)
   end
 end
