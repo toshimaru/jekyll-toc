@@ -125,12 +125,8 @@ module Jekyll
         @ul_attributes ||= @configuration.sublist_class.empty? ? '' : %( class="#{@configuration.sublist_class}")
       end
 
-      def use_ordered_list?
-        @configuration.use_ordered_list
-      end
-
       def list_tag
-        use_ordered_list? ? ORDERED_LIST_HTML_TAG : UNORDERED_LIST_HTML_TAG
+        @list_tag ||= @configuration.ordered_list ? ORDERED_LIST_HTML_TAG : UNORDERED_LIST_HTML_TAG
       end
     end
   end
