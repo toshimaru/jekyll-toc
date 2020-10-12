@@ -59,7 +59,7 @@ class TestOrderedList < Minitest::Test
 
     assert_equal occurrences, 5
   end
-  
+
   private
 
   def parse_with_ordered_list
