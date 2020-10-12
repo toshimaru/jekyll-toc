@@ -147,12 +147,12 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 toc:
   min_level: 1
   max_level: 6
+  ordered_list: false
   no_toc_section_class: no_toc_section
   list_class: section-nav
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
-  ordered_list: false
 ```
 
 ## Customization
