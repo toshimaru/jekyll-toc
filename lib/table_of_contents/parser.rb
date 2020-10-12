@@ -8,9 +8,6 @@ module Jekyll
     class Parser
       include ::Jekyll::TableOfContents::Helper
 
-      ORDERED_LIST_HTML_TAG = 'ol'
-      UNORDERED_LIST_HTML_TAG = 'ul'
-
       def initialize(html, options = {})
         @doc = Nokogiri::HTML::DocumentFragment.parse(html)
         @configuration = Configuration.new(options)
@@ -110,7 +107,7 @@ module Jekyll
       end
 
       def toc_headings_in_no_toc_section
-        if @configuration.no_toc_section_class.is_a? Array
+        if @configuration.no_toc_section_class.is_a?(Array)
           @configuration.no_toc_section_class.map { |cls| toc_headings_within(cls) }.join(',')
         else
           toc_headings_within(@configuration.no_toc_section_class)
@@ -126,7 +123,7 @@ module Jekyll
       end
 
       def list_tag
-        @list_tag ||= @configuration.ordered_list ? ORDERED_LIST_HTML_TAG : UNORDERED_LIST_HTML_TAG
+        @list_tag ||= @configuration.ordered_list ? 'ol' : 'ul'
       end
     end
   end
