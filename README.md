@@ -1,7 +1,7 @@
 # jekyll-toc
 
 ![CI](https://github.com/toshimaru/jekyll-toc/workflows/CI/badge.svg)
-[![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](http://badge.fury.io/rb/jekyll-toc)
+[![Gem Version](https://badge.fury.io/rb/jekyll-toc.svg)](https://badge.fury.io/rb/jekyll-toc)
 [![Code Climate](https://codeclimate.com/github/toshimaru/jekyll-toc/badges/gpa.svg)](https://codeclimate.com/github/toshimaru/jekyll-toc)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cd56b207f327603662a1/test_coverage)](https://codeclimate.com/github/toshimaru/jekyll-toc/test_coverage)
 
@@ -152,7 +152,7 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
-  use_ordered_list: false
+  ordered_list: false
 ```
 
 ## Customization
@@ -255,7 +255,7 @@ This can be configured in `_config.yml`:
 
 ```yml
 toc:
-  use_ordered_list: true # default is false
+  ordered_list: true # default is false
 ```
 
 In order to change the list type, use the [list-style-type](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type) css property.
@@ -265,7 +265,7 @@ Example
 
 ```yml
 toc:
-  use_ordered_list: true
+  ordered_list: true
   list_class: my-list-class
   sublist_class: my-sublist-class
 ```
