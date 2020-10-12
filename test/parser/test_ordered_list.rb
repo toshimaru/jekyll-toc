@@ -8,19 +8,19 @@ class TestOrderedList < Minitest::Test
   def test_default_configuration
     configuration = Jekyll::TableOfContents::Configuration.new({})
 
-    assert_equal configuration.use_ordered_list, false
+    assert_equal configuration.ordered_list, false
   end
 
   def test_disabled_ordered_list
-    configuration = Jekyll::TableOfContents::Configuration.new('use_ordered_list' => false)
+    configuration = Jekyll::TableOfContents::Configuration.new('ordered_list' => false)
 
-    assert_equal configuration.use_ordered_list, false
+    assert_equal configuration.ordered_list, false
   end
 
   def test_enabled_ordered_list
-    configuration = Jekyll::TableOfContents::Configuration.new('use_ordered_list' => true)
+    configuration = Jekyll::TableOfContents::Configuration.new('ordered_list' => true)
 
-    assert_equal configuration.use_ordered_list, true
+    assert_equal configuration.ordered_list, true
   end
 
   def test_basic_ordered_list_top_heading
@@ -63,12 +63,12 @@ class TestOrderedList < Minitest::Test
   private
 
   def parse_with_ordered_list
-    read_html_and_create_parser('use_ordered_list' => true)
+    read_html_and_create_parser('ordered_list' => true)
   end
 
   def parse_with_ordered_list_and_classes
     read_html_and_create_parser(
-      'use_ordered_list' => true,
+      'ordered_list' => true,
       'list_class' => 'top-list-class',
       'sublist_class' => 'sublist-class'
     )

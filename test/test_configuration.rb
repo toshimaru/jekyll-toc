@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class TestConfiguration < Minitest::Test
-  def test_default_conf1guration
+  def test_default_configuration
     configuration = Jekyll::TableOfContents::Configuration.new({})
 
     assert_equal configuration.toc_levels, 1..6
@@ -12,7 +12,7 @@ class TestConfiguration < Minitest::Test
     assert_equal configuration.sublist_class, ''
     assert_equal configuration.item_class, 'toc-entry'
     assert_equal configuration.item_prefix, 'toc-'
-    assert_equal configuration.use_ordered_list, false
+    assert_equal configuration.ordered_list, false
   end
 
   def test_type_error
@@ -24,6 +24,6 @@ class TestConfiguration < Minitest::Test
     assert_equal configuration.sublist_class, ''
     assert_equal configuration.item_class, 'toc-entry'
     assert_equal configuration.item_prefix, 'toc-'
-    assert_equal configuration.use_ordered_list, false
+    assert_equal configuration.ordered_list, false
   end
 end
