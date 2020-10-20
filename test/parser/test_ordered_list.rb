@@ -8,19 +8,19 @@ class TestOrderedList < Minitest::Test
   def test_default_configuration
     configuration = Jekyll::TableOfContents::Configuration.new({})
 
-    assert_equal configuration.ordered_list, false
+    refute(configuration.ordered_list)
   end
 
   def test_disabled_ordered_list
     configuration = Jekyll::TableOfContents::Configuration.new('ordered_list' => false)
 
-    assert_equal configuration.ordered_list, false
+    refute(configuration.ordered_list)
   end
 
   def test_enabled_ordered_list
     configuration = Jekyll::TableOfContents::Configuration.new('ordered_list' => true)
 
-    assert_equal configuration.ordered_list, true
+    assert(configuration.ordered_list)
   end
 
   def test_basic_ordered_list_top_heading
@@ -57,7 +57,7 @@ class TestOrderedList < Minitest::Test
 
     occurrences = html.scan(/<ol class="sublist-class">/).count
 
-    assert_equal occurrences, 5
+    assert_equal(5, occurrences)
   end
 
   private

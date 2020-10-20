@@ -1,11 +1,15 @@
 AllCops:
   TargetRubyVersion: 2.4
+  NewCops: enable
   Exclude:
     - "*.gemspec"
     - "gemfiles/*"
     - "vendor/**/*"
     - Rakefile
     - Gemfile
+require:
+  - rubocop-performance
+  - rubocop-minitest
 
 Metrics/MethodLength:
   Enabled: false
