@@ -12,12 +12,12 @@ class TestTOCOnlyFilter < Minitest::Test
   def test_injects_toc_container
     html = @parser.build_toc
 
-    assert(html.include?(%(<ul class="section-nav">)))
+    assert_includes(html, %(<ul class="section-nav">))
   end
 
   def test_does_not_return_content
     html = @parser.build_toc
 
-    refute(html.include?(%(<h1>Simple H1</h1>)))
+    refute_includes(html, %(<h1>Simple H1</h1>))
   end
 end
