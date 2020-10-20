@@ -9,6 +9,7 @@ AllCops:
     - Gemfile
 require:
   - rubocop-performance
+  - rubocop-minitest
 
 Metrics/MethodLength:
   Enabled: false
