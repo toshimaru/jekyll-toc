@@ -6,6 +6,14 @@
 version: 2
 updates:
   - package-ecosystem: "bundler"
-    directory: "/" # Location of package manifests
+    directory: "/"
     schedule:
       interval: "weekly"
+  reviewers:
+    - toshimaru
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  reviewers:
+    - toshimaru
