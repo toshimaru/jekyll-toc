@@ -172,7 +172,7 @@ toc:
   max_level: 5 # default: 6
 ```
 
-The default level range is from `<h1>` to `<h6>`.
+The default heading range is from `<h1>` to `<h6>`.
 
 ### Skip TOC
 
@@ -180,7 +180,7 @@ The heading is ignored in the toc by adding `no_toc` class.
 
 ```html
 <h1>h1</h1>
-<h1 class="no_toc">This heading is ignored in the toc</h1>
+<h1 class="no_toc">This heading is ignored in the TOC</h1>
 <h2>h2</h2>
 ```
 
@@ -191,8 +191,8 @@ The headings are ignored inside the element which has `no_toc_section` class.
 ```html
 <h1>h1</h1>
 <div class="no_toc_section">
-  <h2>This heading is ignored in the toc</h2>
-  <h3>This heading is ignored in the toc</h3>
+  <h2>This heading is ignored in the TOC</h2>
+  <h3>This heading is ignored in the TOC</h3>
 </div>
 <h4>h4</h4>
 ```
@@ -236,8 +236,8 @@ The toc can be modified with CSS. The sample CSS is the following.
 
 Each TOC `li` entry has two CSS classes for further styling. The general `toc-entry` is applied to all `li` elements in the `ul.section-nav`.
 
-Depending on the heading level each specific entry refers to, it has a second CSS class `toc-XX`, where `XX` is the HTML heading tag name. For example, the TOC entry linking to a heading `<h1>...</h1>` (a single
-`#` in Markdown) will get the CSS class `toc-h1`.
+Depending on the heading level each specific entry refers to, it has a second CSS class `toc-XX`, where `XX` is the HTML heading tag name.
+For example, the TOC entry linking to a heading `<h1>...</h1>` (a single `#` in Markdown) will get the CSS class `toc-h1`.
 
 ### Custom CSS Class
 
