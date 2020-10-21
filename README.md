@@ -291,3 +291,10 @@ toc:
 This will produce:
 
 ![screenshot](https://user-images.githubusercontent.com/7675276/85813980-a0ea5a80-b719-11ea-9458-ccf9b86a778b.png)
+
+## Alternative Tools
+
+- Adding anchor to headings
+  - [AnchorJS](https://www.bryanbraun.com/anchorjs/)
+- Generating TOC for kramdown content
+  - [Automatic “Table of Contents” Generation](https://kramdown.gettalong.org/converter/html.html#toc) (See also. [Create Table of Contents in kramdown](https://blog.toshima.ru/2020/05/22/kramdown-toc))
