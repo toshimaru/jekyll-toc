@@ -170,11 +170,11 @@ toc:
   max_level: 5 # default: 6
 ```
 
-The default level range is `<h1>` to `<h6>`.
+The default level range is from `<h1>` to `<h6>`.
 
 ### Skip TOC
 
-The heading is ignored in the toc when you add `no_toc` to the class.
+The heading is ignored in the toc by adding `no_toc` class.
 
 ```html
 <h1>h1</h1>
@@ -182,7 +182,7 @@ The heading is ignored in the toc when you add `no_toc` to the class.
 <h2>h2</h2>
 ```
 
-### Skip TOC Section
+### Skip TOC Sectionally
 
 The headings are ignored inside the element which has `no_toc_section` class.
 
@@ -205,7 +205,7 @@ toc:
   no_toc_section_class: exclude # default: no_toc_section
 ```
 
-Configuring multiple classes for `no_toc_section_class` is allowed:
+Configuring multiple classes are allowed:
 
 ```yml
 # _config.yml
