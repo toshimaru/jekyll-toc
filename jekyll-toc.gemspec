@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.homepage      = 'https://github.com/toshimaru/jekyll-toc'
   spec.license       = 'MIT'
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files    = spec.files.grep(%r{^(test|spec)/})
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.4'
