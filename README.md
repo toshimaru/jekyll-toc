@@ -149,6 +149,7 @@ jekyll-toc is customizable on `_config.yml`.
 ### Default Configuration 
 
 ```yml
+# _config.yml
 toc:
   min_level: 1
   max_level: 6
@@ -162,9 +163,8 @@ toc:
 
 ### TOC levels
 
-The toc levels can be configured on `_config.yml`:
-
 ```yml
+# _config.yml
 toc:
   min_level: 2 # default: 1
   max_level: 5 # default: 6
@@ -200,6 +200,7 @@ Which would result in only the `<h1>` & `<h4>` within the example being included
 The class can be configured on `_config.yml`:
 
 ```yml
+# _config.yml
 toc:
   no_toc_section_class: exclude # default: no_toc_section
 ```
@@ -207,6 +208,7 @@ toc:
 Configuring multiple classes for `no_toc_section_class` is allowed:
 
 ```yml
+# _config.yml
 toc:
   no_toc_section_class:
     - no_toc_section
@@ -240,6 +242,7 @@ Depending on the heading level each specific entry refers to, it has a second CS
 You can apply custom CSS classes to the generated `<ul>` and `<li>` tags.
 
 ```yml
+# _config.yml
 toc:
   # Default is "section-nav":
   list_class: my-list-class
@@ -257,6 +260,7 @@ By default the table of contents will be generated as an unordered list via `<ul
 This can be configured in `_config.yml`:
 
 ```yml
+# _config.yml
 toc:
   ordered_list: true # default is false
 ```
@@ -267,6 +271,7 @@ Add a class to the `sublist_class` configuration to append it to the `ol` tags s
 Example
 
 ```yml
+# _config.yml
 toc:
   ordered_list: true
   list_class: my-list-class
