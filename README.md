@@ -7,19 +7,21 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [1. Basic Usage](#1-basic-usage)
-  - [2. Advanced Usage](#2-advanced-usage)
+  - [Basic Usage](#basic-usage)
+  - [Advanced Usage](#advanced-usage)
 - [Generated HTML](#generated-html)
-- [Default Configuration](#default-configuration)
 - [Customization](#customization)
+  - [Default Configuration](#default-configuration)
   - [TOC levels](#toc-levels)
   - [Skip TOC](#skip-toc)
-  - [Skip TOC Section](#skip-toc-section)
+  - [Skip TOC Sectionally](#skip-toc-sectionally)
   - [CSS Styling](#css-styling)
   - [Custom CSS Class](#custom-css-class)
   - [Using Unordered/Ordered lists](#using-unorderedordered-lists)
+- [Alternative Tools](#alternative-tools)
 
 ## Installation
 
@@ -51,7 +53,7 @@ toc: true
 There are three Liquid filters, which can be applied to HTML content,
 e.g. the Liquid variable `content` available in Jekyll's templates.
 
-### 1. Basic Usage
+### Basic Usage
 
 #### `toc` filter
 
@@ -63,7 +65,7 @@ Add the `toc` filter to your site's `{{ content }}` (e.g. `_layouts/post.html`).
 
 This filter places the TOC directly above the content.
 
-### 2. Advanced Usage
+### Advanced Usage
 
 If you'd like separated TOC and content, you can use `{% toc %}` tag (or `toc_only` filter) and `inject_anchors` filter.
 
@@ -86,7 +88,7 @@ above the content but at some other place of the page, i.e. an aside.
 
 :warning: **`{% toc %}` Tag Limitation**
 
-`{% toc %}` works only for [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/). 
+`{% toc %}` works only for [Jekyll Posts](https://jekyllrb.com/docs/step-by-step/08-blogging/) and [Jekyll Collections](https://jekyllrb.com/docs/collections/).
 If you'd like to use `{% toc %}` except posts or collections, please use `toc_only` filter as described below.
 
 ```html
@@ -146,7 +148,7 @@ jekyll-toc generates an unordered list by default. The HTML output is as follows
 
 jekyll-toc is customizable on `_config.yml`.
 
-### Default Configuration 
+### Default Configuration
 
 ```yml
 # _config.yml
