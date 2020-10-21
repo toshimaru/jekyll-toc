@@ -116,7 +116,7 @@ location with the `toc_only` filter.
 
 ## Generated HTML
 
-jekyll-toc generates an unordered list. The HTML output is as follows.
+jekyll-toc generates an unordered list by default. The HTML output is as follows.
 
 ```html
 <ul class="section-nav">
@@ -142,7 +142,11 @@ jekyll-toc generates an unordered list. The HTML output is as follows.
 
 ![screenshot](https://user-images.githubusercontent.com/803398/28401295-0dcfb7ca-6d54-11e7-892b-2f2e6ca755a7.png)
 
-## Default Configuration 
+## Customization
+
+jekyll-toc is customizable on `_config.yml`.
+
+### Default Configuration 
 
 ```yml
 toc:
@@ -155,8 +159,6 @@ toc:
   item_class: toc-entry
   item_prefix: toc-
 ```
-
-## Customization
 
 ### TOC levels
 
