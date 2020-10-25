@@ -15,6 +15,7 @@
 - [Customization](#customization)
   - [Default Configuration](#default-configuration)
   - [TOC levels](#toc-levels)
+  - [Enable TOC by default](#enable-toc-by-default)
   - [Skip TOC](#skip-toc)
   - [Skip TOC Sectionally](#skip-toc-sectionally)
   - [CSS Styling](#css-styling)
@@ -172,6 +173,19 @@ toc:
 ```
 
 The default heading range is from `<h1>` to `<h6>`.
+
+### Enable TOC by default
+
+You can enable TOC by default with [Front Matter Defaults](https://jekyllrb.com/docs/configuration/front-matter-defaults/):
+
+```yml
+# _config.yml
+defaults:
+  - scope:
+      path: ""
+    values:
+      toc: true
+```
 
 ### Skip TOC
 
