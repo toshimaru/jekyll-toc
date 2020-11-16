@@ -1,5 +1,20 @@
+# gems
 *.gem
 /Gemfile.lock
-/.bundle/
-/coverage
 *.gemfile.lock
+/gems/
+
+# local gem package folder
+/pkg/
+
+# tests / test coverage
+.jekyll-cache/
+/coverage
+
+# bundler
+/.bundle/
+/vendor/bundle/
+/gemfiles/.bundle/
+/gemfiles/vendor/bundle/
+
+# unsorted
