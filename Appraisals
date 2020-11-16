@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
-appraise 'jekyll-4.0' do
-  gem 'jekyll', '4.0'
-end
+SUPPORTED_VERSIONS = %w[3.8 3.9 4.0 4.1].freeze
 
-appraise 'jekyll-3.8' do
-  gem 'jekyll', '3.8'
-end
-
-appraise 'jekyll-3.7' do
-  gem 'jekyll', '3.7'
+SUPPORTED_VERSIONS.each do |version|
+  appraise "jekyll-#{version}" do
+    gem 'jekyll', version
+  end
 end

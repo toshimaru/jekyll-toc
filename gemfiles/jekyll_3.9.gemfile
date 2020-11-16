@@ -9,6 +9,6 @@ gem "pry"
 gem "rake"
 gem "rubocop", "~> 0.81"
 gem "simplecov", "~> 0.17.1"
-gem "jekyll", "4.0"
+gem "jekyll", "3.9"
 
 gemspec path: "../"

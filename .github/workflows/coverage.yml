@@ -1,5 +1,5 @@
 name: Coverage
-on: [push]
+on: [push, pull_request]
 jobs:
   build:
     strategy:
@@ -10,12 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby ${{ matrix.ruby }}
-        uses: eregon/use-ruby-action@master
+        uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
       - name: bundle install
         run: bundle install --jobs 4 --retry 3
-      - uses: paambaati/codeclimate-action@v2.4.0
+      - uses: paambaati/codeclimate-action@v2.7.4
         env:
           CC_TEST_REPORTER_ID: 6b81e393ea6ad38560386f650ea2fb0e57a7beb5e20f8c8364fabee30d5bff07
         with:
