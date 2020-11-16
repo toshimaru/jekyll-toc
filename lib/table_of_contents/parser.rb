@@ -32,7 +32,7 @@ module Jekyll
                     
           # Add link icon after text
           entry[:header_content].add_next_sibling(
-            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true">&nbsp;&#128279;</a>)
+            %(<a class="anchor" href="##{entry[:id]}"aria-hidden="true">#{@configuration.anchor_symbol}</a>)
           )
         end
 
