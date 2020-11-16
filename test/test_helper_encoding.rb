@@ -21,9 +21,8 @@ SIMPLE_HTML_WITH_IDS = <<~HTML
 HTML
 
 module TestHelpersEncoding
-  def read_html_and_create_parser(anchor_id_url_encoded)
+  def read_html_and_create_parser()
     @parser = Jekyll::TableOfContents::Parser.new(SIMPLE_HTML_WITH_IDS)
     @config = Jekyll::TableOfContents::Configuration.new({})
-    @config.anchor_id_url_encoded = anchor_id_url_encoded
   end
 end

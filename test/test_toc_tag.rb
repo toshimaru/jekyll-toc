@@ -17,7 +17,7 @@ class TestTableOfContentsTag < Minitest::Test
       site: @stubbed_context1.new({ 'toc' => nil })
     )
     tag = Jekyll::TocTag.parse('toc_tag', '', Tokenizer.new(''), ParseContext.new)
-    assert_equal tag.render(context), "<ul id=\"toc\" class=\"section-nav\">\n<li class=\"toc-entry toc-h1\"><a href=\"#test\">test</a></li>\n</ul>"
+    assert_equal("<ul id=\"toc\" class=\"section-nav\">\n<li class=\"toc-entry toc-h1\"><a href=\"#test\">test</a></li>\n</ul>", tag.render(context))
   end
 
   def test_toc_tag_returns_empty_string
