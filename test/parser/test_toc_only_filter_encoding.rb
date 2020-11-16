@@ -6,7 +6,7 @@ class TestTOCOnlyFilterEncodingOn < Minitest::Test
   include TestHelpersEncoding
 
   def setup
-    read_html_and_create_parser()
+    read_html_and_create_parser
   end
 
   def test_injects_toc_container_with_anchor_id_url_encoded
@@ -19,7 +19,7 @@ class TestTOCOnlyFilterEncodingOn < Minitest::Test
     assert_match(/<a href="#simple-h2b">/, html)
     assert_match(/<a href="#sub-h3">/, html)
     assert_match(/<a href="#simple-h3b">/, html)
-    assert_match(/<a href="#simple-h3c-%C3%BC%C3%A4%C3%B6">/, html) # %C3%BC%C3%A4%C3%B6 --> ÜÄÖ
+    assert_match(/<a href="#simple-h3c-%C3%BC%C3%A4%C3%B6">/, html)
   end
 
   def test_does_not_return_content
