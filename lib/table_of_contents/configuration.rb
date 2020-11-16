@@ -16,7 +16,7 @@ module Jekyll
         'sublist_class' => '',
         'item_class' => 'toc-entry',
         'item_prefix' => 'toc-',
-        'anchor_symbol' => ' &#128279;'
+        'anchor_symbol' => ' &#128279;' # with leading space
       }.freeze
 
       def initialize(options)

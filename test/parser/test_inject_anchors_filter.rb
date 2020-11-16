@@ -13,7 +13,7 @@ class TestInjectAnchorsFilter < Minitest::Test
     html = @parser.inject_anchors_into_html
 
     # assert_match(%r{<a class="anchor" href="#simple-h1" aria-hidden="true"><span.*span></a>Simple H1}, html)
-    assert_match(%r{Simple H1<a class="anchor" href="#simple-h1" aria-hidden="true"> 🔗<\/a>}, html)
+    assert_match(%r{Simple H1<a class="anchor" href="#simple-h1" aria-hidden="true"> 🔗</a>}, html)
   end
 
   def test_does_not_inject_toc
