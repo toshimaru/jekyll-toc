@@ -5,7 +5,7 @@ module Jekyll
     # jekyll-toc configuration class
     class Configuration
       attr_reader :toc_levels, :no_toc_class, :ordered_list, :no_toc_section_class,
-                  :list_class, :sublist_class, :item_class, :item_prefix,
+                  :list_id, :list_class, :sublist_class, :item_class, :item_prefix,
                   :nav_to_toc_symbol
 
       DEFAULT_CONFIG = {
@@ -13,6 +13,7 @@ module Jekyll
         'max_level' => 6,
         'ordered_list' => false,
         'no_toc_section_class' => 'no_toc_section',
+        'list_id' => 'toc',
         'list_class' => 'section-nav',
         'sublist_class' => '',
         'item_class' => 'toc-entry',
@@ -27,6 +28,7 @@ module Jekyll
         @ordered_list = options['ordered_list']
         @no_toc_class = 'no_toc'
         @no_toc_section_class = options['no_toc_section_class']
+        @list_id = options['list_id']
         @list_class = options['list_class']
         @sublist_class = options['sublist_class']
         @item_class = options['item_class']

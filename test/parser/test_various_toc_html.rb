@@ -12,7 +12,7 @@ class TestVariousTocHtml < Minitest::Test
   def test_nested_toc
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML)
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h3"><a href="#h3">h3</a>
@@ -31,7 +31,7 @@ class TestVariousTocHtml < Minitest::Test
   def test_nested_toc_with_min_and_max
     parser = Jekyll::TableOfContents::Parser.new(TEST_HTML, 'min_level' => 2, 'max_level' => 5)
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
       </ul>
     HTML
@@ -47,7 +47,7 @@ class TestVariousTocHtml < Minitest::Test
       <h6>h6</h6>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
@@ -74,7 +74,7 @@ class TestVariousTocHtml < Minitest::Test
       <h1>h1</h1>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h6"><a href="#h6">h6</a></li>
       <li class="toc-entry toc-h5"><a href="#h5">h5</a></li>
       <li class="toc-entry toc-h4"><a href="#h4">h4</a></li>
@@ -96,7 +96,7 @@ class TestVariousTocHtml < Minitest::Test
       <h5>h5</h5>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h3"><a href="#h3">h3</a></li>
@@ -129,7 +129,7 @@ class TestVariousTocHtml < Minitest::Test
       <h4 class="no_toc">no_toc h4</h4>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h2"><a href="#h2">h2</a>
@@ -156,7 +156,7 @@ class TestVariousTocHtml < Minitest::Test
       <h3>う</h3>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#%E3%81%82">あ</a>
       <ul>
       <li class="toc-entry toc-h2"><a href="#%E3%81%84">い</a>
@@ -184,7 +184,7 @@ class TestVariousTocHtml < Minitest::Test
       <h1>&amp; &lt; &gt;</h1>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#base-href">&lt;base href&gt;</a></li>
       <li class="toc-entry toc-h1"><a href="#--">&amp; &lt; &gt;</a></li>
@@ -200,7 +200,7 @@ class TestVariousTocHtml < Minitest::Test
       <h2><em>h2</em></h2>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h2"><a href="#h2">h2</a></li>
       <li class="toc-entry toc-h2"><a href="#h2-1">h2</a></li>
       </ul>
@@ -219,7 +219,7 @@ class TestVariousTocHtml < Minitest::Test
       <h6>h6</h6>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h3"><a href="#h3">h3</a>
@@ -254,7 +254,7 @@ class TestVariousTocHtml < Minitest::Test
       <h6>h6</h6>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h3"><a href="#h3">h3</a>
@@ -291,7 +291,7 @@ class TestVariousTocHtml < Minitest::Test
       <h6>h6</h6>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a>
       <ul>
       <li class="toc-entry toc-h3"><a href="#h3">h3</a>
@@ -321,7 +321,7 @@ class TestVariousTocHtml < Minitest::Test
       <h1 id="third">h3</h1>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#second">h2</a></li>
       <li class="toc-entry toc-h1"><a href="#third">h3</a></li>
@@ -342,7 +342,7 @@ class TestVariousTocHtml < Minitest::Test
       <h1>h1</h1>
     HTML
     expected = <<~HTML.chomp
-      <ul class="section-nav">
+      <ul id="toc" class="section-nav">
       <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#h1-1">h1</a></li>
       <li class="toc-entry toc-h1"><a href="#h1-2">h1</a></li>
@@ -358,7 +358,7 @@ class TestVariousTocHtml < Minitest::Test
       'item_class' => 'custom-item', 'list_class' => 'custom-list', 'sublist_class' => 'custom-sublist', 'item_prefix' => 'custom-prefix-'
     )
     expected = <<~HTML.chomp
-      <ul class="custom-list">
+      <ul id="toc" class="custom-list">
       <li class="custom-item custom-prefix-h1"><a href="#h1">h1</a>
       <ul class="custom-sublist">
       <li class="custom-item custom-prefix-h3"><a href="#h3">h3</a>

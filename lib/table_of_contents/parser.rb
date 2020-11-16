@@ -19,7 +19,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<#{list_tag} class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</#{list_tag}>)
+        %(<#{list_tag} id="#{@configuration.list_id}" class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</#{list_tag}>)
       end
 
       def inject_anchors_into_html
