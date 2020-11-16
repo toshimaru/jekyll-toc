@@ -5,7 +5,8 @@ module Jekyll
     # jekyll-toc configuration class
     class Configuration
       attr_reader :toc_levels, :no_toc_class, :ordered_list, :no_toc_section_class,
-                  :list_class, :sublist_class, :item_class, :item_prefix
+                  :list_class, :sublist_class, :item_class, :item_prefix,
+                  :nav_to_toc_symbol
 
       DEFAULT_CONFIG = {
         'min_level' => 1,
@@ -15,7 +16,8 @@ module Jekyll
         'list_class' => 'section-nav',
         'sublist_class' => '',
         'item_class' => 'toc-entry',
-        'item_prefix' => 'toc-'
+        'item_prefix' => 'toc-',
+        'nav_to_toc_symbol' => '&#x21A5;'
       }.freeze
 
       def initialize(options)
@@ -29,6 +31,7 @@ module Jekyll
         @sublist_class = options['sublist_class']
         @item_class = options['item_class']
         @item_prefix = options['item_prefix']
+        @nav_to_toc_symbol = options['nav_to_toc_symbol']
       end
 
       private
