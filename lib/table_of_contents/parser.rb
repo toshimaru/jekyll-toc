@@ -19,7 +19,7 @@ module Jekyll
       end
 
       def build_toc
-        %(<#{list_tag} class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</#{list_tag}>)
+        %(<#{list_tag} id="#{@configuration.list_id}" class="#{@configuration.list_class}">\n#{build_toc_list(@entries)}</#{list_tag}>)
       end
 
       def inject_anchors_into_html
@@ -27,6 +27,14 @@ module Jekyll
           # NOTE: `entry[:id]` is automatically URL encoded by Nokogiri
           entry[:header_content].add_previous_sibling(
             %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
+          )
+
+          # Add link 'nav to toc'
+          arr_to_top = [2, 3]
+          next unless arr_to_top.include?(entry[:h_num])
+
+          entry[:header_content].add_next_sibling(
+            %(<span style="float: right"><a class="anchor_to_top" href="#{@configuration.list_id}" aria-hidden="true">#{@configuration.nav_to_toc_symbol}</a></span>)
           )
         end
 

@@ -5,7 +5,7 @@ require 'test_helper'
 class TestInvalidOptions < Minitest::Test
   BASE_HTML = '<h1>h1</h1>'
   EXPECTED_HTML = <<~HTML.chomp
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
     <li class="toc-entry toc-h1"><a href="#h1">h1</a></li>
     </ul>
   HTML

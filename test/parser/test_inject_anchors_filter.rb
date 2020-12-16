@@ -18,6 +18,6 @@ class TestInjectAnchorsFilter < Minitest::Test
   def test_does_not_inject_toc
     html = @parser.inject_anchors_into_html
 
-    refute_includes(html, %(<ul class="section-nav">))
+    refute_includes(html, %(<ul id="toc" class="section-nav">))
   end
 end

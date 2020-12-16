@@ -20,6 +20,8 @@ Metrics/ClassLength:
 
 Naming/FileName:
   Enabled: false
+Naming/VariableNumber:
+  Enabled: false
 
 Layout/LineLength:
   Enabled: false
@@ -41,3 +43,6 @@ Style/HashTransformValues:
   Enabled: true
 Style/ExponentialNotation:
   Enabled: true
+
+Performance/StringInclude:
+  Enabled: false
