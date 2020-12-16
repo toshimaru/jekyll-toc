@@ -36,7 +36,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, actual)
   end
 
-  def test_kramdown_list_1
+  def test_kramdown_list_l1_l5
     text = <<~MARKDOWN
       * level-1
         * level-2
@@ -70,7 +70,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, actual)
   end
 
-  def test_kramdown_list_2
+  def test_kramdown_list_l1_l3_l2_l4
     text = <<~MARKDOWN
       * level-1
           * level-3
@@ -101,7 +101,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, actual)
   end
 
-  def test_kramdown_list_3
+  def test_kramdown_list_l4_l1
     text = <<~MARKDOWN
             * level-4
           * level-3
@@ -118,7 +118,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, actual)
   end
 
-  def test_kramdown_list_4
+  def test_kramdown_list_l1_l4_l1
     text = <<~MARKDOWN
       * level-1
             * level-4
@@ -143,7 +143,7 @@ class TestKramdownList < Minitest::Test
     assert_equal(expected, actual)
   end
 
-  def test_kramdown_list_5
+  def test_kramdown_list_l1_l3_l1
     text = <<~MARKDOWN
       * level-1
           * level-3
