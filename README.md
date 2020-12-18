@@ -19,7 +19,7 @@
   - [Skip TOC](#skip-toc)
   - [Skip TOC Sectionally](#skip-toc-sectionally)
   - [CSS Styling](#css-styling)
-  - [Custom CSS Class](#custom-css-class)
+  - [Custom CSS Class and ID](#custom-css-class-and-id)
   - [Using Unordered/Ordered lists](#using-unorderedordered-lists)
 - [Alternative Tools](#alternative-tools)
 
@@ -121,7 +121,7 @@ location with the `toc_only` filter.
 jekyll-toc generates an unordered list by default. The HTML output is as follows.
 
 ```html
-<ul class="section-nav">
+<ul id="toc" class="section-nav">
   <li class="toc-entry toc-h1"><a href="#heading1">Heading.1</a>
     <ul>
       <li class="toc-entry toc-h2"><a href="#heading1-1">Heading.1-1</a></li>
@@ -157,6 +157,7 @@ toc:
   max_level: 6
   ordered_list: false
   no_toc_section_class: no_toc_section
+  list_id: toc
   list_class: section-nav
   sublist_class: ''
   item_class: toc-entry
@@ -252,21 +253,18 @@ Each TOC `li` entry has two CSS classes for further styling. The general `toc-en
 Depending on the heading level each specific entry refers to, it has a second CSS class `toc-XX`, where `XX` is the HTML heading tag name.
 For example, the TOC entry linking to a heading `<h1>...</h1>` (a single `#` in Markdown) will get the CSS class `toc-h1`.
 
-### Custom CSS Class
+### Custom CSS Class and ID
 
 You can apply custom CSS classes to the generated `<ul>` and `<li>` tags.
 
 ```yml
 # _config.yml
 toc:
-  # Default is "section-nav":
-  list_class: my-list-class
-  # Default is no class for sublists:
-  sublist_class: my-sublist-class
-  # Default is "toc-entry":
-  item_class: my-item-class
-  # Default is "toc-":
-  item_prefix: item-
+  list_id: my-toc-id # Default: "toc"
+  list_class: my-list-class # Default: "section-nav"
+  sublist_class: my-sublist-class # Default: no class for sublists
+  item_class: my-item-class # Default: "toc-entry"
+  item_prefix: item- # Default: "toc-":
 ```
 
 ### Using Unordered/Ordered lists
