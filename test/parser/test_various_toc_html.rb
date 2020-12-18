@@ -355,10 +355,10 @@ class TestVariousTocHtml < Minitest::Test
   def test_custom_css_classes
     parser = Jekyll::TableOfContents::Parser.new(
       TEST_HTML,
-      'item_class' => 'custom-item', 'list_class' => 'custom-list', 'sublist_class' => 'custom-sublist', 'item_prefix' => 'custom-prefix-'
+      'item_class' => 'custom-item', 'list_id' => 'custom-toc-id', 'list_class' => 'custom-list', 'sublist_class' => 'custom-sublist', 'item_prefix' => 'custom-prefix-'
     )
     expected = <<~HTML.chomp
-      <ul id="toc" class="custom-list">
+      <ul id="custom-toc-id" class="custom-list">
       <li class="custom-item custom-prefix-h1"><a href="#h1">h1</a>
       <ul class="custom-sublist">
       <li class="custom-item custom-prefix-h3"><a href="#h3">h3</a>
