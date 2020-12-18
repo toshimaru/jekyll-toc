@@ -27,7 +27,7 @@ class TestOrderedList < Minitest::Test
     parse_with_ordered_list
     html = @parser.toc
 
-    assert_match(/^<ol class="section-nav">/, html)
+    assert_match(/^<ol id="toc" class="section-nav">/, html)
   end
 
   def test_ordered_list_sub_headings
@@ -41,7 +41,7 @@ class TestOrderedList < Minitest::Test
     parse_with_ordered_list_and_classes
     html = @parser.toc
 
-    assert_match(/^<ol class="top-list-class">/, html)
+    assert_match(/^<ol id="toc" class="top-list-class">/, html)
   end
 
   def test_ordered_list_sub_headings_with_classes

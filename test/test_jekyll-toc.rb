@@ -24,7 +24,7 @@ class TestTableOfContentsFilter < Minitest::Test
 
   def test_toc_only2
     @context = enable_toc_context
-    assert_equal "<ul class=\"section-nav\">\n</ul>", toc_only(DUMMY_HTML)
+    assert_equal %(<ul id="toc" class="section-nav">\n</ul>), toc_only(DUMMY_HTML)
   end
 
   def test_inject_anchors2
@@ -34,7 +34,7 @@ class TestTableOfContentsFilter < Minitest::Test
 
   def test_toc2
     @context = enable_toc_context
-    assert_equal "<ul class=\"section-nav\">\n</ul>#{DUMMY_HTML}", toc(DUMMY_HTML)
+    assert_equal %(<ul id="toc" class="section-nav">\n</ul>#{DUMMY_HTML}), toc(DUMMY_HTML)
   end
 
   private
