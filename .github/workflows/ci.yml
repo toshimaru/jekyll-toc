@@ -10,6 +10,7 @@ jobs:
           - gemfiles/jekyll_3.9.gemfile
           - gemfiles/jekyll_4.0.gemfile
           - gemfiles/jekyll_4.1.gemfile
+          - gemfiles/jekyll_4.2.gemfile
         exclude:
         - ruby: 2.4
           gemfile: gemfiles/jekyll_4.0.gemfile
