@@ -4,13 +4,13 @@ jobs:
   build:
     strategy:
       matrix:
-        ruby: [2.7]
+        ruby: [3.0]
     runs-on: ubuntu-latest
     name: rubocop
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby ${{ matrix.ruby }}
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
       - name: bundle install
