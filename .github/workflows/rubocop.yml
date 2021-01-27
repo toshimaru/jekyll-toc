@@ -4,7 +4,7 @@ jobs:
   build:
     strategy:
       matrix:
-        ruby: [2.7]
+        ruby: [3.0]
     runs-on: ubuntu-latest
     name: rubocop
     steps:
