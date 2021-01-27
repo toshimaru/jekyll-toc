@@ -4,19 +4,12 @@ jobs:
   build:
     strategy:
       matrix:
-        ruby: [2.4, 2.5, 2.6, 2.7, 3.0]
+        ruby: [2.5, 2.6, 2.7, 3.0]
         gemfile:
           - gemfiles/jekyll_3.9.gemfile
           - gemfiles/jekyll_4.0.gemfile
           - gemfiles/jekyll_4.1.gemfile
           - gemfiles/jekyll_4.2.gemfile
-        exclude:
-        - ruby: 2.4
-          gemfile: gemfiles/jekyll_4.0.gemfile
-        - ruby: 2.4
-          gemfile: gemfiles/jekyll_4.1.gemfile
-        - ruby: 2.4
-          gemfile: gemfiles/jekyll_4.2.gemfile
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     runs-on: ubuntu-latest
