@@ -11,7 +11,7 @@ gem "rubocop-minitest"
 gem "rubocop-performance"
 gem "rubocop-rake"
 gem "rubocop"
-gem "simplecov", "~> 0.17.1"
+gem "simplecov", "~> 0.21.2"
 gem "jekyll", "3.9"
 
 gemspec path: "../"
