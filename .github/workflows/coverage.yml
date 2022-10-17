@@ -14,7 +14,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - uses: paambaati/codeclimate-action@v3.0.0
+      - uses: paambaati/codeclimate-action@v3.1.0
         env:
           CC_TEST_REPORTER_ID: 6b81e393ea6ad38560386f650ea2fb0e57a7beb5e20f8c8364fabee30d5bff07
         with:
