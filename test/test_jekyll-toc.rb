@@ -40,13 +40,13 @@ class TestTableOfContentsFilter < Minitest::Test
   private
 
   def disable_toc_context
-    Struct.new(:registers).new(page: { 'toc' => false })
+    Struct.new(:registers).new({page: { 'toc' => false }})
   end
 
   def enable_toc_context
-    Struct.new(:registers).new(
+    Struct.new(:registers).new({
       page: { 'toc' => true },
       site: Struct.new(:config).new({ 'toc' => false })
-    )
+    })
   end
 end
