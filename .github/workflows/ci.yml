@@ -16,6 +16,7 @@ jobs:
           - gemfiles/jekyll_4.0.gemfile
           - gemfiles/jekyll_4.1.gemfile
           - gemfiles/jekyll_4.2.gemfile
+          - gemfiles/jekyll_4.3.gemfile
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     runs-on: ubuntu-latest
