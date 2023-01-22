@@ -13,16 +13,18 @@ class TestTableOfContentsTag < Minitest::Test
 
   def test_toc_tag
     context = @stubbed_context.new({
-      page: @stubbed_context2.new({ 'toc' => false }, '<h1>test</h1>'),
-      site: @stubbed_context1.new({ 'toc' => nil })
-    })
+                                     page: @stubbed_context2.new({ 'toc' => false }, '<h1>test</h1>'),
+                                     site: @stubbed_context1.new({ 'toc' => nil })
+                                   })
     tag = Jekyll::TocTag.parse('toc_tag', '', Tokenizer.new(''), ParseContext.new)
+
     assert_equal(%(<ul id="toc" class="section-nav">\n<li class="toc-entry toc-h1"><a href="#test">test</a></li>\n</ul>), tag.render(context))
   end
 
   def test_toc_tag_returns_empty_string
-    context = @stubbed_context.new({page: { 'toc' => false }})
+    context = @stubbed_context.new({ page: { 'toc' => false } })
     tag = Jekyll::TocTag.parse('toc_tag', '', Tokenizer.new(''), ParseContext.new)
+
     assert_empty tag.render(context)
   end
 end

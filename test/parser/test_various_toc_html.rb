@@ -171,6 +171,7 @@ class TestVariousTocHtml < Minitest::Test
 
     assert_equal(expected, parser.build_toc)
     html_with_anchors = parser.inject_anchors_into_html
+
     assert_match(%r{<a class="anchor" href="#%E3%81%82" aria-hidden="true"><span.*span></a>あ}, html_with_anchors)
     assert_match(%r{<a class="anchor" href="#%E3%81%84" aria-hidden="true"><span.*span></a>い}, html_with_anchors)
     assert_match(%r{<a class="anchor" href="#%E3%81%86" aria-hidden="true"><span.*span></a>う}, html_with_anchors)
@@ -234,6 +235,7 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
+
     assert_match(%r{<h1>.+</h1>}m, html)
     assert_match(%r{<h3>.+</h3>}m, html)
     assert_match(%r{<h6>.+</h6>}m, html)
@@ -269,6 +271,7 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
+
     assert_match(%r{<h1>.+</h1>}m, html)
     assert_match(%r{<h3>.+</h3>}m, html)
     assert_match(%r{<h6>.+</h6>}m, html)
@@ -306,6 +309,7 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
+
     assert_match(%r{<h1>.+</h1>}m, html)
     assert_match(%r{<h3>.+</h3>}m, html)
     assert_match(%r{<h6>.+</h6>}m, html)
@@ -330,6 +334,7 @@ class TestVariousTocHtml < Minitest::Test
     assert_equal(expected, parser.build_toc)
 
     html = parser.inject_anchors_into_html
+
     assert_includes(html, %(<a class="anchor" href="#h1" aria-hidden="true">))
     assert_includes(html, %(<a class="anchor" href="#second" aria-hidden="true">))
     assert_includes(html, %(<a class="anchor" href="#third" aria-hidden="true">))

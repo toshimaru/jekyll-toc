@@ -12,21 +12,25 @@ class TestInvalidOptions < Minitest::Test
 
   def test_option_is_nil
     parser = Jekyll::TableOfContents::Parser.new(BASE_HTML, nil)
+
     assert_equal(EXPECTED_HTML, parser.build_toc)
   end
 
   def test_option_is_epmty_string
     parser = Jekyll::TableOfContents::Parser.new(BASE_HTML, '')
+
     assert_equal(EXPECTED_HTML, parser.build_toc)
   end
 
   def test_option_is_string
     parser = Jekyll::TableOfContents::Parser.new(BASE_HTML, 'string')
+
     assert_equal(EXPECTED_HTML, parser.build_toc)
   end
 
   def test_option_is_array
     parser = Jekyll::TableOfContents::Parser.new(BASE_HTML, [])
+
     assert_equal(EXPECTED_HTML, parser.build_toc)
   end
 end
