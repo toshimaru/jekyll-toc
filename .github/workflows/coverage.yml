@@ -1,18 +1,20 @@
 name: Coverage
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
-  build:
-    strategy:
-      matrix:
-        ruby: [3.0]
+  coverage:
     runs-on: ubuntu-latest
-    name: coverage
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Ruby ${{ matrix.ruby }}
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: 3.2
           bundler-cache: true
       - uses: paambaati/codeclimate-action@v3.2.0
         env:
