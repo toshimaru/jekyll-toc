@@ -1,23 +1,32 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'table_of_contents/version'
+require_relative 'lib/table_of_contents/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'jekyll-toc'
   spec.version       = Jekyll::TableOfContents::VERSION
   spec.summary       = 'Jekyll Table of Contents plugin'
   spec.description   = 'Jekyll (Ruby static website generator) plugin which generates a Table of Contents for the page.'
-  spec.authors       = %w(toshimaru torbjoernk)
+  spec.authors       = %w[toshimaru torbjoernk]
   spec.email         = 'me@toshimaru.net'
-  spec.files         = `git ls-files -z`.split("\x0")
   spec.homepage      = 'https://github.com/toshimaru/jekyll-toc'
   spec.license       = 'MIT'
-  spec.test_files    = spec.files.grep(%r{^(test|spec)/})
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.5'
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/toshimaru/jekyll-toc'
+  spec.metadata['changelog_uri'] = 'https://github.com/toshimaru/jekyll-toc/releases'
+  spec.metadata['rubygems_mfa_required'] = 'true'
+
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  spec.files = Dir.chdir(__dir__) do
+    `git ls-files -z`.split("\x0").reject do |f|
+      (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|circleci)|appveyor)})
+    end
+  end
+
+  spec.required_ruby_version = '>= 2.6'
 
   spec.add_dependency 'jekyll', '>= 3.9'
   spec.add_dependency 'nokogiri', '~> 1.11'
