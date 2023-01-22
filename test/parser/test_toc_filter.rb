@@ -25,6 +25,7 @@ class TestTOCFilter < Minitest::Test
                         .css('li.toc-h5')
                         .css('li.toc-h6')
                         .text
+
     assert_equal('Simple H6', nested_h6_text)
   end
 
