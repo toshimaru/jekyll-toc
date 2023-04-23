@@ -116,6 +116,15 @@ They are of the form:
 This is only useful when the TOC itself should be placed at some other
 location with the `toc_only` filter.
 
+#### `inject_destination_anchors` filter
+
+```html
+<a class="anchor" id="#heading1-1"></a>
+```
+
+Inserts destination anchors alongside header tags. Useful if you are not using markdown (which does this automatically). Outputs HTML with destination anchor tags.
+
+
 ## Generated HTML
 
 jekyll-toc generates an unordered list by default. The HTML output is as follows.
