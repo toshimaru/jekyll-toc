@@ -109,7 +109,7 @@ They are of the form:
 
 ```html
 <a class="anchor" href="#heading1-1" aria-hidden="true">
-  <span class="octicon octicon-link"></span>
+  <span class="octicon octicon-link">Link to Heading1 1 section</span>
 </a>
 ```
 
