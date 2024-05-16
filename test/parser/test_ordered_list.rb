@@ -55,7 +55,7 @@ class TestOrderedList < Minitest::Test
     parse_with_ordered_list_and_classes
     html = @parser.toc
 
-    occurrences = html.scan(/<ol class="sublist-class">/).count
+    occurrences = html.scan('<ol class="sublist-class">').count
 
     assert_equal(5, occurrences)
   end
