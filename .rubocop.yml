@@ -8,8 +8,9 @@ AllCops:
     - Rakefile
     - Gemfile
 require:
-  - rubocop-performance
   - rubocop-minitest
+  - rubocop-rake
+  - rubocop-performance
 
 Metrics/MethodLength:
   Enabled: false
