@@ -24,14 +24,10 @@ module Jekyll
 
       def inject_anchors_into_html
         @entries.each do |entry|
-          header = entry[:header_content]
-          header_content = header.inner_html
-          header.parent.inner_html = %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span>#{header_content}</a>)
+          entry[:header_content].wrap(%(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>))
         end
         @doc.inner_html
       end
-      
-      
 
       private
 
