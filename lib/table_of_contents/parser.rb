@@ -24,14 +24,14 @@ module Jekyll
 
       def inject_anchors_into_html
         @entries.each do |entry|
-          # NOTE: `entry[:id]` is automatically URL encoded by Nokogiri
-          entry[:header_content].add_previous_sibling(
-            %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span></a>)
-          )
+          header = entry[:header_content]
+          header_content = header.inner_html
+          header.parent.inner_html = %(<a class="anchor" href="##{entry[:id]}" aria-hidden="true"><span class="octicon octicon-link"></span>#{header_content}</a>)
         end
-
         @doc.inner_html
       end
+      
+      
 
       private
 
@@ -40,7 +40,7 @@ module Jekyll
       def parse_content
         headers = Hash.new(0)
 
-        (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
+        entries = (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
           .reject { |n| n.classes.include?(@configuration.no_toc_class) }
           .inject([]) do |entries, node|
           text = node.text
@@ -57,6 +57,7 @@ module Jekyll
             h_num: node.name.delete('h').to_i
           }
         end
+        entries
       end
 
       # Returns the list items for entries

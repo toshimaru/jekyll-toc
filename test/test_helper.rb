@@ -11,12 +11,12 @@ require 'jekyll'
 require 'jekyll-toc'
 
 SIMPLE_HTML = <<~HTML
-  <h1>Simple H1</h1>
-  <h2>Simple H2</h2>
-  <h3>Simple H3</h3>
-  <h4>Simple H4</h4>
-  <h5>Simple H5</h5>
-  <h6>Simple H6</h6>
+  <h1 id="simple-h1">Simple H1</h1>
+  <h2 id="simple-h2">Simple H2</h2>
+  <h3 id="simple-h3">Simple H3</h3>
+  <h4 id="simple-h4">Simple H4</h4>
+  <h5 id="simple-h5">Simple H5</h5>
+  <h6 id="simple-h6">Simple H6</h6>
 HTML
 
 module TestHelpers
