@@ -36,7 +36,7 @@ module Jekyll
       def parse_content
         headers = Hash.new(0)
 
-        entries = (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
+        (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
           .reject { |n| n.classes.include?(@configuration.no_toc_class) }
           .inject([]) do |entries, node|
           text = node.text
@@ -53,7 +53,6 @@ module Jekyll
             h_num: node.name.delete('h').to_i
           }
         end
-        entries
       end
 
       # Returns the list items for entries
