@@ -301,6 +301,62 @@ toc:
 }
 ```
 
+### Using `<div>` Instead of `<ul>`, `<ol>`, and `<li>`
+
+By default, the table of contents is generated using `<ul>`, `<ol>`, and `<li>` tags. If you prefer to use `<div>` elements instead (for custom styling or accessibility reasons), you can enable this by setting the `div_list` option in your `_config.yml`:
+
+```yml
+# _config.yml
+toc:
+  div_list: true # default is false
+```
+
+When `div_list` is set to `true`, the TOC will be rendered using `<div>` elements for both the list container and each entry, instead of `<ul>`, `<ol>`, and `<li>`. You can still use the `list_class`, `sublist_class`, and `item_class` options to add custom CSS classes for styling:
+
+```yml
+# _config.yml
+toc:
+  div_list: true
+  list_class: my-list-class
+  sublist_class: my-sublist-class
+  item_class: my-item-class
+```
+
+Example CSS for styling the TOC with `<div>` elements:
+
+```css
+.my-list-class {
+  /* Styles for the TOC container */
+  margin: 10px 0;
+}
+
+.my-item-class {
+  /* Styles for each TOC entry */
+  padding: 4px 0;
+}
+
+.my-sublist-class {
+  /* Styles for nested TOC containers */
+  margin-left: 20px;
+}
+```
+
+This will produce a TOC structure like:
+
+```html
+<div id="toc" class="my-list-class">
+  <div class="my-item-class toc-h1"><a href="#heading1">Heading.1</a>
+    <div class="my-sublist-class">
+      <div class="my-item-class toc-h2"><a href="#heading1-1">Heading.1-1</a></div>
+      <div class="my-item-class toc-h2"><a href="#heading1-2">Heading.1-2</a></div>
+    </div>
+  </div>
+  <div class="my-item-class toc-h1"><a href="#heading2">Heading.2</a></div>
+</div>
+```
+
+Use this option if you want more flexibility in styling or need to avoid list semantics for accessibility or design reasons.
+
 This will produce:
 
 ![screenshot](https://user-images.githubusercontent.com/7675276/85813980-a0ea5a80-b719-11ea-9458-ccf9b86a778b.png)

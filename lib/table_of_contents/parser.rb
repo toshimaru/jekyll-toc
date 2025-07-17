@@ -69,18 +69,24 @@ module Jekyll
           entry = entries[i]
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
-            toc_list << %(<li class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
             # If the next entry should be indented in the list, generate a sublist
+            toc_list << if @configuration.div_list
+                          %(<div class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
+                        else
+                          %(<li class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
+                        end
             next_i = i + 1
             if next_i < entries.count && entries[next_i][:h_num] > min_h_num
               nest_entries = get_nest_entries(entries[next_i, entries.count], min_h_num)
               toc_list << %(\n<#{list_tag}#{ul_attributes}>\n#{build_toc_list(nest_entries)}</#{list_tag}>\n)
               i += nest_entries.count
             end
-            # Add the closing tag for the current entry in the list
-            toc_list << %(</li>\n)
+            toc_list << if @configuration.div_list
+                          %(</div>\n)
+                        else
+                          %(</li>\n)
+                        end
           elsif entry[:h_num] > min_h_num
-            # If the current entry should be indented in the list, generate a sublist
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
             toc_list << build_toc_list(nest_entries)
             i += nest_entries.count - 1
@@ -123,7 +129,11 @@ module Jekyll
       end
 
       def list_tag
-        @list_tag ||= @configuration.ordered_list ? 'ol' : 'ul'
+        @list_tag ||= if @configuration.div_list
+                        'div'
+                      else
+                        (@configuration.ordered_list ? 'ol' : 'ul')
+                      end
       end
     end
   end
