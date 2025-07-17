@@ -70,22 +70,14 @@ module Jekyll
           if entry[:h_num] == min_h_num
             # If the current entry should not be indented in the list, add the entry to the list
             # If the next entry should be indented in the list, generate a sublist
-            toc_list << if @configuration.div_list
-                          %(<div class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
-                        else
-                          %(<li class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
-                        end
+            toc_list << %(<#{list_parent_tag} class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a>)
             next_i = i + 1
             if next_i < entries.count && entries[next_i][:h_num] > min_h_num
               nest_entries = get_nest_entries(entries[next_i, entries.count], min_h_num)
               toc_list << %(\n<#{list_tag}#{ul_attributes}>\n#{build_toc_list(nest_entries)}</#{list_tag}>\n)
               i += nest_entries.count
             end
-            toc_list << if @configuration.div_list
-                          %(</div>\n)
-                        else
-                          %(</li>\n)
-                        end
+            toc_list << %(</#{list_parent_tag}>\n)
           elsif entry[:h_num] > min_h_num
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
             toc_list << build_toc_list(nest_entries)
@@ -126,6 +118,10 @@ module Jekyll
 
       def ul_attributes
         @ul_attributes ||= @configuration.sublist_class.empty? ? '' : %( class="#{@configuration.sublist_class}")
+      end
+
+      def list_parent_tag
+        @list_parent_tag ||= @configuration.div_list ? 'div' : 'li'
       end
 
       def list_tag
