@@ -296,7 +296,7 @@ toc:
   list-style-type: upper-alpha;
 }
 
-.my-sublist-class: {
+.my-sublist-class {
   list-style-type: lower-alpha;
 }
 ```
