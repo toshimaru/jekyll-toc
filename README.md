@@ -21,6 +21,8 @@
   - [CSS Styling](#css-styling)
   - [Custom CSS Class and ID](#custom-css-class-and-id)
   - [Using Unordered/Ordered lists](#using-unorderedordered-lists)
+  - [Using divs as list elements](#using-divs-as-list-elements)
+  - [Using a flat list](#using-a-flat-list)
 - [Alternative Tools](#alternative-tools)
 
 ## Installation
@@ -162,6 +164,8 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+  div_list: false
+  flat_list: false
 ```
 
 ### TOC levels
@@ -301,7 +305,11 @@ toc:
 }
 ```
 
-### Using `<div>` Instead of `<ul>`, `<ol>`, and `<li>`
+This will produce:
+
+![screenshot](https://user-images.githubusercontent.com/7675276/85813980-a0ea5a80-b719-11ea-9458-ccf9b86a778b.png)
+
+### Using divs as list elements
 
 By default, the table of contents is generated using `<ul>`, `<ol>`, and `<li>` tags. If you prefer to use `<div>` elements instead (for custom styling or accessibility reasons), you can enable this by setting the `div_list` option in your `_config.yml`:
 
@@ -357,9 +365,53 @@ This will produce a TOC structure like:
 
 Use this option if you want more flexibility in styling or need to avoid list semantics for accessibility or design reasons.
 
-This will produce:
+### Using a flat list
 
-![screenshot](https://user-images.githubusercontent.com/7675276/85813980-a0ea5a80-b719-11ea-9458-ccf9b86a778b.png)
+By default, the table of contents is generated as a nested structure that reflects the hierarchy of headings in your content. If you prefer a flat list with no nesting (where all TOC entries appear at the same level regardless of their heading level), you can enable this by setting the `flat_list` option in your `_config.yml`:
+
+```yml
+# _config.yml
+toc:
+  flat_list: true # default is false
+```
+
+When `flat_list` is set to `true`, all TOC entries will be rendered at the same level without any nesting, while still retaining the CSS classes that indicate their heading level. This is useful when you want to style headings differently based on their level but prefer a simplified, non-nested list structure.
+
+The flat list option works with both standard lists (`<ul>`, `<ol>`) and div-based lists (when `div_list` is set to `true`).
+
+Example with standard lists:
+
+```html
+<ul id="toc" class="section-nav">
+  <li class="toc-entry toc-h1"><a href="#heading1">Heading.1</a></li>
+  <li class="toc-entry toc-h2"><a href="#heading1-1">Heading.1-1</a></li>
+  <li class="toc-entry toc-h2"><a href="#heading1-2">Heading.1-2</a></li>
+  <li class="toc-entry toc-h1"><a href="#heading2">Heading.2</a></li>
+  <li class="toc-entry toc-h2"><a href="#heading2-1">Heading.2-1</a></li>
+  <li class="toc-entry toc-h3"><a href="#heading2-1-1">Heading.2-1-1</a></li>
+</ul>
+```
+
+Example with div-based lists:
+
+```html
+<div id="toc" class="section-nav">
+  <div class="toc-entry toc-h1"><a href="#heading1">Heading.1</a></div>
+  <div class="toc-entry toc-h2"><a href="#heading1-1">Heading.1-1</a></div>
+  <div class="toc-entry toc-h2"><a href="#heading1-2">Heading.1-2</a></div>
+  <div class="toc-entry toc-h1"><a href="#heading2">Heading.2</a></div>
+  <div class="toc-entry toc-h2"><a href="#heading2-1">Heading.2-1</a></div>
+  <div class="toc-entry toc-h3"><a href="#heading2-1-1">Heading.2-1-1</a></div>
+</div>
+```
+
+Use this option when you want a simplified TOC structure but still want to style entries differently based on their heading level using CSS. For example:
+
+```css
+.toc-h1 { font-weight: bold; font-size: 1.2em; }
+.toc-h2 { font-weight: normal; font-size: 1.1em; }
+.toc-h3 { font-style: italic; font-size: 1em; }
+```
 
 ## Alternative Tools
 

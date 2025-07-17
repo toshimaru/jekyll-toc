@@ -61,6 +61,26 @@ module Jekyll
 
       # Returns the list items for entries
       def build_toc_list(entries)
+        if @configuration.flat_list
+          build_flat_toc_list(entries)
+        else
+          build_nested_toc_list(entries)
+        end
+      end
+
+      # Returns the list items for entries in a flat structure
+      def build_flat_toc_list(entries)
+        toc_list = +''
+
+        entries.each do |entry|
+          toc_list << %(<#{list_parent_tag} class="#{@configuration.item_class} #{@configuration.item_prefix}#{entry[:node_name]}"><a href="##{entry[:id]}">#{entry[:text]}</a></#{list_parent_tag}>\n)
+        end
+
+        toc_list
+      end
+
+      # Returns the list items for entries in a nested structure
+      def build_nested_toc_list(entries)
         i = 0
         toc_list = +''
         min_h_num = entries.map { |e| e[:h_num] }.min
@@ -74,13 +94,13 @@ module Jekyll
             next_i = i + 1
             if next_i < entries.count && entries[next_i][:h_num] > min_h_num
               nest_entries = get_nest_entries(entries[next_i, entries.count], min_h_num)
-              toc_list << %(\n<#{list_tag}#{ul_attributes}>\n#{build_toc_list(nest_entries)}</#{list_tag}>\n)
+              toc_list << %(\n<#{list_tag}#{ul_attributes}>\n#{build_nested_toc_list(nest_entries)}</#{list_tag}>\n)
               i += nest_entries.count
             end
             toc_list << %(</#{list_parent_tag}>\n)
           elsif entry[:h_num] > min_h_num
             nest_entries = get_nest_entries(entries[i, entries.count], min_h_num)
-            toc_list << build_toc_list(nest_entries)
+            toc_list << build_nested_toc_list(nest_entries)
             i += nest_entries.count - 1
           end
           i += 1

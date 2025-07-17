@@ -14,6 +14,7 @@ class TestConfiguration < Minitest::Test
     assert_equal('', configuration.sublist_class)
     assert_equal('toc-entry', configuration.item_class)
     assert_equal('toc-', configuration.item_prefix)
+    refute(configuration.flat_list)
   end
 
   def test_type_error
@@ -27,5 +28,12 @@ class TestConfiguration < Minitest::Test
     assert_equal('', configuration.sublist_class)
     assert_equal('toc-entry', configuration.item_class)
     assert_equal('toc-', configuration.item_prefix)
+    refute(configuration.flat_list)
+  end
+
+  def test_flat_list_configuration
+    configuration = Jekyll::TableOfContents::Configuration.new('flat_list' => true)
+
+    assert(configuration.flat_list)
   end
 end

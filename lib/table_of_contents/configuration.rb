@@ -5,7 +5,7 @@ module Jekyll
     # jekyll-toc configuration class
     class Configuration
       attr_reader :toc_levels, :no_toc_class, :ordered_list, :no_toc_section_class,
-                  :list_id, :list_class, :sublist_class, :item_class, :item_prefix, :div_list
+                  :list_id, :list_class, :sublist_class, :item_class, :item_prefix, :div_list, :flat_list
 
       DEFAULT_CONFIG = {
         'min_level' => 1,
@@ -17,7 +17,8 @@ module Jekyll
         'sublist_class' => '',
         'item_class' => 'toc-entry',
         'item_prefix' => 'toc-',
-        'div_list' => false
+        'div_list' => false,
+        'flat_list' => false
       }.freeze
 
       def initialize(options)
@@ -33,6 +34,7 @@ module Jekyll
         @item_class = options['item_class']
         @item_prefix = options['item_prefix']
         @div_list = options['div_list']
+        @flat_list = options['flat_list']
       end
 
       private
