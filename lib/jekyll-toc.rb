@@ -11,8 +11,16 @@ module Jekyll
       return '' unless context.registers[:page]['toc']
 
       content_html = context.registers[:page]['content']
-      toc_config = context.registers[:site].config['toc'] || {}
+      toc_config = merge_toc_config(context)
       TableOfContents::Parser.new(content_html, toc_config).build_toc
+    end
+
+    private
+
+    def merge_toc_config(context)
+      site_config = context.registers[:site].config['toc'] || {}
+      page_config = context.registers[:page]['toc_config'] || {}
+      site_config.merge(page_config)
     end
   end
 
@@ -44,7 +52,9 @@ module Jekyll
     end
 
     def toc_config
-      @context.registers[:site].config['toc'] || {}
+      site_config = @context.registers[:site].config['toc'] || {}
+      page_config = @context.registers[:page]['toc_config'] || {}
+      site_config.merge(page_config)
     end
   end
 end

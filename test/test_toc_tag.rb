@@ -8,12 +8,12 @@ class TestTableOfContentsTag < Minitest::Test
   def setup
     @stubbed_context  = Struct.new(:registers)
     @stubbed_context1 = Struct.new(:config)
-    @stubbed_context2 = Struct.new(:toc, :content)
+    @stubbed_context2 = Struct.new(:toc, :content, :toc_config)
   end
 
   def test_toc_tag
     context = @stubbed_context.new({
-                                     page: @stubbed_context2.new({ 'toc' => false }, '<h1>test</h1>'),
+                                     page: @stubbed_context2.new(true, '<h1>test</h1>', nil),
                                      site: @stubbed_context1.new({ 'toc' => nil })
                                    })
     tag = Jekyll::TocTag.parse('toc_tag', '', Tokenizer.new(''), ParseContext.new)
@@ -22,7 +22,7 @@ class TestTableOfContentsTag < Minitest::Test
   end
 
   def test_toc_tag_returns_empty_string
-    context = @stubbed_context.new({ page: { 'toc' => false } })
+    context = @stubbed_context.new({ page: { 'toc' => false, 'toc_config' => nil } })
     tag = Jekyll::TocTag.parse('toc_tag', '', Tokenizer.new(''), ParseContext.new)
 
     assert_empty tag.render(context)

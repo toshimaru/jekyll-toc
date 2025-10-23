@@ -175,6 +175,23 @@ toc:
 
 The default heading range is from `<h1>` to `<h6>`.
 
+#### Per-Page TOC Level Override
+
+You can override the `min_level` and `max_level` settings for individual pages or posts by adding a `toc_config` key to the YAML front matter:
+
+```yml
+---
+layout: post
+title: "My Post"
+toc: true
+toc_config:
+  min_level: 2  # Override: Start from H2 for this page only
+  max_level: 4  # Override: Stop at H4 for this page only
+---
+```
+
+This is useful when you want different TOC depths for different types of content.
+
 ### Enable TOC by default
 
 You can enable TOC by default with [Front Matter Defaults](https://jekyllrb.com/docs/configuration/front-matter-defaults/):
