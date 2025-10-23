@@ -12,6 +12,14 @@ module Jekyll
                    .tr(' ', '-') # replace spaces with dash
         CGI.escape(text)
       end
+
+      def extract_text(node, only_direct_text: false)
+        if only_direct_text
+          node.children.select { |child| child.text? }.map { |child| child.text.strip }.reject(&:empty?).join(' ')
+        else
+          node.text.strip
+        end
+      end
     end
   end
 end

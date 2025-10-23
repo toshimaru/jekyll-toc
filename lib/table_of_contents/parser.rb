@@ -43,7 +43,7 @@ module Jekyll
         (@doc.css(toc_headings) - @doc.css(toc_headings_in_no_toc_section))
           .reject { |n| n.classes.include?(@configuration.no_toc_class) }
           .inject([]) do |entries, node|
-          text = node.text
+          text = extract_text(node, only_direct_text: @configuration.toc_only_direct_text)
           id = node.attribute('id') || generate_toc_id(text)
 
           suffix_num = headers[id]

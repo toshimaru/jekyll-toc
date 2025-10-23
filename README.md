@@ -18,6 +18,7 @@
   - [Enable TOC by default](#enable-toc-by-default)
   - [Skip TOC](#skip-toc)
   - [Skip TOC Sectionally](#skip-toc-sectionally)
+  - [TOC Only Direct Text](#toc-only-direct-text)
   - [CSS Styling](#css-styling)
   - [Custom CSS Class and ID](#custom-css-class-and-id)
   - [Using Unordered/Ordered lists](#using-unorderedordered-lists)
@@ -162,6 +163,7 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+  toc_only_direct_text: false
 ```
 
 ### TOC levels
@@ -230,6 +232,43 @@ toc:
     - no_toc_section
     - exclude
     - your_custom_skip_class_name
+```
+
+### toc_only_direct_text
+
+By default, the TOC includes all text content from headings, including text within nested HTML elements. The `toc_only_direct_text` option allows you to extract only the direct text nodes from headings, excluding all child elements.
+
+This is particularly useful when using custom HTML components or tags within headings (like badges, icons, or status indicators) that you don't want to appear in the table of contents.
+
+```yml
+# _config.yml
+toc:
+  toc_only_direct_text: true # default: false
+```
+
+**Example:**
+
+Given this heading:
+
+```html
+<h2>formatName <tag>Required</tag></h2>
+```
+
+- With `toc_only_direct_text: false` (default): TOC shows "formatName Required"
+- With `toc_only_direct_text: true`: TOC shows "formatName"
+
+**Per-page override:**
+
+You can override this setting for specific pages using front matter:
+
+```yml
+---
+layout: post
+title: "My Post"
+toc: true
+toc_config:
+  toc_only_direct_text: true
+---
 ```
 
 ### CSS Styling
