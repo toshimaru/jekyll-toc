@@ -3,6 +3,9 @@
 source "https://rubygems.org"
 
 gem "appraisal"
+gem "base64"
+gem "bigdecimal"
+gem "csv"
 gem "minitest-reporters"
 gem "minitest"
 gem "pry"
