@@ -3,3 +3,4 @@
 /.bundle/
 /coverage
 *.gemfile.lock
+vendor/
