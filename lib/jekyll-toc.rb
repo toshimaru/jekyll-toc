@@ -31,6 +31,12 @@ module Jekyll
       TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
     end
 
+    def inject_destination_anchors(html)
+      return html unless toc_enabled?
+
+      TableOfContents::Parser.new(html, toc_config).inject_destination_anchors_into_html
+    end
+
     def toc(html)
       return html unless toc_enabled?
 

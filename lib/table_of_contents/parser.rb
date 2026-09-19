@@ -33,6 +33,17 @@ module Jekyll
         @doc.inner_html
       end
 
+      def inject_destination_anchors_into_html
+        @entries.each do |entry|
+          # NOTE: `entry[:id]` is automatically URL encoded by Nokogiri
+          entry[:header_content].add_previous_sibling(
+            %(<a class="anchor" id="#{entry[:id]}"></a>)
+          )
+        end
+
+        @doc.inner_html
+      end
+
       private
 
       # parse logic is from html-pipeline toc_filter
