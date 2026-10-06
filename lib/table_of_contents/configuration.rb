@@ -22,10 +22,10 @@ module Jekyll
       def initialize(options)
         options = generate_option_hash(options)
 
-        @toc_levels = options['min_level']..options['max_level']
+        @toc_levels = (options['min_level']..options['max_level']).to_a
         @ordered_list = options['ordered_list']
         @no_toc_class = 'no_toc'
-        @no_toc_section_class = options['no_toc_section_class']
+        @no_toc_section_class = Array(options['no_toc_section_class'])
         @list_id = options['list_id']
         @list_class = options['list_class']
         @sublist_class = options['sublist_class']
